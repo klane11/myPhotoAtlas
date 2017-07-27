@@ -9,10 +9,48 @@ html, body {
         padding: 0;
 }
 
-/*.jumbotron {
-    background-image: url("../images/AtlantaSkyline.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    height: 300px;
 
+.header {
+    height: 60px;
+    width: 100%;
+}
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+}
+
+.hamburger,
+.exit {
+    background: none;
+    border: none;
+}
+
+.hamburger img,
+.exit img {
+    height: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (min-width: 976px){
+    .jumbotron {
+        height: 500px;
+    }
+}
