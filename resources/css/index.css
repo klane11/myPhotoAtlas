@@ -1,0 +1,7 @@
+.jumbotron {
+    background-image: url("../images/AtlantaSkyline.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 300px;
+}
