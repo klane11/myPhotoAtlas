@@ -34,9 +34,21 @@ html, body {
 
 
 
+.title {
+    font-size: 40px;
+    color: white;
+    font-weight: bold;
+    
+}
 
-
-
+.jumbotron {
+    background-image: url("https://c2.staticflickr.com/6/5039/5912056963_8ed390c902_b.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 300px;
+    text-align: center;
+}
 
 
 
@@ -52,5 +64,8 @@ html, body {
 @media only screen and (min-width: 976px){
     .jumbotron {
         height: 500px;
+    }
+    .title {
+        font-size: 60px;
     }
 }
