@@ -4,13 +4,11 @@ var GEOCODE = "https://maps.googleapis.com/maps/api/geocode/json?address=";
 var GOOGLE_API_KEY = "AIzaSyD8UFO6YBOxOpaAG0Q6BUg4iqd_9214ZWY";
 
 
-getGeoCoords(searchValue) {
+function getGeoCoords(searchValue) {
     var formattedSearchValue = searchValue.split(' ');
     formattedSearchValue = searchValue.join("+");
     var req = $.get(GEOCODE + formattedSearchValue + "&key=" + GOOGLE_API_KEY);
     console.log(req);
-} 
-
 }
 
 var map;
