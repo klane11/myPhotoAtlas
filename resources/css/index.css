@@ -1,7 +1,18 @@
-/* .jumbotron {
+
+.main-map {
+    height: 100%;
+}
+
+html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+}
+
+/*.jumbotron {
     background-image: url("../images/AtlantaSkyline.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     height: 300px;
-} */
+
