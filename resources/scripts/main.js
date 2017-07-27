@@ -1,3 +1,4 @@
+
 var $mainMap = $('[data-role="main-map"]');
 var $searchField = $('[data-role="search-form"]');
 var GEOCODE = "https://maps.googleapis.com/maps/api/geocode/json?address=";
@@ -29,5 +30,4 @@ function addSearchListener() {
 
 // initMap();
 addSearchListener();
-
 
