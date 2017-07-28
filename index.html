@@ -80,7 +80,7 @@
     <!--main content  -->
     <main>
         <div data-role="main-map" class="main-map">
-            <div id='main-map'></div>
+            <div id='map'></div>
         </div>
         <div class="gallery-heading">
            <h2>Image Gallery</h2>
@@ -100,20 +100,22 @@
     </footer>
     
 
-
-
-
     <!--jQuery minified version -->
     <script
         src="http://code.jquery.com/jquery-3.2.1.min.js"
         integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous">
     </script>
-<!--  Google Maps API-->
-   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8UFO6YBOxOpaAG0Q6BUg4iqd_9214ZWY&callback=initMap"
-    async defer></script>
+
+    <!--  Google Maps API-->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8UFO6YBOxOpaAG0Q6BUg4iqd_9214ZWY&callback=initMap">
+    </script>
+
     <!--our JS file  -->
     <script src="resources/scripts/main.js" charset="utf-8"></script>
+    
+    <!--Links map.js file to HTML-->
     <script src="resources/scripts/map.js" charset="utf-8"></script>
 </body>
 
