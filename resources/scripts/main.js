@@ -19,11 +19,13 @@ var $ICON_BUTTON = $('[data-role="iconButton"]')
 function getGeoCoords(searchValue) {
     var formattedSearchValue = searchValue.split(' ');
     formattedSearchValue = formattedSearchValue.join("+");
-    var req = $.get(GEOCODE + formattedSearchValue + "&key=" + GOOGLE_API_KEY);
-    console.log(req);
+    var resp = $.get(GEOCODE + formattedSearchValue + "&key=" + GOOGLE_API_KEY);
+    resp
+        .then(photoSearch)
 }
 
-function makePicture (farmID, serverID, photoID, secret, title) {
+
+function makePicture(farmID, serverID, photoID, secret, title) {
     return $('<img>', {
         'src': "https://farm" + farmID + ".staticflickr.com/" + serverID + "/" + photoID + "_" + secret + "_m.jpg",
         'alt': title
@@ -31,17 +33,24 @@ function makePicture (farmID, serverID, photoID, secret, title) {
 }
 
 
-function photoSearch (lat, long) {
-    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + lat + "&lon=" + long + "&format=json&nojsoncallback=1");
+function photoSearch(resp) {
+    if ($pictureDisplay.children()) {
+        $pictureDisplay.empty();
+    }
+    // console.log(resp["results"][0]["geometry"]["location"]["lng"]);
+    // console.log(resp["results"][0]["geometry"]["location"]["lat"]);
+    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&sort=faves&format=json&nojsoncallback=1");
+    // &radius=20&radius_units=mi
+    // var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&woe_id=" + resp["places"]["place"][0]["woeid"] + "&tags=landmark&format=json&nojsoncallback=1");
+    console.log(resp);
+
     resp
         .then(createPicture)
 }
 
 
 function createPicture(resp) {
-    console.log(resp);
     var pictureArray = resp["photos"]["photo"];
-    console.log(pictureArray);
     var $pictureContainer = $('<div></div>', {
         'class': 'picture-container'
     })
@@ -53,9 +62,11 @@ function createPicture(resp) {
 }
 
 
-// function getPlaceId(lat, lon) {
-//     var req = $.get( " https://api.flickr.com/services/rest/?method=flickr.places.findByLatLon&api_key=" + FLICKR_API_KEY + "&lat=" + lat + "&lon=" + lon + "&format=json&nojsoncallback=1&api_sig=58d68ecd1670fc8a4e904bef1d4e7f7a")
-// }
+function getPlaceId(resp) {
+    var resp = $.get( "https://api.flickr.com/services/rest/?method=flickr.places.findByLatLon&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&format=json&nojsoncallback=1");
+    resp
+        .then(photoSearch)
+}
 
 // var map;
 // function initMap() {
@@ -99,9 +110,14 @@ function clickExitButton(){
 
 // initMap();
 addSearchListener();
+
+
+// photoSearch("33.7876133", "-84.3734643")
+
 // photoSearch("33.7876133", "-84.3734643")
 $EXIT_ICON.hide();
 $MENU_CONTAINER.hide();
 
 clickMenuShow();
 clickExitButton();
+
