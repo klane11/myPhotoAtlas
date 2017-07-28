@@ -20,6 +20,15 @@ function getGeoCoords(searchValue) {
         .then(photoSearch)
 }
 
+function mapSetCenterSearch(resp) {
+    var latLon = {};
+    latLon["lat"] = Number(resp["results"][0]["geometry"]["location"]["lat"]);
+    latLon["lng"] = Number(resp["results"][0]["geometry"]["location"]["lng"]);
+    console.log(latLon);
+    map.setZoom(12);
+	map.setCenter(latLon);
+}
+
 // Creates DOM picture elements from array of returned photos
 function makePicture(farmID, serverID, photoID, secret, title) {
     return $('<img>', {
@@ -34,6 +43,8 @@ function photoSearch(resp) {
     if ($pictureDisplay.children()) {
         $pictureDisplay.empty();
     }
+
+    mapSetCenterSearch(resp);
 
     // var URITags = encodeURI("nature")
     // var URI = encodeURI(searchValue);
@@ -95,11 +106,11 @@ function getPicGeo(picture) {
     var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.geo.getLocation&api_key=" + FLICKR_API_KEY + "&photo_id=" + picId + "&format=json&nojsoncallback=1");
     
     resp
-        .then(mapSetCenter)
+        .then(mapSetCenterPic)
 }
 
 // Resets map center when picture is clicked
-function mapSetCenter(picture) {
+function mapSetCenterPic(picture) {
     var latLon = {};
     latLon["lat"] = Number(picture["photo"]["location"]["latitude"]);
     latLon["lng"] = Number(picture["photo"]["location"]["longitude"]);
