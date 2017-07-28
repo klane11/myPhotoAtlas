@@ -19,6 +19,7 @@ var $ICON_BUTTON = $('[data-role="iconButton"]')
 
 
 
+
 function getGeoCoords(searchValue) {
     var URI = encodeURI(searchValue);
     var resp = $.get(GEOCODE + URI + "&key=" + GOOGLE_API_KEY);
