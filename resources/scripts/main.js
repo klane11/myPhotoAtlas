@@ -25,7 +25,7 @@ function mapSetCenterSearch(resp) {
     latLon["lat"] = Number(resp["results"][0]["geometry"]["location"]["lat"]);
     latLon["lng"] = Number(resp["results"][0]["geometry"]["location"]["lng"]);
     console.log(latLon);
-    map.setZoom(12);
+    map.setZoom(10);
 	map.setCenter(latLon);
 }
 
