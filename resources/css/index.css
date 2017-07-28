@@ -1,19 +1,19 @@
 
-.main-map {
-    height: 100%;
-}
-
 html, body {
         height: 100%;
         margin: 0;
         padding: 0;
 }
 
+.main-map {
+    height: 100%;
+}
 
 .header {
     height: 60px;
     width: 100%;
 }
+
 .navigation {
     display: flex;
     justify-content: space-between;
@@ -43,8 +43,7 @@ html, body {
 .title {
     font-size: 40px;
     color: white;
-    font-weight: bold;
-    
+    font-weight: bold; 
 }
 
 .jumbotron {
@@ -56,6 +55,12 @@ html, body {
     text-align: center;
 }
 
+.home-search-btn {
+    background-color: white;
+    color: black;
+    height: 50px;
+    width: 100px;
+}
 
 /* modifies gallery heading, located above picture-container & images */
 .gallery-heading {
@@ -65,7 +70,7 @@ html, body {
 }
 
 .gallery-heading h2 {
-    color: grey;
+  
 }
 
 /* modifies picture-container class(created by Sarah on the DOM), within picture-display div in HTML  */
@@ -94,10 +99,21 @@ html, body {
 
 
 
+/*-------------------------------MEDIA QUERIES-------------------------------*/
+
+/* Small Screens */
+@media only screen and (min-width: 360px) {
+    .jumbotron {
+        height: 350px;
+    }
+    .title {
+        font-size: 45px;
+    }   
+}
 
 
-
-@media only screen and (min-width: 976px){
+/* Medium Screens */
+@media only screen and (min-width: 768px){
     .jumbotron {
         height: 500px;
     }
@@ -105,3 +121,5 @@ html, body {
         font-size: 60px;
     }
 }
+
+/*---------------------------------------------------------------------------*/
