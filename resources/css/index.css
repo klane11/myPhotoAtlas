@@ -1,14 +1,4 @@
 
-
-html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-}
-
-.main-map {
-    height: 100%;
-
 #map {
 	height: 400px;
 	width: 100%;

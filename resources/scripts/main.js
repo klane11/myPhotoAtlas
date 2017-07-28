@@ -92,27 +92,26 @@ function addSearchListener() {
 // Gets latitude and longitude for clicked pic from Flickr API, then prints to console
 function getPicGeo(picture) {
     var picId = picture[0]["attributes"][2]["nodeValue"];
-    console.log(picId);
-    console.log("https://api.flickr.com/services/rest/?method=flickr.photos.geo.getLocation&api_key=" + FLICKR_API_KEY + "&photo_id=" + picId + "&format=json&nojsoncallback=1");
     var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.geo.getLocation&api_key=" + FLICKR_API_KEY + "&photo_id=" + picId + "&format=json&nojsoncallback=1");
     
     resp
-        .then(getPicLatLon)
+        .then(mapSetCenter)
 }
 
-// Prints Latitude and Longitude coordinates to console as an array
-function getPicLatLon(picture) {
-    var latLon = [];
-    latLon.push(picture["photo"]["location"]["latitude"]);
-    latLon.push(picture["photo"]["location"]["longitude"]);
+// Resets map center when picture is clicked
+function mapSetCenter(picture) {
+    var latLon = {};
+    latLon["lat"] = Number(picture["photo"]["location"]["latitude"]);
+    latLon["lng"] = Number(picture["photo"]["location"]["longitude"]);
     console.log(latLon);
+    map.setZoom(12);
+	map.setCenter(latLon);
 }
 
 // Adds click listener to all images within "picture-display" div, then gets coordinates with getPicGeo function
 function addPictureListener() {
     $('[data-role="picture-display"]').on('click', $('img'), function(event) {
     event.preventDefault();
-    console.log($(event.target));
     getPicGeo($(event.target));
 })
    
