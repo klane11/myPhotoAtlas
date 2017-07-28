@@ -1,0 +1,85 @@
+
+These are all elements that we can use to filter Flickr 
+explains each element of breifly how to use.
+
+**** This link is where can see what type of data is returned and how writen in URL
+https://www.flickr.com/services/api/explore/?method=flickr.photos.search
+
+
+
+id (Required)
+    A single user ID. This specifies a user to fetch for.
+ids (Required)
+    A comma delimited list of user IDs. This specifies a list of users to fetch for.
+photoset_id (Required)
+    The id of the photoset for which to fetch the photo's context.
+tags 
+    A comma delimited list of tags to filter the feed by.
+tagmode 
+    Control whether items must have ALL the tags (tagmode=all), or ANY (tagmode=any) of the tags. Default is ALL.
+text 
+    A free text search. Photos who's title, description or tags contain the text will be returned. You can exclude results that match a term by prepending it with a - character.
+format 
+    The format of the feed. See the feeds page for feed format information. Default is Atom 1.0.
+lang 
+    The display language for the feed. See the feeds page for feed language information. Default is US English (en-us).
+sort 
+    The sort order. One of faves, views, comments or interesting. Deafults to interesting.
+extras 
+    A comma-delimited list of extra information to fetch for each returned record. Currently supported fields are: description, license, date_upload, date_taken, owner_name, icon_server, original_format, last_update, geo, tags, machine_tags, o_dims, views, media, path_alias, url_sq, url_t, url_s, url_q, url_m, url_n, url_z, url_c, url_l, url_o
+per_page 
+    Number of photos to return per page. If this argument is omitted, it defaults to 100. The maximum allowed value is 500.
+page 
+    The page of results to return. If this argument is omitted, it defaults to 1.
+min_upload_date 
+    Minimum upload date. Photos with an upload date greater than or equal to this value will be returned. The date should be in the form of a unix timestamp.
+max_upload_date 
+    Maximum upload date. Photos with an upload date less than or equal to this value will be returned. The date should be in the form of a unix timestamp.
+min_taken_date 
+    Minimum taken date. Photos with an taken date greater than or equal to this value will be returned. The date should be in the form of a mysql datetime.
+max_taken_date 
+    Maximum taken date. Photos with an taken date less than or equal to this value will be returned. The date should be in the form of a mysql datetime.
+sort 
+    The order in which to sort returned photos. Deafults to date-posted-desc. The possible values are: date-posted-asc, date-posted-desc, date-taken-asc, date-taken-desc, interestingness-desc, and interestingness-asc.
+media 
+    Filter results by media type. Possible values are all (default), photos or videos
+**** threshold 
+    The minimum number of photos that a place type must have to be included. If the number of photos is lowered then the parent place type for that place will be used.
+    For example if your contacts only have 3 photos taken in the locality of Montreal (WOE ID 3534) but your threshold is set to 5 then those photos will be "rolled up" and included instead with a place record for the region of Quebec (WOE ID 2344924).
+
+
+
+
+
+*** Dont use
+favorite 
+    returns list of people who have favorited a photo 
+privacy_filter
+    Return photos only matching a certain privacy level. Valid values are:
+    1 public photos
+    2 private photos visible to friends
+    3 private photos visible to family
+    4 private photos visible to friends & family
+    5 completely private photos
+place_type_id (Optional)
+    The numeric ID for a specific place type to cluster photos by. 
+
+    Valid place type IDs are :
+    22: neighbourhood
+    7: locality
+    8: region
+    12: country
+    29: continent
+
+    (While optional, you must pass either a valid place type or place type ID.)
+place_type (Optional)
+    A specific place type to cluster photos by. 
+
+    Valid place types are :
+    neighbourhood (and neighborhood)
+    locality
+    region
+    country
+    continent
+
+    The "place_type" argument has been deprecated in favor of the "place_type_id" argument. It won't go away but it will not be added to new methods. A complete list of place type IDs is available using the flickr.places.getPlaceTypes method. (While optional, you must pass either a valid place type or place type ID.)

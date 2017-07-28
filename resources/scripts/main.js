@@ -35,6 +35,11 @@ function photoSearch(resp) {
         $pictureDisplay.empty();
     }
 
+    var URITags = encodeURI("nature")
+    var URI = encodeURI(searchValue);
+    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&text=" + URI + "&tag=" + URITags + "&format=json&nojsoncallback=1");
+    console.log(resp);
+    // var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&sort=faves&format=json&nojsoncallback=1");
     // Gets search results by latitude and longitude
     var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&radius=20&radius_units=mi&format=json&nojsoncallback=1");
     // &radius=20&radius_units=mi
@@ -118,6 +123,16 @@ function printIt(thing) {
 }
 
 
+
+
+addSearchListener();
+addPictureListener();
+// photoSearch("33.7876133", "-84.3734643")
+// initMap();
+
+
+
+// when hamburger menu icon is clicked, the hamburger icon hids, the exit icon shows and the menu-container shows slowly
 function clickMenuShow(){
     $HAMBURGER.click(function (){
         $EXIT_ICON.show();
@@ -126,6 +141,7 @@ function clickMenuShow(){
     });
 }
 
+// when exit icon is clicked, the exit icon hids, the hamburger menu shows, and the menu-container hids slowly
 function clickExitButton(){
     $EXIT_ICON.click(function (){
         $HAMBURGER.show();
@@ -139,15 +155,22 @@ function clickExitButton(){
 // $HAMBURGER.toggleClass('.hamburger', '.icon');
 // $EXIT_ICON.toggleClass('.icon', '.exit');
 
+// initMap();
+addSearchListener();
 
-// photoSearch("33.7876133", "-84.3734643")
+
+
+
 
 addSearchListener();
 addPictureListener();
 
+
+// starts off DOM with exit and menu-container hidden until clicked
+
 $EXIT_ICON.hide();
 $MENU_CONTAINER.hide();
-
+// initializes hamburger meniu
 clickMenuShow();
 clickExitButton();
 
