@@ -1,25 +1,18 @@
 
+// html data roles
 var $mainMap = $('[data-role="main-map"]');
 var $searchField = $('[data-role="search-form"]');
 var GEOCODE = "https://maps.googleapis.com/maps/api/geocode/json?address=";
 var GOOGLE_API_KEY = "AIzaSyD8UFO6YBOxOpaAG0Q6BUg4iqd_9214ZWY";
 var FLICKR_API_KEY = "566ab7296356eb73e65e0d7f80743bde";
 var $pictureDisplay = $('[data-role="picture-display"]');
-
-
-// Uses Google API to get latitude and longitude from searched value, sends to photoSearch function to find pictures pased on coordinates
-
-// html data roles
 var $MENU_CONTAINER = $('[data-text-role="menu"]')
 var $EXIT_ICON = $('[data-image-role="exit-container"]')
 var $HAMBURGER = $('[data-image-role="hamburger"]')
 var $ICON_BUTTON = $('[data-role="iconButton"]')
 
 
-
-
-
-
+// Uses Google API to get latitude and longitude from searched value, sends to photoSearch function to find pictures pased on coordinates
 function getGeoCoords(searchValue) {
     var URI = encodeURI(searchValue);
     var resp = $.get(GEOCODE + URI + "&key=" + GOOGLE_API_KEY);
@@ -42,6 +35,11 @@ function photoSearch(resp) {
         $pictureDisplay.empty();
     }
 
+    var URITags = encodeURI("nature")
+    var URI = encodeURI(searchValue);
+    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&text=" + URI + "&tag=" + URITags + "&format=json&nojsoncallback=1");
+    console.log(resp);
+    // var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&sort=faves&format=json&nojsoncallback=1");
     // Gets search results by latitude and longitude
     var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&radius=20&radius_units=mi&format=json&nojsoncallback=1");
     // &radius=20&radius_units=mi
@@ -80,15 +78,6 @@ function createPicture(resp) {
 //         .then(photoSearch)
 // }
 
-// Creates map
-// var map;
-// function initMap() {
-//     map = new google.maps.Map(document.getElementById('main-map'), {
-//         center: {lat: 40.0000, lng: -98.0000},
-//         zoom: 4
-//     });
-// }
-
 // Adds listener to search form, takes search value and gets Google coordinates
 function addSearchListener() {
     $searchField.on("submit", function (event) {
@@ -108,11 +97,14 @@ function getPicGeo(picture) {
     var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.geo.getLocation&api_key=" + FLICKR_API_KEY + "&photo_id=" + picId + "&format=json&nojsoncallback=1");
     
     resp
-        .then(printIt)
-    // var latLon = [];
-    // latLon.push(picture[0]["location"]["latitude"]);
-    // latLon.push(picture["photo"]["location"]["longitude"]);
-    // return latLon;
+        .then(getPicLatLon)
+}
+
+function getPicLatLon(picture) {
+    var latLon = [];
+    latLon.push(picture["photo"]["location"]["latitude"]);
+    latLon.push(picture["photo"]["location"]["longitude"]);
+    console.log(latLon);
 }
 
 // Adds click listener to all images within "picture-display" div, then gets coordinates with getPicGeo function
@@ -120,8 +112,7 @@ function addPictureListener() {
     $('[data-role="picture-display"]').on('click', $('img'), function(event) {
     event.preventDefault();
     console.log($(event.target));
-    var latLon = getPicGeo($(event.target));
-    console.log(latLon);
+    getPicGeo($(event.target));
 })
    
 }
@@ -131,6 +122,9 @@ function printIt(thing) {
     console.log(thing);
 }
 
+
+
+
 addSearchListener();
 addPictureListener();
 // photoSearch("33.7876133", "-84.3734643")
@@ -138,7 +132,7 @@ addPictureListener();
 
 
 
-
+// when hamburger menu icon is clicked, the hamburger icon hids, the exit icon shows and the menu-container shows slowly
 function clickMenuShow(){
     $HAMBURGER.click(function (){
         $EXIT_ICON.show();
@@ -147,6 +141,7 @@ function clickMenuShow(){
     });
 }
 
+// when exit icon is clicked, the exit icon hids, the hamburger menu shows, and the menu-container hids slowly
 function clickExitButton(){
     $EXIT_ICON.click(function (){
         $HAMBURGER.show();
@@ -164,12 +159,18 @@ function clickExitButton(){
 addSearchListener();
 
 
-// photoSearch("33.7876133", "-84.3734643")
 
-// photoSearch("33.7876133", "-84.3734643")
+
+
+addSearchListener();
+addPictureListener();
+
+
+// starts off DOM with exit and menu-container hidden until clicked
+
 $EXIT_ICON.hide();
 $MENU_CONTAINER.hide();
-
+// initializes hamburger meniu
 clickMenuShow();
 clickExitButton();
 
