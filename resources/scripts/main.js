@@ -35,10 +35,10 @@ function photoSearch(resp) {
         $pictureDisplay.empty();
     }
 
-    var URITags = encodeURI("nature")
-    var URI = encodeURI(searchValue);
-    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&text=" + URI + "&tag=" + URITags + "&format=json&nojsoncallback=1");
-    console.log(resp);
+    // var URITags = encodeURI("nature")
+    // var URI = encodeURI(searchValue);
+    // var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&text=" + URI + "&tag=" + URITags + "&format=json&nojsoncallback=1");
+    // console.log(resp);
     // var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&sort=faves&format=json&nojsoncallback=1");
     // Gets search results by latitude and longitude
     var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&radius=20&radius_units=mi&format=json&nojsoncallback=1");
@@ -100,6 +100,7 @@ function getPicGeo(picture) {
         .then(getPicLatLon)
 }
 
+// Prints Latitude and Longitude coordinates to console as an array
 function getPicLatLon(picture) {
     var latLon = [];
     latLon.push(picture["photo"]["location"]["latitude"]);
@@ -155,16 +156,6 @@ function clickExitButton(){
 // $HAMBURGER.toggleClass('.hamburger', '.icon');
 // $EXIT_ICON.toggleClass('.icon', '.exit');
 
-// initMap();
-addSearchListener();
-
-
-
-
-
-addSearchListener();
-addPictureListener();
-
 
 // starts off DOM with exit and menu-container hidden until clicked
 
@@ -173,5 +164,7 @@ $MENU_CONTAINER.hide();
 // initializes hamburger meniu
 clickMenuShow();
 clickExitButton();
+addSearchListener();
+addPictureListener();
 
 
