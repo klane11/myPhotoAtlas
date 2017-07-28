@@ -1,13 +1,10 @@
 
-
 html, body {
         height: 100%;
         margin: 0;
         padding: 0;
 }
 
-.main-map {
-    height: 100%;
 
 #map {
 	height: 400px;
@@ -63,10 +60,18 @@ html, body {
 
 .home-search-btn {
     background-color: white;
-    color: black;
-    height: 50px;
-    width: 100px;
+    color: grey;
+    height: 40px;
+    width: 150px;
+    font-size: 1.25em;
+    margin-top: 50px;
+    border: none;
 }
+
+.glyphicon {
+    Margin-right: 10px;
+}
+
 
 /* modifies gallery heading, located above picture-container & images */
 .gallery-heading {
