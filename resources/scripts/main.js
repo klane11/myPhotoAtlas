@@ -1,25 +1,18 @@
 
+// html data roles
 var $mainMap = $('[data-role="main-map"]');
 var $searchField = $('[data-role="search-form"]');
 var GEOCODE = "https://maps.googleapis.com/maps/api/geocode/json?address=";
 var GOOGLE_API_KEY = "AIzaSyD8UFO6YBOxOpaAG0Q6BUg4iqd_9214ZWY";
 var FLICKR_API_KEY = "566ab7296356eb73e65e0d7f80743bde";
 var $pictureDisplay = $('[data-role="picture-display"]');
-
-
-// Uses Google API to get latitude and longitude from searched value, sends to photoSearch function to find pictures pased on coordinates
-
-// html data roles
 var $MENU_CONTAINER = $('[data-text-role="menu"]')
 var $EXIT_ICON = $('[data-image-role="exit-container"]')
 var $HAMBURGER = $('[data-image-role="hamburger"]')
 var $ICON_BUTTON = $('[data-role="iconButton"]')
 
 
-
-
-
-
+// Uses Google API to get latitude and longitude from searched value, sends to photoSearch function to find pictures pased on coordinates
 function getGeoCoords(searchValue) {
     var URI = encodeURI(searchValue);
     var resp = $.get(GEOCODE + URI + "&key=" + GOOGLE_API_KEY);
