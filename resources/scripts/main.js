@@ -33,16 +33,18 @@ function makePicture(farmID, serverID, photoID, secret, title) {
 }
 
 
-function photoSearch(resp) {
+function photoSearch(searchValue) {
     if ($pictureDisplay.children()) {
         $pictureDisplay.empty();
     }
-    // console.log(resp["results"][0]["geometry"]["location"]["lng"]);
-    // console.log(resp["results"][0]["geometry"]["location"]["lat"]);
-    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&sort=faves&format=json&nojsoncallback=1");
+
+    var URITags = encodeURI("nature")
+    var URI = encodeURI(searchValue);
+    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&text=" + URI + "&tag=" + URITags + "&format=json&nojsoncallback=1");
+    console.log(resp);
+    // var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&sort=faves&format=json&nojsoncallback=1");
     // &radius=20&radius_units=mi
     // var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&woe_id=" + resp["places"]["place"][0]["woeid"] + "&tags=landmark&format=json&nojsoncallback=1");
-    console.log(resp);
 
     resp
         .then(createPicture)
@@ -80,13 +82,13 @@ function addSearchListener() {
     $searchField.on("submit", function (event) {
         event.preventDefault();
         var searchValue = $('[data-role="search"]').val();
-        getGeoCoords(searchValue);
+        photoSearch(searchValue);
     });
 }
 
 
 
-
+// when hamburger menu icon is clicked, the hamburger icon hids, the exit icon shows and the menu-container shows slowly
 function clickMenuShow(){
     $HAMBURGER.click(function (){
         $EXIT_ICON.show();
@@ -95,6 +97,7 @@ function clickMenuShow(){
     });
 }
 
+// when exit icon is clicked, the exit icon hids, the hamburger menu shows, and the menu-container hids slowly
 function clickExitButton(){
     $EXIT_ICON.click(function (){
         $HAMBURGER.show();
@@ -103,21 +106,15 @@ function clickExitButton(){
     });
 }
 
-
-// $MENU_CONTAINER.toggleClass('.menu-container', '.menu-container-on');
-// $HAMBURGER.toggleClass('.hamburger', '.icon');
-// $EXIT_ICON.toggleClass('.icon', '.exit');
-
 // initMap();
 addSearchListener();
 
 
-// photoSearch("33.7876133", "-84.3734643")
 
-// photoSearch("33.7876133", "-84.3734643")
+// starts off DOM with exit and menu-container hidden until clicked
 $EXIT_ICON.hide();
 $MENU_CONTAINER.hide();
-
+// initializes hamburger meniu
 clickMenuShow();
 clickExitButton();
 
