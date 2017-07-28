@@ -30,18 +30,38 @@ function makePicture(farmID, serverID, photoID, secret, title) {
 }
 
 // Searches Flickr API for images based on latitude and longitude from Google Search, sends pictues to createPicture function
+
+
 function photoSearch(resp) {
     if ($pictureDisplay.children()) {
         $pictureDisplay.empty();
     }
 
+    // these are variables being used at the moment to render photos and see how different tags interact
+    var botanicalGarden = "atlantabotanicalgarden%2C+botanical%2C+orchid%2C+atlanta%2C+garden%2C+flower%2C+nature%2C+floral%2C+tropical%2C+green%2C";
+    var nature = encodeURI("nature");
+    var garden = encodeURI("garden");
+    var waterfall = encodeURI("waterfall");
+    var sclupture = encodeURI("sculpture");
+    console.log($("input[type='checkbox']").val());
+
+
+    // main response being used at moment. This adds in the variables above to search. Tags are essential in the search process, tag_mode, and radius units. These aspects will be changed later to get respnoses from the user
+    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"]+ "&tags=" + sclupture + "&tag_mode=any&radius=20&radius_units=mi&format=json&nojsoncallback=1");
+    console.log(resp);
+
+
+
+
+    // var URITags = encodeURI("nature");
+    // var URI = encodeURI("nature" + "landscape" + "air");
     // var URITags = encodeURI("nature")
     // var URI = encodeURI(searchValue);
     // var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&text=" + URI + "&tag=" + URITags + "&format=json&nojsoncallback=1");
     // console.log(resp);
     // var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&sort=faves&format=json&nojsoncallback=1");
     // Gets search results by latitude and longitude
-    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&radius=20&radius_units=mi&format=json&nojsoncallback=1");
+
     // &radius=20&radius_units=mi
 
     // Gets results by WOEID/tag
@@ -83,8 +103,9 @@ function addSearchListener() {
     $searchField.on("submit", function (event) {
         event.preventDefault();
         var searchValue = $('[data-role="search"]').val();
+        var tags = $('[data-role]').val();
         // getGeoCoords(searchValue);
-        getGeoCoords(searchValue);
+        getGeoCoords(searchValue, tags);
     });
 }
 
