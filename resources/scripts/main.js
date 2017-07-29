@@ -13,6 +13,7 @@ var $ICON_BUTTON = $('[data-role="iconButton"]')
 
 
 // Uses Google API to get latitude and longitude from searched value, sends to photoSearch function to find pictures pased on coordinates
+// 1.2
 function getGeoCoords(searchValue) {
     var URI = encodeURI(searchValue);
     var resp = $.get(GEOCODE + URI + "&key=" + GOOGLE_API_KEY);
@@ -20,15 +21,21 @@ function getGeoCoords(searchValue) {
         .then(photoSearch)
 }
 
-// Creates DOM picture elements from array of returned photos
-function makePicture(farmID, serverID, photoID, secret, title) {
-    return $('<img>', {
-        'src': "https://farm" + farmID + ".staticflickr.com/" + serverID + "/" + photoID + "_" + secret + "_m.jpg",
-        'alt': title,
-        'id': photoID
-    })
+// 1.3.1
+// Searches Flickr API for images based on latitude and longitude from Google Search, sends pictues to createPicture function
+function photoSearch(resp, tags) {
+    if ($pictureDisplay.children()) {
+        $pictureDisplay.empty();
+    }
+    // gets tags from checkbox
+    var tags = chooseTags();
+    // Adds in tags. Tags are essential in the search process,as well as radius units. These aspects will be changed later to get respnoses from the user
+    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"]+ "&tags=" + tags + "&tag_mode=any&radius=20&radius_units=mi&format=json&nojsoncallback=1");
+    resp
+        .then(createPicture)
 }
 
+// 1.3.2
 // gets what checkboses are checked and value to turn into tags to search Flickrs API
 function chooseTags() {
     console.log("working");
@@ -41,21 +48,8 @@ function chooseTags() {
     }
     return types;
 }
-// Searches Flickr API for images based on latitude and longitude from Google Search, sends pictues to createPicture function
-function photoSearch(resp, tags) {
-    if ($pictureDisplay.children()) {
-        $pictureDisplay.empty();
-    }
-    var tags = chooseTags();
-    console.log(tags)
-    // This adds in tags. Tags are essential in the search process,as well as radius units. These aspects will be changed later to get respnoses from the user
-    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"]+ "&tags=" + tags + "&tag_mode=any&radius=20&radius_units=mi&format=json&nojsoncallback=1");
-    resp
-        .then(createPicture)
-}
 
-
-
+// 1.4
 // Creates array from picture search results, creates picture-container div, loops through array, creates picture for each with makePicture function, appends to picture-container div, appends div to DOM
 function createPicture(resp) {
     var pictureArray = resp["photos"]["photo"];
@@ -64,19 +58,32 @@ function createPicture(resp) {
         'data-role': 'picture-container'
     })
     pictureArray.forEach(function(picture, i) {
+        // calls makePicture function
         var $picture = makePicture(picture["farm"], picture["server"], picture["id"], picture["secret"], picture["title"]);
         $pictureContainer.append($picture);
     })
+    //appens final picture display to picture container
     $pictureDisplay.append($pictureContainer);
 }
 
 
+// 1.5
+// Creates DOM picture elements from array of returned photos
+function makePicture(farmID, serverID, photoID, secret, title) {
+    return $('<img>', {
+        'src': "https://farm" + farmID + ".staticflickr.com/" + serverID + "/" + photoID + "_" + secret + "_m.jpg",
+        'alt': title,
+        'id': photoID
+    })
+}
+
+
 // Adds listener to search form, takes search value and gets Google coordinates
+// 1.1
 function addSearchListener() {
     $searchField.on("submit", function (event) {
         event.preventDefault();
         var searchValue = $('[data-role="search"]').val();
-        // getGeoCoords(searchValue);
         getGeoCoords(searchValue);
         });
 }

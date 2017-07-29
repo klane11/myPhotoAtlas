@@ -65,8 +65,15 @@
 .input-group{
     text-align: center;
 }
-.search-bar {
+.location-search-container{
     width: 300px;
+    padding-right: 0;
+}
+.btn {
+    z-index: 50;
+}
+.search-location{
+    width: 100%;
 }
 
 /*checkbox animation  */
@@ -105,11 +112,13 @@
 /* modifies picture-container class(created by Sarah on the DOM), within picture-display div in HTML  */
 .picture-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-flow: wrap;
     align-items: center;
-    margin-left: 2px;
-    margin-right: 2px;
+    padding: 10px;
+    border: 2px solid #023E58;
+    text-align: center;
+    overflow: hidden;
 }
 
 /* Modifies search images */
@@ -117,9 +126,15 @@
 .picture-container img {
     max-height: 200px;
     max-width: 300px;
-    margin: 5px;
+    overflow: hidden;
+    margin: 10px;
+    opacity: .7;
+    transition: all .5s ease-in-out
 }
 
+.picture-container img:hover {
+    opacity: 1;
+}
 .footer-contaienr {
     height: 300px;
     background: #023E58;
