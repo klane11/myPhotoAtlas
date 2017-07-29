@@ -49,23 +49,62 @@ html, body {
     font-weight: bold; 
 }
 
+
 .jumbotron {
-    background-image: url("https://c2.staticflickr.com/6/5039/5912056963_8ed390c902_b.jpg");
+    text-align: center;
+    color: white;
+    background-color: transparent;
+}
+
+.jumbotron-title h1 {
+    padding-top: 50px;
+}
+
+.jumbotron-1 {
+    width: 100%;
+    height: 100%;
+    background-image: url("../images/golden-clouds.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    height: 300px;
-    text-align: center;
+}
+
+.jumbotron-2 {
+    width: 100%;
+    height: 100%;
+    background-image: url("../images/canyon.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.jumbotron-3 {
+    width: 100%;
+    height: 100%;
+    background-image: url("../images/redwood.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.jumbotron-4 {
+    width: 100%;
+    height: 100%;
+    background-image: url("../images/galaxy.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 .home-search-btn {
     background-color: white;
     color: grey;
     height: 40px;
-    width: 150px;
+    width: 125px;
     font-size: 1.25em;
     margin-top: 50px;
     border: none;
+    cursor: pointer;
 }
 
 .glyphicon {
