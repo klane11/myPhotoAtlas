@@ -1,10 +1,4 @@
 
-#map {
-	height: 400px;
-	width: 100%;
-	box-shadow: 5px 5px 10px #888888;
-}
-
 .header {
     height: 60px;
     width: 100%;
@@ -53,10 +47,18 @@
 
 .home-search-btn {
     background-color: white;
-    color: black;
-    height: 50px;
-    width: 100px;
+    color: grey;
+    height: 40px;
+    width: 150px;
+    font-size: 1.25em;
+    margin-top: 50px;
+    border: none;
 }
+
+.glyphicon {
+    Margin-right: 10px;
+}
+
 
 /* modifies gallery heading, located above picture-container & images */
 .gallery-heading {
