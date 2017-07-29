@@ -9,7 +9,7 @@ var $pictureDisplay = $('[data-role="picture-display"]');
 var $MENU_CONTAINER = $('[data-text-role="menu"]')
 var $EXIT_ICON = $('[data-image-role="exit-container"]')
 var $HAMBURGER = $('[data-image-role="hamburger"]')
-var $ICON_BUTTON = $('[data-role="iconButton"]')
+var $ICON_BUTTON = $('[data-role="iconButtonpwd"]')
 
 
 // Uses Google API to get latitude and longitude from searched value, sends to photoSearch function to find pictures pased on coordinates
@@ -151,6 +151,21 @@ function clickExitButton(){
     });
 }
 
+//Carousel control; rotates through jumbotron images
+function carouselControl() {
+    $(document).ready(function(){
+        $('.carousel').slick({
+        autoplay: true,
+        mobileFirst: true,
+        autoplaySpeed: 4000,
+        arrows: false,
+        pauseOnFocus: false,
+        pauseOnHover: false,
+        swipeToSlide: true,
+        }); 
+    });
+};
+
 
 // $MENU_CONTAINER.toggleClass('.menu-container', '.menu-container-on');
 // $HAMBURGER.toggleClass('.hamburger', '.icon');
@@ -166,5 +181,6 @@ clickMenuShow();
 clickExitButton();
 addSearchListener();
 addPictureListener();
+carouselControl();
 
 
