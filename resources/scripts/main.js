@@ -55,9 +55,9 @@ function photoSearch(resp, tags) {
     // var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&text=" + URI + "&tag=" + URITags + "&format=json&nojsoncallback=1");
     // var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&sort=faves&format=json&nojsoncallback=1");
     // Gets search results by latitude and longitude
-    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&radius=20&radius_units=mi&format=json&nojsoncallback=1");
-    resp
-        .then(createPicture)
+    // var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&radius=20&radius_units=mi&format=json&nojsoncallback=1");
+    // resp
+    //     .then(createPicture)
     // &radius=20&radius_units=mi
 
 
@@ -71,9 +71,8 @@ function photoSearch(resp, tags) {
 }
 
 // 1.3.2
-// gets what checkboses are checked and value to turn into tags to search Flickrs API
+// gets what checkboxes are checked and value to turn into tags to search Flickrs API
 function chooseTags() {
-    console.log("working");
     var $checkboxes = $('[data-role=checkbox]');
     var types = [];
     for (var i = 0; i < $checkboxes.length; i++) {
