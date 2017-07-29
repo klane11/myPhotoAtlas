@@ -9,7 +9,7 @@ var $pictureDisplay = $('[data-role="picture-display"]');
 var $MENU_CONTAINER = $('[data-text-role="menu"]')
 var $EXIT_ICON = $('[data-image-role="exit-container"]')
 var $HAMBURGER = $('[data-image-role="hamburger"]')
-var $ICON_BUTTON = $('[data-role="iconButton"]')
+var $ICON_BUTTON = $('[data-role="iconButtonpwd"]')
 
 // "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CmRaAAAAMpgMQ3JyymBzblKvQn4p8rlAv9Oc_q613EzrWvmkUy_IGYwdJaHEet7sN7aKJRXiUdWRdZh7vp7wcHWXjL8WPrq22PlfX9JzpswrwS-r4bRq7WvQ99wGyjVvZUDkT6sMEhCfmuf4mAkhW91E04hpKbU8GhSLBVRuXF3WE7-KkTPSETcF2msYwg&key=AIzaSyD8UFO6YBOxOpaAG0Q6BUg4iqd_9214ZWY"
 
@@ -212,6 +212,21 @@ function clickExitButton(){
     });
 }
 
+//Carousel control; rotates through jumbotron images
+function carouselControl() {
+    $(document).ready(function(){
+        $('.carousel').slick({
+        autoplay: true,
+        mobileFirst: true,
+        autoplaySpeed: 4000,
+        arrows: false,
+        pauseOnFocus: false,
+        pauseOnHover: false,
+        swipeToSlide: true,
+        }); 
+    });
+};
+
 
 
 // starts off DOM with exit and menu-container hidden until clicked
@@ -220,6 +235,11 @@ $MENU_CONTAINER.hide();
 // initializes hamburger meniu
 clickMenuShow();
 clickExitButton();
+
+addSearchListener();
+addPictureListener();
+carouselControl();
+
 
 
 
@@ -291,7 +311,7 @@ clickExitButton();
     // var search = new google.maps.places.PlacesService(map);
     // search.nearbySearch(request, createPlacesPicture)
 
-}
+//}
 
 // function storeData(resp) {
 //     localStorage.setItem('googlePics', JSON.stringify(resp));

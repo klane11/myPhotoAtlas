@@ -11,6 +11,8 @@
     <!--<link rel="icon" href="resources/images/favicon.png" type="image/x-icon">-->
     <!--NORMALIZE-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.css">
+    <!--slick carousel link for images-->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"/>
     <!--bootstrap-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <!--css link  -->
@@ -57,23 +59,60 @@
         <!-- menu for hamburger menu -->
         <div class="menu-container " data-text-role="menu">
             <ul class="">
+                <li class="active"><a>Home</a></li>
                 <li class="active"><a>Explore</a></li>
-                <li class="active"><a>Start a project</a></li>
                 <li class="active"><a>About us</a></li>
                 <li class="active"><a>Contact</a></li>
             </ul>
         </div>
-        <!--banner section if we want one / like jumbotron -->
-        <banner>
-            <div class="jumbotron">
-                <span class="title">Where will you Discover next?</span>
-                <div class="home-search">
 
-                    <button class="home-search-btn" href="#"><i class="glyphicon glyphicon-search"></i>Search Now</button>
-                </div>   
+
+        <!--carousel/jumbotron section-->
+        <banner>
+
+            <div class="carousel">
+                <div class="jumbotron">
+                    <div class="jumbotron-1">
+                        <div class="jumbotron-title">
+                            <h1>Explore.</h1>
+                        </div>
+                        <div class="button-container">
+                            <button class="home-search-btn" href="#"><i class="glyphicon glyphicon-search"></i>Search</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="jumbotron">
+                    <div class="jumbotron-2">
+                        <div class="jumbotron-title">
+                            <h1>Discover.</h1>
+                        </div>
+                        <div class="button-container">
+                            <button class="home-search-btn" href="#"><i class="glyphicon glyphicon-search"></i>Search</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="jumbotron">
+                    <div class="jumbotron-3">
+                        <div class="jumbotron-title">
+                            <h1>Adventure Awaits.</h1>
+                        </div>
+                        <div class="button">
+                            <button class="home-search-btn" href="#"><i class="glyphicon glyphicon-search"></i>Search</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="jumbotron">
+                    <div class="jumbotron-4">
+                        <div class="jumbotron-title">
+                            <h1>Where will you go next?</h1>
+                        </div>
+                        <div class="button-container">
+                            <button class="home-search-btn" href="#"><i class="glyphicon glyphicon-search"></i>Search</button>
+                        </div>
+                    </div>
+                </div>
 
             </div>
-            
         </banner>
     </header>
 
@@ -121,8 +160,8 @@
     <!--Links map.js file to HTML-->
     <script src="resources/scripts/map.js" charset="utf-8"></script>
 
-
-
+    <!--slick.js-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js"></script>
 
 
 
