@@ -24,7 +24,6 @@ function mapSetCenterSearch(resp) {
     var latLon = {};
     latLon["lat"] = Number(resp["results"][0]["geometry"]["location"]["lat"]);
     latLon["lng"] = Number(resp["results"][0]["geometry"]["location"]["lng"]);
-    console.log(latLon);
     map.setZoom(10);
 	map.setCenter(latLon);
 }
@@ -49,10 +48,9 @@ function photoSearch(resp) {
     // var URITags = encodeURI("nature")
     // var URI = encodeURI(searchValue);
     // var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&text=" + URI + "&tag=" + URITags + "&format=json&nojsoncallback=1");
-    // console.log(resp);
-    // var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&sort=faves&format=json&nojsoncallback=1");
+    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&sort=faves&format=json&nojsoncallback=1");
     // Gets search results by latitude and longitude
-    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&radius=20&radius_units=mi&format=json&nojsoncallback=1");
+    // var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&radius=20&radius_units=mi&format=json&nojsoncallback=1");
     // &radius=20&radius_units=mi
 
     // Gets results by WOEID/tag
@@ -63,6 +61,10 @@ function photoSearch(resp) {
     // var URI = encodeURI(searchValue);
     // var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&text=" + URI + "&format=json&nojsoncallback=1");
     // console.log(resp);
+
+//    var resp = $.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + resp["results"][0]["geometry"]["location"]["lat"] + "," + resp["results"][0]["geometry"]["location"]["lng"] + "&radius=500&key=" + GOOGLE_API_KEY);
+
+   console.log(resp);
 
     resp
         .then(createPicture)
@@ -114,9 +116,25 @@ function mapSetCenterPic(picture) {
     var latLon = {};
     latLon["lat"] = Number(picture["photo"]["location"]["latitude"]);
     latLon["lng"] = Number(picture["photo"]["location"]["longitude"]);
-    console.log(latLon);
     map.setZoom(12);
 	map.setCenter(latLon);
+    placePicMarker(latLon);
+}
+
+var markers = [];
+// Removes all markers from map and places new one when pic clicked
+function placePicMarker(latLon) {
+    markers.forEach(function(marker) {
+        marker.setMap(null);
+    });
+    var icon = 'resources/images/photography+workshops.png';
+	var marker = new google.maps.Marker({
+        position: latLon,
+        map: map,
+        icon: icon,
+        animation: google.maps.Animation.DROP,
+    })
+    markers.push(marker);
 }
 
 // Adds click listener to all images within "picture-display" div, then gets coordinates with getPicGeo function
