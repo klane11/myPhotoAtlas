@@ -1,13 +1,4 @@
 
-.main-map {
-    height: 100%;
-}
-
-html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-}
 
 .header {
     height: 60px;
@@ -46,25 +37,71 @@ html, body {
     
 }
 
-.jumbotron {
-    background-image: url("https://c2.staticflickr.com/6/5039/5912056963_8ed390c902_b.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+/* .jumbotron {
     height: 300px;
     text-align: center;
+} */
+
+#map {
+	height: 300px;
+    box-shadow: 5px 5px 10px #888888;
+    display: fixed;
+    z-index: 50;
+}
+.search-input {
+    width: 100%;
 }
 
 /* modifies gallery heading, located above picture-container & images */
+.main-container {
+    padding:20px;
+}
 .gallery-heading {
     display: flex;
-    flex-direction: row;
     justify-content: center;
-}
-
-.gallery-heading h2 {
     color: grey;
 }
+
+.input-group{
+    text-align: center;
+}
+.search-bar {
+    width: 300px;
+}
+
+/*checkbox animation  */
+
+.checkbox-name {
+    margin-bottom: 15px;
+    margin-right: 15px;
+    margin-top: 20px;
+    cursor: pointer;
+    letter-spacing: 2px;
+}   
+
+.checkbox-name:after,
+.checkbox-name:before {
+  border: 1px solid white;
+  bottom: 0px;
+  content: " ";
+  display: block;
+  transition: all 280ms ease-in-out;
+  width: 0;
+}
+
+.checkbox-name:hover:after,
+.checkbox-name:hover:before {
+  border-color:black;
+  transition: width 350ms ease-in-out;
+  width: 100%;
+}
+
+.checkbox-name:hover:before {
+  bottom: auto;
+  top: 0;
+  width: 100%;
+}
+
 
 /* modifies picture-container class(created by Sarah on the DOM), within picture-display div in HTML  */
 .picture-container {
@@ -85,15 +122,27 @@ html, body {
 }
 
 
+.footer-contaienr {
+    height: 300px;
+    background: lightblue;
+}
 
 
 
 @media only screen and (min-width: 976px){
-    .jumbotron {
+    /* .jumbotron {
+        height: 500px;
+    }  */
+    #map {
         height: 500px;
     }
-    .title {
+    .search-input {
+        width: 1024px;
+        margin: 0 auto;
+    }
+    .gallery-heading {
         font-size: 60px;
+        padding: 40px;
     }
 }
 
