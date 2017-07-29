@@ -29,6 +29,7 @@ function makePicture(farmID, serverID, photoID, secret, title) {
     })
 }
 
+// gets what checkboses are checked and value to turn into tags to search Flickrs API
 function chooseTags() {
     console.log("working");
     var $checkboxes = $('[data-role=checkbox]');
@@ -41,20 +42,14 @@ function chooseTags() {
     return types;
 }
 // Searches Flickr API for images based on latitude and longitude from Google Search, sends pictues to createPicture function
-function photoSearch(resp) {
+function photoSearch(resp, tags) {
     if ($pictureDisplay.children()) {
         $pictureDisplay.empty();
     }
-    // these are variables being used at the moment to render photos and see how different tags interact
-    var botanicalGarden = "atlantabotanicalgarden%2C+botanical%2C+orchid%2C+atlanta%2C+garden%2C+flower%2C+nature%2C+floral%2C+tropical%2C+green%2C";
-    var nature = encodeURI("nature");
-    var garden = encodeURI("garden");
-    var waterfall = encodeURI("waterfall");
-    var sclupture = encodeURI("sculpture");
-
-    
-    // main response being used at moment. This adds in the variables above to search. Tags are essential in the search process, tag_mode, and radius units. These aspects will be changed later to get respnoses from the user
-    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"]+ "&tags=" + sclupture + "&tag_mode=any&radius=20&radius_units=mi&format=json&nojsoncallback=1");
+    var tags = chooseTags();
+    console.log(tags)
+    // This adds in tags. Tags are essential in the search process,as well as radius units. These aspects will be changed later to get respnoses from the user
+    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"]+ "&tags=" + tags + "&tag_mode=any&radius=20&radius_units=mi&format=json&nojsoncallback=1");
     resp
         .then(createPicture)
 }
@@ -82,13 +77,21 @@ function addSearchListener() {
         event.preventDefault();
         var searchValue = $('[data-role="search"]').val();
         // getGeoCoords(searchValue);
-        var tags = chooseTags();
-        console.log(tags)
-        getGeoCoords(searchValue, tags);
+        getGeoCoords(searchValue);
         });
 }
 
 
+
+
+
+
+
+
+// ******************************
+// ******************************
+// ******************************
+// when photo is clicked to get location of photo
 // Gets latitude and longitude for clicked pic from Flickr API, then prints to console
 function getPicGeo(picture) {
     var picId = picture[0]["attributes"][2]["nodeValue"];
@@ -121,7 +124,9 @@ function addPictureListener() {
 function printIt(thing) {
     console.log(thing);
 }
-
+// ******************************
+// ******************************
+// ******************************
 
 
 // initializes search listener for clicking on picture and taking us to that location
