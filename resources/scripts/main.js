@@ -11,6 +11,7 @@ var $EXIT_ICON = $('[data-image-role="exit-container"]')
 var $HAMBURGER = $('[data-image-role="hamburger"]')
 var $ICON_BUTTON = $('[data-role="iconButton"]')
 
+// "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CmRaAAAAMpgMQ3JyymBzblKvQn4p8rlAv9Oc_q613EzrWvmkUy_IGYwdJaHEet7sN7aKJRXiUdWRdZh7vp7wcHWXjL8WPrq22PlfX9JzpswrwS-r4bRq7WvQ99wGyjVvZUDkT6sMEhCfmuf4mAkhW91E04hpKbU8GhSLBVRuXF3WE7-KkTPSETcF2msYwg&key=AIzaSyD8UFO6YBOxOpaAG0Q6BUg4iqd_9214ZWY"
 
 // Uses Google API to get latitude and longitude from searched value, sends to photoSearch function to find pictures pased on coordinates
 function getGeoCoords(searchValue) {
@@ -48,9 +49,11 @@ function photoSearch(resp) {
     // var URITags = encodeURI("nature")
     // var URI = encodeURI(searchValue);
     // var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&text=" + URI + "&tag=" + URITags + "&format=json&nojsoncallback=1");
-    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&sort=faves&format=json&nojsoncallback=1");
+    // var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&sort=faves&format=json&nojsoncallback=1");
     // Gets search results by latitude and longitude
-    // var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&radius=20&radius_units=mi&format=json&nojsoncallback=1");
+    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&radius=20&radius_units=mi&format=json&nojsoncallback=1");
+    resp
+        .then(createPicture)
     // &radius=20&radius_units=mi
 
     // Gets results by WOEID/tag
@@ -61,14 +64,52 @@ function photoSearch(resp) {
     // var URI = encodeURI(searchValue);
     // var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&text=" + URI + "&format=json&nojsoncallback=1");
     // console.log(resp);
+    // var resp = $.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + resp["results"][0]["geometry"]["location"]["lat"] + "," + resp["results"][0]["geometry"]["location"]["lng"] + "&radius=500&key=" + GOOGLE_API_KEY);
+    // console.log(resp);
+    // resp
+        // .then(storeData)
+        // .then(createGooglePic)
+        
+    // var place = new google.maps.LatLng(Number(resp["results"][0]["geometry"]["location"]["lat"]), Number(resp["results"][0]["geometry"]["location"]["lng"]))
+    // var request = {
+    //     location: place,
+    //     radius: '500'
+    // };
 
-//    var resp = $.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + resp["results"][0]["geometry"]["location"]["lat"] + "," + resp["results"][0]["geometry"]["location"]["lng"] + "&radius=500&key=" + GOOGLE_API_KEY);
+    // var search = new google.maps.places.PlacesService(map);
+    // search.nearbySearch(request, createPlacesPicture)
 
-   console.log(resp);
-
-    resp
-        .then(createPicture)
 }
+
+// function storeData(resp) {
+//     localStorage.setItem('googlePics', JSON.stringify(resp));
+//     var parsed = JSON.parse(localStorage.getItem('googlePics'));
+//     return parsed;
+// }
+
+// function createGooglePic(array) {
+//     console.log(array);
+//     var resultsArray = array["results"];
+//     var $pictureContainer = $('<div></div>', {
+//         'class': 'picture-container',
+//         'data-role': 'picture-container'
+//     })
+//     resultsArray.forEach(function(picture) {
+//         console.log(picture);
+//         var $picture = makeGooglePic([picture]["photos"][0]["photo_reference"], picture["name"], picture["id"], picture["geometry"]["location"]);
+//         $pictureContainer.append($picture);
+//     })
+//     $pictureDisplay.append($pictureContainer);
+// }
+
+// function makeGooglePic(reference, title, photoID, location) {
+//     return $('<img>', {
+//         'src': "https://maps.googleapis.com/maps/api/place/photo?maxwidth=240&photoreference=" + reference + "&key=" + GOOGLE_API_KEY,
+//         'alt': title,
+//         'id': photoID,
+//         'location': location
+//     })
+// }
 
 // Creates array from picture search results, creates picture-container div, loops through array, creates picture for each with makePicture function, appends to picture-container div, appends div to DOM
 function createPicture(resp) {
