@@ -111,11 +111,6 @@ function addSearchListener() {
 }
 
 
-
-
-
-
-
 // ******************************
 // ******************************
 // ******************************
@@ -139,6 +134,7 @@ function mapSetCenterPic(picture) {
     reverseGeoCode(latLon);
 }
 
+// Takes latitude and longitude, obtains address
 function reverseGeoCode(latLon) {
     var resp = $.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latLon["lat"] + "," + latLon["lng"] + "&key=" + GOOGLE_API_KEY);
     resp
@@ -158,10 +154,10 @@ function placePicMarker(latLon, resp) {
         marker.setMap(null);
     });
 
-    var formatted_address = resp["results"][0]["formatted_address"];
+    var formatted_address = checkAddress(resp);
     var URI = encodeURI(formatted_address);
     var link = "https://maps.google.com?q=" + URI;
-    var content = '<h6>' + formatted_address + '</h6>' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>';
+    var content = '<h6>' + formatted_address + '</h6>' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' + '<a href="#" data-role="store-place"> Add to myPlaces</a>';
     var icon = 'resources/images/markiethemarker.png';
 
 	  var marker = new google.maps.Marker({
@@ -194,6 +190,16 @@ function placePicMarker(latLon, resp) {
     //         })
     //     })
 }
+
+function checkAddress(resp) {
+    var add = resp["results"][0]["formatted_address"];
+    if (add !== undefined) {
+        return add;
+    } else {
+        return "No address data found for this picture."
+    }
+}
+
 
 // Adds click listener to all images within "picture-display" div, then gets coordinates with getPicGeo function
 function addPictureListener() {
