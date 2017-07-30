@@ -1,4 +1,3 @@
-
 // html data roles
 var $mainMap = $('[data-role="main-map"]');
 var $searchField = $('[data-role="search-form"]');
@@ -13,8 +12,6 @@ var $ICON_BUTTON = $('[data-role="iconButtonpwd"]');
 var $HIDE_MAP = $('[data-images-role="hide-map"]');
 var $SHOW_MAP = $('[data-images-role="show-map"]');
 
-// "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CmRaAAAAMpgMQ3JyymBzblKvQn4p8rlAv9Oc_q613EzrWvmkUy_IGYwdJaHEet7sN7aKJRXiUdWRdZh7vp7wcHWXjL8WPrq22PlfX9JzpswrwS-r4bRq7WvQ99wGyjVvZUDkT6sMEhCfmuf4mAkhW91E04hpKbU8GhSLBVRuXF3WE7-KkTPSETcF2msYwg&key=AIzaSyD8UFO6YBOxOpaAG0Q6BUg4iqd_9214ZWY"
-
 // Uses Google API to get latitude and longitude from searched value, sends to photoSearch function to find pictures pased on coordinates
 // 1.2
 function getGeoCoords(searchValue) {
@@ -25,7 +22,6 @@ function getGeoCoords(searchValue) {
         .then(photoSearch)
 }
 
-
 // 1.3.1
 // Searches Flickr API for images based on latitude and longitude from Google Search, sends pictues to createPicture function
 function photoSearch(resp, tags) {
@@ -34,7 +30,6 @@ function photoSearch(resp, tags) {
     }
     // gets tags from checkbox
     var tags = chooseTags();
-    console.log(tags)
     // Adds in tags. Tags are essential in the search process,as well as radius units. These aspects will be changed later to get respnoses from the user
     var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"]+ "&tags=" + tags + "&tag_mode=any&radius=20&radius_units=mi&format=json&nojsoncallback=1");
     resp
@@ -90,7 +85,8 @@ function createPicture(resp) {
 // Creates DOM picture elements from array of returned photos
 function makePicture(farmID, serverID, photoID, secret, title) {
     return $('<img>', {
-        'src': "https://farm" + farmID + ".staticflickr.com/" + serverID + "/" + photoID + "_" + secret + "_z.jpg",
+
+        'src': "https://farm" + farmID + ".staticflickr.com/" + serverID + "/" + photoID + "_" + secret + "_m.jpg",
         'alt': title,
         'id': photoID
     });
@@ -108,40 +104,40 @@ function addSearchListener() {
 }
 
 
-
-
-
-
-
 // ******************************
 // ******************************
 // ******************************
 // when photo is clicked to get location of photo
 // Gets latitude and longitude for clicked pic from Flickr API
 function getPicGeo(picture) {
+    console.log(picture);
     var picId = picture[0]["attributes"][2]["nodeValue"];
+    var photoURL = picture[0]["attributes"][0]["nodeValue"];
     var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.geo.getLocation&api_key=" + FLICKR_API_KEY + "&photo_id=" + picId + "&format=json&nojsoncallback=1");
     
     resp
-        .then(mapSetCenterPic)
+        .then(function(resp) {
+            mapSetCenterPic(resp, picture);
+        })
 }
 
 // Resets map center when picture is clicked
-function mapSetCenterPic(picture) {
+function mapSetCenterPic(picture, photoURL) {
     var latLon = {};
     latLon["lat"] = Number(picture["photo"]["location"]["latitude"]);
     latLon["lng"] = Number(picture["photo"]["location"]["longitude"]);
     map.setZoom(12);
 	map.setCenter(latLon);
-    reverseGeoCode(latLon);
+    reverseGeoCode(latLon, picture);
 }
 
-function reverseGeoCode(latLon) {
+// Takes latitude and longitude, obtains address
+function reverseGeoCode(latLon, picture) {
     var resp = $.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latLon["lat"] + "," + latLon["lng"] + "&key=" + GOOGLE_API_KEY);
     resp
         
         .then(function(resp) {
-            placePicMarker(latLon, resp);
+            placePicMarker(latLon, resp, picture);
         })
         .catch(function(error) {
             console.log(error);
@@ -150,17 +146,15 @@ function reverseGeoCode(latLon) {
 
 var markers = [];
 // Removes all markers from map and places new one when pic clicked
-function placePicMarker(latLon, resp) {
-    console.log(resp);
+function placePicMarker(latLon, resp, picture) {
     markers.forEach(function(marker) {
         marker.setMap(null);
     });
 
-    var formatted_address = resp["results"][0]["formatted_address"];
-    console.log(formatted_address);
+    var formatted_address = checkAddress(resp);
     var URI = encodeURI(formatted_address);
     var link = "https://maps.google.com?q=" + URI;
-    var content = '<h6>' + formatted_address + '</h6>' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>';
+    var content = '<h6>' + formatted_address + '</h6>' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' + '<a href="#" data-role="save">Add to myPlaces</a>';
     var icon = 'resources/images/markiethemarker.png';
 
 	  var marker = new google.maps.Marker({
@@ -173,34 +167,51 @@ function placePicMarker(latLon, resp) {
         content: content
     });
     
-    console.log(link);
     marker.addListener('click', function() {
-        console.log(content);
         infoWindow.open(map, marker);
     });
-    
     markers.push(marker);
-    // var contentReq = new Promise (
-    //     function(resolve, reject) {
-    //         var content = '<h6>' + formatted_address + '</h6><a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>';
-    //         resolve(content);
-    //     }
-    // )
-    // contentReq
-    //     .then(function(fulfilled) {
-    //         marker.addListener('click', function() {
-    //             console.log(fulfilled);
-    //             infoWindow.setContent(fulfilled);
-    //             infoWindow.open(map, marker);
-    //         })
-    //     })
+
+    google.maps.event.addListener(infoWindow, 'domready', function() {
+        document.querySelector('[data-role="save"]').addEventListener("click", function(e) {
+            e.preventDefault();
+            addPlace(formatted_address, picture);
+        });
+    });
 }
+
+function addPlace(address, picture) {
+    var myPlaces = JSON.parse(localStorage.getItem('myPlaces'));
+    myPlaces[address] = picture;
+    localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
+}
+
+function createMyPlaces() {
+    var myPlaces = JSON.parse(localStorage.getItem('myPlaces'));
+    if (myPlaces) {
+        localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
+    } else {
+        myPlaces = {};
+        localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
+    }
+}
+
+// Check to see if address exists in reverseGeoCode response
+function checkAddress(resp) {
+    var add = resp["results"][0]["formatted_address"];
+    if (add !== undefined) {
+        return add;
+    } else {
+        return "No address data found for this picture."
+    }
+}
+
 
 // Adds click listener to all images within "picture-display" div, then gets coordinates with getPicGeo function
 function addPictureListener() {
     $('[data-role="picture-display"]').on('click', $('img'), function(event) {
-    event.preventDefault();
-    getPicGeo($(event.target));
+        event.preventDefault();
+        getPicGeo($(event.target));
     });
 }
 
@@ -222,12 +233,10 @@ $(window).scroll(function() {
         targetClass.css("top", "50px", "z-index", "1");
         $(".menu-container").css("z-index", "100")
         // $(".main-container").css("margin-top", "400px")
-        console.log("nope")
     } else {
         targetClass.css("top", "0", "z-index", "1");
         $(".menu-container").css("z-index", "100")
         // $(".main-container").css("margin-top", "400px")
-        console.log("yup")
         
     }
 });
@@ -249,10 +258,6 @@ function clickHideMap(){
         $(".map-container").hide();
     });
 }
-
-
-
-
 
 // when hamburger menu icon is clicked, the hamburger icon hids, the exit icon shows and the menu-container shows slowly
 function clickMenuShow(){
@@ -286,7 +291,7 @@ function carouselControl() {
         swipeToSlide: true,
         }); 
     });
-};
+}
 
 
 
@@ -303,6 +308,7 @@ clickShowMap();
 // initializes search listener for clicking on picture and taking us to that location
 addSearchListener();
 addPictureListener();
+createMyPlaces();
 // carousel on landing page
 // carouselControl();
 
