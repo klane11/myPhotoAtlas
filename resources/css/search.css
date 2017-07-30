@@ -5,6 +5,9 @@ font-family: 'Caveat', cursive; */
 body {
     font-family: 'Raleway', sans-serif;
 }
+
+
+/*header  */
 .header {
     height: 60px;
     width: 100%;
@@ -16,6 +19,7 @@ body {
     align-items: center;
 }
 
+/*retractable menu  */
 .hamburger,
 .exit,
 .hide-map,
@@ -23,18 +27,12 @@ body {
     background: none;
     border: none;
 }
-
 .hamburger img,
 .map-icons img {
     height: 30px;
 }
 .exit img {
     height: 25px;
-}
-.open-close-map {
-    position: fixed;
-    left: 0;
-    bottom: 0;
 }
 .menu-container {
     z-index: 100;
@@ -43,23 +41,24 @@ body {
     z-index: 100;
     list-style: none;
 }
-
 .menu-container ul a {
     z-index: 100;
     color: black;
 }
-
 .title {
     font-size: 40px;
     color: white;
     font-weight: bold;
 }
 
+
+/**************************  */
+/* map   */
 .map-container {
     background-color: #2C6675;
     width: 100%;
     position: fixed;
-    transition: all .75s;
+    transition: all 1s;
     margin: 0 auto;
     z-index: 100;
 }
@@ -69,30 +68,41 @@ body {
     box-shadow: 0px 0px 10px #2C6675;
     width: 100%;
 }
-/* #map & {
-    display: fixed;
-    z-index: 50;
-} */
+
+.white-space {
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    background-color: white;
+    border-bottom: 1px solid #023E58;
+    height: 20px;
+    transition: all 1s;
+}
+.open-close-map {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+}
+/**************************  */
+/*main  */
+main {
+    background-color: #2C6675
+}
+/*search area  */
+/* modifies gallery heading, located above picture-container & images */
 .search-input {
     width: 100%;
 }
 
-main {
-    background-color: #2C6675
-}
-/* modifies gallery heading, located above picture-container & images */
 .top-search-container {
     background-color: white;
     border-bottom: 2px solid #023E58;
 }
 .main-container {
+    margin-top: 300px;
     padding: 20px;
     text-align: center;
     transition: all .5s ease-in;
-}
-.hidden-heading {
-    padding-bottom: 20px;
-    color: #2C6675;
 }
 .gallery-heading {
     font-family: 'Rock Salt', cursive;
@@ -102,6 +112,7 @@ main {
     margin: 0 auto;
     color: grey;
     margin-top: 75px;
+    margin-bottom: 15px;
 }
 
 .input-group{
@@ -118,7 +129,7 @@ main {
 .search-location{
     width: 100%;
 }
-
+/* ************************ */
 /*checkbox animation  */
 .checkbox-container {
     display: flex;
@@ -127,7 +138,6 @@ main {
     flex-direction: row;
     flex-wrap: wrap;
 }
-
 .checkbox-name {
     margin-bottom: 15px;
     margin-right: 15px;
@@ -135,7 +145,6 @@ main {
     cursor: pointer;
     letter-spacing: 2px;
 }
-
 .checkbox-name:after,
 .checkbox-name:before {
     border: 1px solid white;
@@ -145,7 +154,6 @@ main {
     transition: all 280ms ease-in-out;
     width: 0;
 }
-
 .checkbox-name:hover:after,
 .checkbox-name:hover:before {
     border-color:black;
@@ -153,15 +161,14 @@ main {
     width: 100%;
     
 }
-
 .checkbox-name:hover:before {
     bottom: auto;
     top: 0;
     width: 100%;
 }
 
+/* ************************ */
 /* modifies picture-container class(created by Sarah on the DOM), within picture-display div in HTML  */
-
 .picture-container {
     display: flex;
     justify-content: center;
@@ -173,29 +180,31 @@ main {
     text-align: center;
     background-color: white;
 }
-
-/* Modifies search images */
 .picture-box {
     height: 200px;
     width: 250px;
     overflow: hidden;
     margin: 10px;
+    transition: all .75s;
 }
 .picture-container img {
     max-height: 400px;
     max-width: 400px;
-    margin: 10px;
     opacity: .8;
     cursor: pointer;
     transition: all .75s;
 }
-
+.picture-box:hover {
+    box-shadow: 5px 5px 10px grey;
+}
 .picture-container img:hover{
     opacity: 1;
     box-shadow: 5px 5px 10px grey;
     transform: scale(1.02); 
 }
 
+/* ************************ */
+/*footer  */
 .footer-container {
     height: 300px;
     background: #023E58;

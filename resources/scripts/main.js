@@ -86,7 +86,7 @@ function createPicture(resp) {
 function makePicture(farmID, serverID, photoID, secret, title) {
     return $('<img>', {
 
-        'src': "https://farm" + farmID + ".staticflickr.com/" + serverID + "/" + photoID + "_" + secret + "_m.jpg",
+        'src': "https://farm" + farmID + ".staticflickr.com/" + serverID + "/" + photoID + "_" + secret + "_z.jpg",
         'alt': title,
         'id': photoID
     });
@@ -247,7 +247,7 @@ function clickShowMap(){
         console.log("hi")
         $('[data-images-role="hide-map"]').show();
         $(this).hide();
-        $(".map-container").show();
+        $(".map-container").show("slow");
     });
 }
 function clickHideMap(){
@@ -255,7 +255,7 @@ function clickHideMap(){
         console.log("maybe")
         $('[data-images-role="show-map"]').show();
         $(this).hide();
-        $(".map-container").hide();
+        $(".map-container").hide("slow");
     });
 }
 
@@ -284,7 +284,7 @@ function carouselControl() {
         $('.carousel').slick({
         autoplay: true,
         mobileFirst: true,
-        autoplaySpeed: 4000,
+        autoplaySpeed: 4500,
         arrows: false,
         pauseOnFocus: false,
         pauseOnHover: false,
@@ -310,7 +310,7 @@ addSearchListener();
 addPictureListener();
 createMyPlaces();
 // carousel on landing page
-// carouselControl();
+carouselControl();
 
 
 
