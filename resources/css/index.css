@@ -20,11 +20,12 @@ font-family: 'Caveat', cursive; */
     border: none;
 }
 
-.hamburger img,
-.exit img {
+.hamburger img{
     height: 30px;
 }
-
+.exit img {
+    height: 25px;
+}
 .menu-container ul {
     list-style: none;
 }

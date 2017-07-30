@@ -1,5 +1,10 @@
+/* font-family: 'Raleway', sans-serif;
+font-family: 'Rock Salt', cursive;
+font-family: 'Caveat', cursive; */
 
-
+body {
+    font-family: 'Raleway', sans-serif;
+}
 .header {
     height: 60px;
     width: 100%;
@@ -12,14 +17,19 @@
 }
 
 .hamburger,
-.exit {
+.exit,
+.hide-map,
+.show-map {
     background: none;
     border: none;
 }
 
 .hamburger img,
-.exit img {
+.map-icons img {
     height: 30px;
+}
+.exit img {
+    height: 25px;
 }
 .menu-container {
     z-index: 100;
@@ -62,22 +72,31 @@
     width: 100%;
 }
 
+main {
+    background-color: #2C6675
+}
 /* modifies gallery heading, located above picture-container & images */
+.top-search-container {
+    background-color: white;
+    border-bottom: 2px solid #023E58;
+}
 .main-container {
     padding: 20px;
-    margin-top: 200px;
     text-align: center;
+    transition: all .5s ease-in;
 }
 .hidden-heading {
     padding-bottom: 20px;
     color: #2C6675;
 }
 .gallery-heading {
+    font-family: 'Rock Salt', cursive;
     display: flex;
     justify-content: center;
     text-align: center;
     margin: 0 auto;
     color: grey;
+    margin-top: 75px;
 }
 
 .input-group{
@@ -103,6 +122,7 @@
     flex-direction: row;
     flex-wrap: wrap;
 }
+
 .checkbox-name {
     margin-bottom: 15px;
     margin-right: 15px;
@@ -113,46 +133,54 @@
 
 .checkbox-name:after,
 .checkbox-name:before {
-  border: 1px solid white;
-  bottom: 0px;
-  content: " ";
-  display: block;
-  transition: all 280ms ease-in-out;
-  width: 0;
+    border: 1px solid white;
+    bottom: 0px;
+    content: " ";
+    display: block;
+    transition: all 280ms ease-in-out;
+    width: 0;
 }
 
 .checkbox-name:hover:after,
 .checkbox-name:hover:before {
-  border-color:black;
-  transition: width 350ms ease-in-out;
-  width: 100%;
+    border-color:black;
+    transition: width 350ms ease-in-out;
+    width: 100%;
+    
 }
 
 .checkbox-name:hover:before {
-  bottom: auto;
-  top: 0;
-  width: 100%;
+    bottom: auto;
+    top: 0;
+    width: 100%;
 }
 
 /* modifies picture-container class(created by Sarah on the DOM), within picture-display div in HTML  */
+
 .picture-container {
     display: flex;
     justify-content: center;
     flex-flow: wrap;
     align-items: center;
     padding: 10px;
-    border: 2px solid #023E58;
+    border-left: 2px solid #023E58;
+    border-right: 2px solid #023E58;
     text-align: center;
+    background-color: white;
 }
 
 /* Modifies search images */
-
-.picture-container img {
-    max-height: 200px;
-    max-width: 300px;
+.picture-box {
+    height: 200px;
+    width: 250px;
     overflow: hidden;
     margin: 10px;
-    opacity: .7;
+}
+.picture-container img {
+    max-height: 400px;
+    max-width: 400px;
+    margin: 10px;
+    opacity: .8;
     cursor: pointer;
     transition: all .75s;
 }
@@ -160,11 +188,13 @@
 .picture-container img:hover{
     opacity: 1;
     box-shadow: 5px 5px 10px grey;
+    transform: scale(1.02); 
 }
 
 .footer-container {
     height: 300px;
     background: #023E58;
+    border-top: 2px solid black;
 }
 
 
@@ -180,11 +210,14 @@
     .main-container{
         margin: 0 auto;
         margin-top: 250px;
-        width: 1024px;
+        max-width: 1024px;
         text-align: center;
     }
     .search-input {
-        
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-content: center;
     }
     .gallery-heading {
         font-size: 60px;
