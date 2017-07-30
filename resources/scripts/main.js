@@ -123,17 +123,11 @@ function addSearchListener() {
 }
 
 
-
-
-
-
-
-
 // ******************************
 // ******************************
 // ******************************
 // when photo is clicked to get location of photo
-// Gets latitude and longitude for clicked pic from Flickr API, then prints to console
+// Gets latitude and longitude for clicked pic from Flickr API
 function getPicGeo(picture) {
     var picId = picture[0]["attributes"][2]["nodeValue"];
     var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.geo.getLocation&api_key=" + FLICKR_API_KEY + "&photo_id=" + picId + "&format=json&nojsoncallback=1");
@@ -149,12 +143,22 @@ function mapSetCenterPic(picture) {
     latLon["lng"] = Number(picture["photo"]["location"]["longitude"]);
     map.setZoom(12);
 	map.setCenter(latLon);
-    placePicMarker(latLon);
+    reverseGeoCode(latLon);
+}
+
+function reverseGeoCode(latLon) {
+    var resp = $.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latLon["lat"] + "," + latLon["lng"] + "&key=" + GOOGLE_API_KEY);
+    console.log(resp);
+    resp
+        .then(function() {
+            placePicMarker(latLon, resp);
+        })
 }
 
 var markers = [];
 // Removes all markers from map and places new one when pic clicked
-function placePicMarker(latLon) {
+function placePicMarker(latLon, resp) {
+    console.log(resp);
     markers.forEach(function(marker) {
         marker.setMap(null);
     });
@@ -166,6 +170,11 @@ function placePicMarker(latLon) {
         animation: google.maps.Animation.DROP,
     })
     markers.push(marker);
+    var infoWindow = new google.maps.InfoWindow({});
+    marker.addListener('click', function() {
+		infoWindow.setContent(content);
+		infoWindow.open(map, marker);
+    })
 }
 
 // Adds click listener to all images within "picture-display" div, then gets coordinates with getPicGeo function
@@ -184,10 +193,6 @@ function printIt(thing) {
 // ******************************
 // ******************************
 
-
-// initializes search listener for clicking on picture and taking us to that location
-addSearchListener();
-addPictureListener();
 // photoSearch("33.7876133", "-84.3734643")
 // initMap();
 
@@ -235,6 +240,7 @@ $MENU_CONTAINER.hide();
 clickMenuShow();
 clickExitButton();
 
+// initializes search listener for clicking on picture and taking us to that location
 addSearchListener();
 addPictureListener();
 carouselControl();
