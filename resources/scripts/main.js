@@ -102,14 +102,14 @@ function addSearchListener() {
 // when photo is clicked to get location of photo
 // Gets latitude and longitude for clicked pic from Flickr API
 function getPicGeo(picture) {
+    console.log(picture);
     var picId = picture[0]["attributes"][2]["nodeValue"];
     var photoURL = picture[0]["attributes"][0]["nodeValue"];
-    console.log(photoURL);
     var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.geo.getLocation&api_key=" + FLICKR_API_KEY + "&photo_id=" + picId + "&format=json&nojsoncallback=1");
     
     resp
         .then(function(resp) {
-            mapSetCenterPic(resp, photoURL);
+            mapSetCenterPic(resp, picture);
         })
 }
 
@@ -120,16 +120,16 @@ function mapSetCenterPic(picture, photoURL) {
     latLon["lng"] = Number(picture["photo"]["location"]["longitude"]);
     map.setZoom(12);
 	map.setCenter(latLon);
-    reverseGeoCode(latLon, photoURL);
+    reverseGeoCode(latLon, picture);
 }
 
 // Takes latitude and longitude, obtains address
-function reverseGeoCode(latLon, photoURL) {
+function reverseGeoCode(latLon, picture) {
     var resp = $.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latLon["lat"] + "," + latLon["lng"] + "&key=" + GOOGLE_API_KEY);
     resp
         
         .then(function(resp) {
-            placePicMarker(latLon, resp, photoURL);
+            placePicMarker(latLon, resp, picture);
         })
         .catch(function(error) {
             console.log(error);
@@ -138,11 +138,10 @@ function reverseGeoCode(latLon, photoURL) {
 
 var markers = [];
 // Removes all markers from map and places new one when pic clicked
-function placePicMarker(latLon, resp, photoURL) {
+function placePicMarker(latLon, resp, picture) {
     markers.forEach(function(marker) {
         marker.setMap(null);
     });
-    console.log(photoURL);
     var formatted_address = checkAddress(resp);
     var URI = encodeURI(formatted_address);
     var link = "https://maps.google.com?q=" + URI;
@@ -167,14 +166,14 @@ function placePicMarker(latLon, resp, photoURL) {
     google.maps.event.addListener(infoWindow, 'domready', function() {
         document.querySelector('[data-role="save"]').addEventListener("click", function(e) {
             e.preventDefault();
-            addPlace(formatted_address, photoURL);
+            addPlace(formatted_address, picture);
         });
     });
 }
 
-function addPlace(address, photoURL) {
+function addPlace(address, picture) {
     var myPlaces = JSON.parse(localStorage.getItem('myPlaces'));
-    myPlaces[photoURL] = address;
+    myPlaces[address] = picture;
     localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
 }
 
