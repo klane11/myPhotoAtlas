@@ -154,19 +154,15 @@ function reverseGeoCode(latLon) {
 var markers = [];
 // Removes all markers from map and places new one when pic clicked
 function placePicMarker(latLon, resp) {
-    console.log(resp);
     markers.forEach(function(marker) {
         marker.setMap(null);
     });
 
-    var icon = 'resources/images/markiethemarker.png';
-
     var formatted_address = resp["results"][0]["formatted_address"];
-    console.log(formatted_address);
     var URI = encodeURI(formatted_address);
     var link = "https://maps.google.com?q=" + URI;
     var content = '<h6>' + formatted_address + '</h6>' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>';
-    var icon = 'resources/images/photography+workshops.png';
+    var icon = 'resources/images/markiethemarker.png';
 
 	  var marker = new google.maps.Marker({
         position: latLon,
@@ -178,9 +174,7 @@ function placePicMarker(latLon, resp) {
         content: content
     });
     
-    console.log(link);
     marker.addListener('click', function() {
-        console.log(content);
         infoWindow.open(map, marker);
     });
     
@@ -223,18 +217,14 @@ $(window).scroll(function() {
     var targetClass = $(".map-container");
     var a = 30;
     var pos = $(window).scrollTop();
-    console.log(a)
-    console.log(pos)
     if (pos < a) {
         targetClass.css("top", "50px", "z-index", "1");
         $(".menu-container").css("z-index", "100")
         // $(".main-container").css("margin-top", "400px")
-        console.log("nope")
     } else {
         targetClass.css("top", "0", "z-index", "1");
         $(".menu-container").css("z-index", "100")
         // $(".main-container").css("margin-top", "400px")
-        console.log("yup")
         
     }
 });
