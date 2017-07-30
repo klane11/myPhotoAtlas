@@ -19,6 +19,7 @@ function getGeoCoords(searchValue) {
     var URI = encodeURI(searchValue);
     var resp = $.get(GEOCODE + URI + "&key=" + GOOGLE_API_KEY);
     resp
+        .then(mapSetCenterSearch)
         .then(photoSearch)
 }
 
@@ -36,7 +37,6 @@ function photoSearch(resp, tags) {
     var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"]+ "&tags=" + tags + "&tag_mode=any&radius=20&radius_units=mi&format=json&nojsoncallback=1");
     resp
         .then(createPicture)
-        .then(mapSetCenterSearch)
 }
 
 // after photos are set, when photos are clicked on, takes you to that point on map
@@ -45,7 +45,8 @@ function mapSetCenterSearch(resp) {
     latLon["lat"] = Number(resp["results"][0]["geometry"]["location"]["lat"]);
     latLon["lng"] = Number(resp["results"][0]["geometry"]["location"]["lng"]);
     map.setZoom(10);
-	map.setCenter(latLon);
+    map.setCenter(latLon);
+    return resp;
 }
 
 // 1.3.2
@@ -64,6 +65,7 @@ function chooseTags() {
 // 1.4
 // Creates array from picture search results, creates picture-container div, loops through array, creates picture for each with makePicture function, appends to picture-container div, appends div to DOM
 function createPicture(resp) {
+    console.log(resp)
     var pictureArray = resp["photos"]["photo"];
     var $pictureContainer = $('<div></div>', {
         'class': 'picture-container',
@@ -71,8 +73,12 @@ function createPicture(resp) {
     })
     pictureArray.forEach(function(picture, i) {
         // calls makePicture function
+        var $pictureDiv = $('<div></div>', {
+            "class" : "picture-box"
+        });
         var $picture = makePicture(picture["farm"], picture["server"], picture["id"], picture["secret"], picture["title"]);
-        $pictureContainer.append($picture);
+        $pictureDiv.append($picture)
+        $pictureContainer.append($pictureDiv);
     })
     //appens final picture display to picture container
     $pictureDisplay.append($pictureContainer);
@@ -82,21 +88,10 @@ function createPicture(resp) {
 // Creates DOM picture elements from array of returned photos
 function makePicture(farmID, serverID, photoID, secret, title) {
     return $('<img>', {
-        'src': "https://farm" + farmID + ".staticflickr.com/" + serverID + "/" + photoID + "_" + secret + "_m.jpg",
+        'src': "https://farm" + farmID + ".staticflickr.com/" + serverID + "/" + photoID + "_" + secret + "_z.jpg",
         'alt': title,
         'id': photoID
-    })
-}
-
-
-// 1.5
-// Creates DOM picture elements from array of returned photos
-function makePicture(farmID, serverID, photoID, secret, title) {
-    return $('<img>', {
-        'src': "https://farm" + farmID + ".staticflickr.com/" + serverID + "/" + photoID + "_" + secret + "_m.jpg",
-        'alt': title,
-        'id': photoID
-    })
+    });
 }
 
 
@@ -159,14 +154,12 @@ function placePicMarker(latLon, resp) {
         marker.setMap(null);
     });
 
-    var icon = 'resources/images/markiethemarker.png';
-
     var formatted_address = resp["results"][0]["formatted_address"];
     console.log(formatted_address);
     var URI = encodeURI(formatted_address);
     var link = "https://maps.google.com?q=" + URI;
     var content = '<h6>' + formatted_address + '</h6>' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>';
-    var icon = 'resources/images/photography+workshops.png';
+    var icon = 'resources/images/markiethemarker.png';
 
 	  var marker = new google.maps.Marker({
         position: latLon,
@@ -223,8 +216,6 @@ $(window).scroll(function() {
     var targetClass = $(".map-container");
     var a = 30;
     var pos = $(window).scrollTop();
-    console.log(a)
-    console.log(pos)
     if (pos < a) {
         targetClass.css("top", "50px", "z-index", "1");
         $(".menu-container").css("z-index", "100")
@@ -240,6 +231,22 @@ $(window).scroll(function() {
 });
 
 
+// function clickShowMap(){
+//     $('[data-role-images="show-map"]').click(function (){
+//         console.log("hi")
+//         $('[data-images-role="hide-map"]').show();
+//         $(this).hide();
+//         // $(".map-container").show();
+//     });
+// }
+// function clickHideMap(){
+//     $('[data-role-images="hide-map"]').click(function (){
+//         console.log("maybe")
+//         $('[data-images-role="show-map"]').show();
+//         $(this).hide();
+//         // $(".map-container").hide();
+//     });
+// }
 
 
 
@@ -250,8 +257,8 @@ function clickMenuShow(){
     $HAMBURGER.click(function (){
         $EXIT_ICON.show();
         $(this).hide();
-        $(".map-container").css("left", "170px", "width", "80%");
-        $MENU_CONTAINER.show("slow")
+        $(".map-container").css("left", "170px");
+        $MENU_CONTAINER.show("slow");
     });
 }
 // when exit icon is clicked, the exit icon hids, the hamburger menu shows, and the menu-container hids slowly
@@ -259,7 +266,7 @@ function clickExitButton(){
     $EXIT_ICON.click(function (){
         $HAMBURGER.show();
         $(this).hide();
-        $(".map-container").css("left", "0", "width", "100%");
+        $(".map-container").css("left", "0");
         $MENU_CONTAINER.hide("slow");
     });
 }
@@ -282,17 +289,21 @@ function carouselControl() {
 
 
 // starts off DOM with exit and menu-container hidden until clicked
+$('[data-images-role="hide-map"]').hide();
+
 $EXIT_ICON.hide();
 $MENU_CONTAINER.hide();
 // initializes hamburger meniu
 clickMenuShow();
 clickExitButton();
+clickHideMap();
+clickShowMap();
 
 // initializes search listener for clicking on picture and taking us to that location
 addSearchListener();
 addPictureListener();
 // carousel on landing page
-carouselControl();
+// carouselControl();
 
 
 
