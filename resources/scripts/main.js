@@ -5,10 +5,12 @@ var GEOCODE = "https://maps.googleapis.com/maps/api/geocode/json?address=";
 var GOOGLE_API_KEY = "AIzaSyD8UFO6YBOxOpaAG0Q6BUg4iqd_9214ZWY";
 var FLICKR_API_KEY = "566ab7296356eb73e65e0d7f80743bde";
 var $pictureDisplay = $('[data-role="picture-display"]');
-var $MENU_CONTAINER = $('[data-text-role="menu"]')
-var $EXIT_ICON = $('[data-image-role="exit-container"]')
-var $HAMBURGER = $('[data-image-role="hamburger"]')
-var $ICON_BUTTON = $('[data-role="iconButtonpwd"]')
+var $MENU_CONTAINER = $('[data-text-role="menu"]');
+var $EXIT_ICON = $('[data-image-role="exit-container"]');
+var $HAMBURGER = $('[data-image-role="hamburger"]');
+var $ICON_BUTTON = $('[data-role="iconButtonpwd"]');
+var $HIDE_MAP = $('[data-images-role="hide-map"]');
+var $SHOW_MAP = $('[data-images-role="show-map"]');
 
 // Uses Google API to get latitude and longitude from searched value, sends to photoSearch function to find pictures pased on coordinates
 // 1.2
@@ -40,7 +42,7 @@ function mapSetCenterSearch(resp) {
     latLon["lat"] = Number(resp["results"][0]["geometry"]["location"]["lat"]);
     latLon["lng"] = Number(resp["results"][0]["geometry"]["location"]["lng"]);
     map.setZoom(10);
-	map.setCenter(latLon);
+    map.setCenter(latLon);
     return resp;
 }
 
@@ -60,6 +62,7 @@ function chooseTags() {
 // 1.4
 // Creates array from picture search results, creates picture-container div, loops through array, creates picture for each with makePicture function, appends to picture-container div, appends div to DOM
 function createPicture(resp) {
+    console.log(resp)
     var pictureArray = resp["photos"]["photo"];
     var $pictureContainer = $('<div></div>', {
         'class': 'picture-container',
@@ -67,8 +70,12 @@ function createPicture(resp) {
     })
     pictureArray.forEach(function(picture, i) {
         // calls makePicture function
+        var $pictureDiv = $('<div></div>', {
+            "class" : "picture-box"
+        });
         var $picture = makePicture(picture["farm"], picture["server"], picture["id"], picture["secret"], picture["title"]);
-        $pictureContainer.append($picture);
+        $pictureDiv.append($picture)
+        $pictureContainer.append($pictureDiv);
     })
     //appens final picture display to picture container
     $pictureDisplay.append($pictureContainer);
@@ -78,10 +85,11 @@ function createPicture(resp) {
 // Creates DOM picture elements from array of returned photos
 function makePicture(farmID, serverID, photoID, secret, title) {
     return $('<img>', {
+
         'src': "https://farm" + farmID + ".staticflickr.com/" + serverID + "/" + photoID + "_" + secret + "_m.jpg",
         'alt': title,
         'id': photoID
-    })
+    });
 }
 
 
@@ -142,13 +150,14 @@ function placePicMarker(latLon, resp, picture) {
     markers.forEach(function(marker) {
         marker.setMap(null);
     });
+
     var formatted_address = checkAddress(resp);
     var URI = encodeURI(formatted_address);
     var link = "https://maps.google.com?q=" + URI;
     var content = '<h6>' + formatted_address + '</h6>' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' + '<a href="#" data-role="save">Add to myPlaces</a>';
     var icon = 'resources/images/markiethemarker.png';
 
-	var marker = new google.maps.Marker({
+	  var marker = new google.maps.Marker({
         position: latLon,
         map: map,
         icon: icon,
@@ -233,14 +242,30 @@ $(window).scroll(function() {
 });
 
 
+function clickShowMap(){
+    $SHOW_MAP.click(function (){
+        console.log("hi")
+        $('[data-images-role="hide-map"]').show();
+        $(this).hide();
+        $(".map-container").show();
+    });
+}
+function clickHideMap(){
+    $HIDE_MAP.click(function (){
+        console.log("maybe")
+        $('[data-images-role="show-map"]').show();
+        $(this).hide();
+        $(".map-container").hide();
+    });
+}
 
 // when hamburger menu icon is clicked, the hamburger icon hids, the exit icon shows and the menu-container shows slowly
 function clickMenuShow(){
     $HAMBURGER.click(function (){
         $EXIT_ICON.show();
         $(this).hide();
-        $(".map-container").css("left", "170px", "width", "80%");
-        $MENU_CONTAINER.show("slow")
+        $(".map-container").css("left", "170px");
+        $MENU_CONTAINER.show("slow");
     });
 }
 // when exit icon is clicked, the exit icon hids, the hamburger menu shows, and the menu-container hids slowly
@@ -248,7 +273,7 @@ function clickExitButton(){
     $EXIT_ICON.click(function (){
         $HAMBURGER.show();
         $(this).hide();
-        $(".map-container").css("left", "0", "width", "100%");
+        $(".map-container").css("left", "0");
         $MENU_CONTAINER.hide("slow");
     });
 }
@@ -271,18 +296,21 @@ function carouselControl() {
 
 
 // starts off DOM with exit and menu-container hidden until clicked
+$HIDE_MAP.hide();
 $EXIT_ICON.hide();
 $MENU_CONTAINER.hide();
 // initializes hamburger meniu
 clickMenuShow();
 clickExitButton();
+clickHideMap();
+clickShowMap();
 
 // initializes search listener for clicking on picture and taking us to that location
 addSearchListener();
 addPictureListener();
 createMyPlaces();
 // carousel on landing page
-carouselControl();
+// carouselControl();
 
 
 

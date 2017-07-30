@@ -9,6 +9,7 @@
     <link rel="shortcut icon" href="resources/images/favicon.png" type="image/x-icon">
     <link rel="icon" href="resources/images/favicon.png" type="image/x-icon">
     <!--<link rel="icon" href="resources/images/favicon.png" type="image/x-icon">-->
+    <link href="https://fonts.googleapis.com/css?family=Caveat|Raleway|Rock+Salt" rel="stylesheet">
     <!--NORMALIZE-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.css">
     <!--bootstrap-->
@@ -37,9 +38,11 @@
                         </button>
                     </div>
 
+
+
                     <!-- project name  -->
                     <div class="logo col-xs-4 col-xs-offset-6 col-s-2 col-md-offset-9 navbar-right">
-                        <span class="navbar-brand" href="#">Project name</span>
+                        <span class="navbar-brand" href="#">myPlaces</span>
                     </div>
                 </div>
             </nav>
@@ -47,9 +50,9 @@
         <!-- menu for hamburger menu -->
         <div class="menu-container" data-text-role="menu">
             <ul class="">
-                <li class="active"><a>Explore</a></li>
-                <li class="active"><a>Start a project</a></li>
-                <li class="active"><a>About us</a></li>
+                <li class="active"><a href="index.html">Home</a></li>
+                <li class="active"><a href="myPlaces.html">myPlaces</a></li>
+                <li class="active"><a href="about.html">About us</a></li>
                 <li class="active"><a>Contact</a></li>
             </ul>
         </div>
@@ -59,10 +62,18 @@
                 <div class="row">
                     <div data-role="main-map" class="main-map container-fluid" id="map"></div>
                 </div>
+            </div>
+            <div class="open-close-map col-xs-2">
+                <div class="map-icons">
+                    <button class="show-map" data-images-role="show-map">
+                        <img src="resources/images/showcircleicon.png" alt="show map icon">
+                    </button>
+                    <button class="hide-map" data-images-role="hide-map">
+                        <img src="resources/images/hidecircleicon.png" alt="hide map icon">
+                    </button>
+                </div>
             </div> 
-            <div class="close-map">
-                
-            </div>  
+             
         </banner> 
 
     </header>
@@ -70,101 +81,109 @@
 
     <!--main content  -->
     <main>
-        <div class="main-container container">
-            <div class="row">
-                <div class="container-fluid hidden-heading">
-                    <h1>Explore The World Around You</h1>
-                </div>
-            </div>
+        
+        <div class="top-search-container">
+            <div class="main-container container">
 
-            <div class="row">
-                <div class="container-fluid gallery-heading">
-                    <h2>Where Will You Discover Next?</h2>
-                </div>
-            </div>
+                
 
-            
-            <!--search bar and checkbox container-->
-            <div class="search-input row">
-
-                <form class="input-group containe col-xs-12"  data-role="search-form">
-                    <div class="container-fluid location-search-container">
-                        <input class="form-control row col-xs-8 search-location" placeholder="Explore" name="srch-term" id="srch-term" type="text" data-role="search">
-                        <div class="input-group-btn row col-xs-2">
-                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                        </div>
+                <div class="row">
+                    <div class="container-fluid gallery-heading">
+                        <h2>Where Will You Discover Next?</h2>
                     </div>
+                </div>
 
-                    <div class="checkbox-container">
+                
+                <!--search bar and checkbox container-->
+                <div class="search-input row">
+
+                    <form class="input-group containe col-xs-12"  data-role="search-form">
+                        <div class="container-fluid location-search-container">
+                            <input class="form-control row col-xs-8 search-location" placeholder="Explore" name="srch-term" id="srch-term" type="text" data-role="search">
+                            <div class="input-group-btn row col-xs-2">
+                                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="checkbox-container">
+                            
+                            <div class="waterfall-box"> 
+                                <input type="checkbox" id="waterfall" value="waterfall" data-role="checkbox"> 
+                                <label for="waterfall" class="checkbox-name" > Waterfalls</label>
+                            </div>
+                
+                            <div class="nature-box">
+                                <input type="checkbox"  id="nature" value="nature" data-role="checkbox"> 
+                                <label for="nature" class="checkbox-name"> Nature</label>
+                            </div>
+                            
+                            <div class="park-box">
+                                <input type="checkbox" id="park" value="park" data-role="checkbox"> 
+                                <label for="park" class="checkbox-name"> Parks</label>
+                            </div>
+
+                            <div class="wildflowers-box"> 
+                                <input type="checkbox" id="wildflowers" value="wildflowers" data-role="checkbox"> 
+                                <label for="wildflowers" class="checkbox-name"> Wildflowers</label>
+                            </div>
+
+                            <!-- <div class="garden-box">
+                                <input type="checkbox" id="garden" value="garden" data-role="checkbox"> 
+                                <label for="garden" class="checkbox-name"> Gardens</label>
+                            </div> -->
+
+                            <div class="sunset-box">    
+                                <input type="checkbox" id="sunset" value="sunset" data-role="checkbox"> 
+                                <label for="sunset" class="checkbox-name"> Sunsets</label>
+                            </div>
+
+                            <div class="sculpture">
+                                <input type="checkbox" id="sculpture" value="sculpture" data-role="checkbox"> 
+                                <label for="sculpture" class="checkbox-name"> Sculptures</label>
+                            </div>
+                            
+                            <div class="art-box">   
+                                <input type="checkbox" id="art" value="art" data-role="checkbox"> 
+                                <label for="art" class="checkbox-name"> Art</label>
+                            </div>
+
+                            <div class="bridge-box">
+                                <input type="checkbox" id="bridge" value="bridge" data-role="checkbox"> 
+                                <label for="bridge" class="checkbox-name"> Bridges</label>
+                            </div>
+
+                            <div class="beach-box">
+                                <input type="checkbox" id="beach" value="beach" data-role="checkbox"> 
+                                <label for="beach" class="checkbox-name"> Beaches</label>
+                            </div>
+
+                            <div class="pier">
+                                <input type="checkbox" id="pier" value="pier" data-role="checkbox"> 
+                                <label for="pier" class="checkbox-name"> Piers</label>
+                            </div>
+                        </div>
+
                         
-                        <div class="waterfall-box"> 
-                            <input type="checkbox" id="waterfall" value="waterfall" data-role="checkbox"> 
-                            <label for="waterfall" class="checkbox-name" > Waterfalls</label>
-                        </div>
-            
-                        <div class="nature-box">
-                            <input type="checkbox"  id="nature" value="nature" data-role="checkbox"> 
-                            <label for="nature" class="checkbox-name"> Nature</label>
-                        </div>
-                        
-                        <div class="park-box">
-                            <input type="checkbox" id="park" value="park" data-role="checkbox"> 
-                            <label for="park" class="checkbox-name"> Parks</label>
-                        </div>
-
-                        <div class="wildflowers-box"> 
-                            <input type="checkbox" id="wildflowers" value="wildflowers" data-role="checkbox"> 
-                            <label for="wildflowers" class="checkbox-name"> Wildflowers</label>
-                        </div>
-
-                        <!-- <div class="garden-box">
-                            <input type="checkbox" id="garden" value="garden" data-role="checkbox"> 
-                            <label for="garden" class="checkbox-name"> Gardens</label>
-                        </div> -->
-
-                        <div class="sunset-box">    
-                            <input type="checkbox" id="sunset" value="sunset" data-role="checkbox"> 
-                            <label for="sunset" class="checkbox-name"> Sunsets</label>
-                        </div>
-
-                        <div class="sculpture">
-                            <input type="checkbox" id="sculpture" value="sculpture" data-role="checkbox"> 
-                            <label for="sculpture" class="checkbox-name"> Sculptures</label>
-                        </div>
-                        
-                        <div class="art-box">   
-                            <input type="checkbox" id="art" value="art" data-role="checkbox"> 
-                            <label for="art" class="checkbox-name"> Art</label>
-                        </div>
-
-                        <div class="bridge-box">
-                            <input type="checkbox" id="bridge" value="bridge" data-role="checkbox"> 
-                            <label for="bridge" class="checkbox-name"> Bridges</label>
-                        </div>
-
-                        <div class="beach-box">
-                            <input type="checkbox" id="beach" value="beach" data-role="checkbox"> 
-                            <label for="beach" class="checkbox-name"> Beaches</label>
-                        </div>
-
-                        <div class="pier">
-                            <input type="checkbox" id="pier" value="pier" data-role="checkbox"> 
-                            <label for="pier" class="checkbox-name"> Piers</label>
-                        </div>
-                    </div>
-
-                    
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
 
+        <!-- <div class="picture-container container"> -->
+            <!-- <div data-role="picture-display"> -->
+                <!-- <div class="picture">
+                     <img src="https://farm6.staticflickr.com/5689/20467224184_8f2c43fd44_z.jpg" alt="a special request" id="20467224184">
+                </div>
+                <img src="https://farm6.staticflickr.com/5345/9685800031_db6d7447e0_z.jpg" alt="Lagos Sunset, Bar Beach, Lagos Nigeria" id="9685800031"><img src="https://farm8.staticflickr.com/7302/9688875496_134098e14e_z.jpg" alt="Lagos Sunset, Bar Beach, Lagos Nigeria (3)" id="9688875496"><img src="https://farm8.staticflickr.com/7335/9688873936_f465a3b5da_z.jpg" alt="Lagos Sunset, Bar Beach, Lagos Nigeria (2)" id="9688873936"><img src="https://farm6.staticflickr.com/5497/9218074204_dbe85a7042_z.jpg" alt="Burning #sunset #goldenhour #friday #lagos #lagosisland" id="9218074204"><img src="https://farm9.staticflickr.com/8223/8290001517_c26a1ab8da_z.jpg" alt="DSC_2862" id="8290001517"><img src="https://farm9.staticflickr.com/8421/7746033866_d4165a9437_z.jpg" alt="DSC_1567" id="7746033866"><img src="https://farm9.staticflickr.com/8427/7746032418_1b994bff06_z.jpg" alt="DSC_1568" id="7746032418"><img src="https://farm8.staticflickr.com/7002/6494498713_d3f27d6b34_z.jpg" alt="Sun Setting over Lagoon" id="6494498713"><img src="https://farm7.staticflickr.com/6172/6205133062_823854ed09_z.jpg" alt="Working winches, Maersk Conakry" id="6205133062"><img src="https://farm7.staticflickr.com/6008/6205119898_68d0e96c9d_z.jpg" alt="Tug pulls Maersk Conakry, APM Terminals Apapa" id="6205119898"><img src="https://farm7.staticflickr.com/6154/6205099634_c1c55d1cb6_z.jpg" alt="Stowing ropes, Maersk Conakry" id="6205099634"><img src="https://farm7.staticflickr.com/6176/6204951108_9755c37df7_z.jpg" alt="fo'c'sle deck, Maersk Conakry, sunset" id="6204951108"><img src="https://farm5.staticflickr.com/4142/4931544870_c92105718e_z.jpg" alt="Mirage II" id="4931544870"><img src="https://farm5.staticflickr.com/4117/4927659411_58cd0f9549_z.jpg" alt="Phases" id="4927659411"><img src="https://farm5.staticflickr.com/4115/4908522695_622e866673_z.jpg" alt="Sunset @ the beach..." id="4908522695">
+            </div>
+         </div>  -->
         <div class="container picture-containers">
             <div data-role="picture-display">
 
             </div>
         </div>
 
-
+    
     </main>
 
 
