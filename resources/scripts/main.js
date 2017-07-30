@@ -23,51 +23,29 @@ function getGeoCoords(searchValue) {
 }
 
 
-function mapSetCenterSearch(resp) {
-    var latLon = {};
-    latLon["lat"] = Number(resp["results"][0]["geometry"]["location"]["lat"]);
-    latLon["lng"] = Number(resp["results"][0]["geometry"]["location"]["lng"]);
-    map.setZoom(10);
-	map.setCenter(latLon);
-}
-
-// Creates DOM picture elements from array of returned photos
-function makePicture(farmID, serverID, photoID, secret, title) {
-    return $('<img>', {
-        'src': "https://farm" + farmID + ".staticflickr.com/" + serverID + "/" + photoID + "_" + secret + "_m.jpg",
-        'alt': title,
-        'id': photoID
-    })
-}
-
-
 // 1.3.1
 // Searches Flickr API for images based on latitude and longitude from Google Search, sends pictues to createPicture function
 function photoSearch(resp, tags) {
     if ($pictureDisplay.children()) {
         $pictureDisplay.empty();
     }
-
-    mapSetCenterSearch(resp);
-
-    // var URITags = encodeURI("nature")
-    // var URI = encodeURI(searchValue);
-    // var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&text=" + URI + "&tag=" + URITags + "&format=json&nojsoncallback=1");
-    // var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&sort=faves&format=json&nojsoncallback=1");
-    // Gets search results by latitude and longitude
-    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&radius=20&radius_units=mi&format=json&nojsoncallback=1");
-    resp
-        .then(createPicture)
-    // &radius=20&radius_units=mi
-
-
-
     // gets tags from checkbox
     var tags = chooseTags();
+    console.log(tags)
     // Adds in tags. Tags are essential in the search process,as well as radius units. These aspects will be changed later to get respnoses from the user
     var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"]+ "&tags=" + tags + "&tag_mode=any&radius=20&radius_units=mi&format=json&nojsoncallback=1");
     resp
         .then(createPicture)
+        .then(mapSetCenterSearch)
+}
+
+// after photos are set, when photos are clicked on, takes you to that point on map
+function mapSetCenterSearch(resp) {
+    var latLon = {};
+    latLon["lat"] = Number(resp["results"][0]["geometry"]["location"]["lat"]);
+    latLon["lng"] = Number(resp["results"][0]["geometry"]["location"]["lng"]);
+    map.setZoom(10);
+	map.setCenter(latLon);
 }
 
 // 1.3.2
@@ -101,6 +79,16 @@ function createPicture(resp) {
     $pictureDisplay.append($pictureContainer);
 }
 
+// 1.4.2
+// Creates DOM picture elements from array of returned photos
+function makePicture(farmID, serverID, photoID, secret, title) {
+    return $('<img>', {
+        'src': "https://farm" + farmID + ".staticflickr.com/" + serverID + "/" + photoID + "_" + secret + "_m.jpg",
+        'alt': title,
+        'id': photoID
+    })
+}
+
 
 // 1.5
 // Creates DOM picture elements from array of returned photos
@@ -122,9 +110,6 @@ function addSearchListener() {
         getGeoCoords(searchValue);
         });
 }
-
-
-
 
 
 
@@ -159,7 +144,7 @@ function placePicMarker(latLon) {
     markers.forEach(function(marker) {
         marker.setMap(null);
     });
-    var icon = 'resources/images/photography+workshops.png';
+    var icon = 'resources/images/markiethemarker.png';
 	var marker = new google.maps.Marker({
         position: latLon,
         map: map,
@@ -186,11 +171,35 @@ function printIt(thing) {
 // ******************************
 
 
-// initializes search listener for clicking on picture and taking us to that location
-addSearchListener();
-addPictureListener();
-// photoSearch("33.7876133", "-84.3734643")
-// initMap();
+$(window).scroll(function() {
+    var targetClass = $(".map-container");
+    var a = 30;
+    var pos = $(window).scrollTop();
+    console.log(a)
+    console.log(pos)
+    if (pos < a) {
+        targetClass.css("top", "50px");
+        $(".main-container").css("margin-top", "400px")
+        $(".footer-container").css("background", "pink");
+        console.log("nope")
+    } else {
+        targetClass.css("top", "0");
+        $(".main-container").css("margin-top", "400px")
+        $(".footer-container").css("background", "black");
+        console.log("yup")
+        
+    }
+});
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -202,7 +211,6 @@ function clickMenuShow(){
         $MENU_CONTAINER.show("slow")
     });
 }
-
 // when exit icon is clicked, the exit icon hids, the hamburger menu shows, and the menu-container hids slowly
 function clickExitButton(){
     $EXIT_ICON.click(function (){
@@ -211,7 +219,7 @@ function clickExitButton(){
         $MENU_CONTAINER.hide("slow");
     });
 }
-
+// index.html carousel
 //Carousel control; rotates through jumbotron images
 function carouselControl() {
     $(document).ready(function(){
@@ -235,10 +243,13 @@ $MENU_CONTAINER.hide();
 // initializes hamburger meniu
 clickMenuShow();
 clickExitButton();
-
+// initializes search listener for clicking on picture and taking us to that location
 addSearchListener();
 addPictureListener();
+// carousel on landing page
 carouselControl();
+
+
 
 
 
@@ -342,3 +353,19 @@ carouselControl();
 //         'location': location
 //     })
 // }
+
+
+
+
+
+
+
+
+
+
+// URI encoder for tags
+// var URITags = encodeURI("nature")
+    // var URI = encodeURI(searchValue);
+    // var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&text=" + URI + "&tag=" + URITags + "&format=json&nojsoncallback=1");
+    // var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&sort=faves&format=json&nojsoncallback=1");
+    // Gets search results by latitude and longitude
