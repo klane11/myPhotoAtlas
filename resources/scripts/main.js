@@ -149,17 +149,27 @@ function mapSetCenterPic(picture) {
 function reverseGeoCode(latLon) {
     var resp = $.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latLon["lat"] + "," + latLon["lng"] + "&key=" + GOOGLE_API_KEY);
     resp
-        .then(function() {
+        
+        .then(function(resp) {
             placePicMarker(latLon, resp);
+        })
+        .catch(function(error) {
+            console.log(error);
         })
 }
 
 var markers = [];
 // Removes all markers from map and places new one when pic clicked
 function placePicMarker(latLon, resp) {
+    console.log(resp);
     markers.forEach(function(marker) {
         marker.setMap(null);
     });
+    var formatted_address = resp["results"][0]["formatted_address"];
+    console.log(formatted_address);
+    var URI = encodeURI(formatted_address);
+    var link = "https://maps.google.com?q=" + URI;
+    var content = '<h6>' + formatted_address + '</h6>' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>';
     var icon = 'resources/images/photography+workshops.png';
 	var marker = new google.maps.Marker({
         position: latLon,
@@ -167,16 +177,31 @@ function placePicMarker(latLon, resp) {
         icon: icon,
         animation: google.maps.Animation.DROP,
     })
-//    '<h6>' + resp["responseJSON"]["results"][1]["address_components"][0]["long_name"] + '</h6>'
-    markers.push(marker);
-    var infoWindow = new google.maps.InfoWindow({});
-    var formatted_address = resp["responseJSON"]["results"][0]["formatted_address"];
-    var URI = encodeURI(formatted_address);
-    var content = '<h6>' + formatted_address + '</h6><a target="_blank" rel="noopener noreferrer" href=https://maps.google.com?q=' + URI + '>Directions</a>';
+    var infoWindow = new google.maps.InfoWindow({
+        content: content
+    });
+    
+    console.log(link);
     marker.addListener('click', function() {
-		infoWindow.setContent(content);
-		infoWindow.open(map, marker);
-    })
+        console.log(content);
+        infoWindow.open(map, marker);
+    });
+    
+    markers.push(marker);
+    // var contentReq = new Promise (
+    //     function(resolve, reject) {
+    //         var content = '<h6>' + formatted_address + '</h6><a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>';
+    //         resolve(content);
+    //     }
+    // )
+    // contentReq
+    //     .then(function(fulfilled) {
+    //         marker.addListener('click', function() {
+    //             console.log(fulfilled);
+    //             infoWindow.setContent(fulfilled);
+    //             infoWindow.open(map, marker);
+    //         })
+    //     })
 }
 
 // Adds click listener to all images within "picture-display" div, then gets coordinates with getPicGeo function
