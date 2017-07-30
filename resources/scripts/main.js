@@ -85,7 +85,7 @@ function createPicture(resp) {
 // Creates DOM picture elements from array of returned photos
 function makePicture(farmID, serverID, photoID, secret, title) {
     return $('<img>', {
-        'src': "https://farm" + farmID + ".staticflickr.com/" + serverID + "/" + photoID + "_" + secret + "_m.jpg",
+        'src': "https://farm" + farmID + ".staticflickr.com/" + serverID + "/" + photoID + "_" + secret + "_z.jpg",
         'alt': title,
         'id': photoID
     });
