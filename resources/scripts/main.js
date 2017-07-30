@@ -55,9 +55,9 @@ function photoSearch(resp, tags) {
     // var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&text=" + URI + "&tag=" + URITags + "&format=json&nojsoncallback=1");
     // var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&sort=faves&format=json&nojsoncallback=1");
     // Gets search results by latitude and longitude
-    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&radius=20&radius_units=mi&format=json&nojsoncallback=1");
-    resp
-        .then(createPicture)
+    // var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&radius=20&radius_units=mi&format=json&nojsoncallback=1");
+    // resp
+    //     .then(createPicture)
     // &radius=20&radius_units=mi
 
 
@@ -71,9 +71,8 @@ function photoSearch(resp, tags) {
 }
 
 // 1.3.2
-// gets what checkboses are checked and value to turn into tags to search Flickrs API
+// gets what checkboxes are checked and value to turn into tags to search Flickrs API
 function chooseTags() {
-    console.log("working");
     var $checkboxes = $('[data-role=checkbox]');
     var types = [];
     for (var i = 0; i < $checkboxes.length; i++) {
@@ -124,17 +123,11 @@ function addSearchListener() {
 }
 
 
-
-
-
-
-
-
 // ******************************
 // ******************************
 // ******************************
 // when photo is clicked to get location of photo
-// Gets latitude and longitude for clicked pic from Flickr API, then prints to console
+// Gets latitude and longitude for clicked pic from Flickr API
 function getPicGeo(picture) {
     var picId = picture[0]["attributes"][2]["nodeValue"];
     var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.geo.getLocation&api_key=" + FLICKR_API_KEY + "&photo_id=" + picId + "&format=json&nojsoncallback=1");
@@ -150,15 +143,33 @@ function mapSetCenterPic(picture) {
     latLon["lng"] = Number(picture["photo"]["location"]["longitude"]);
     map.setZoom(12);
 	map.setCenter(latLon);
-    placePicMarker(latLon);
+    reverseGeoCode(latLon);
+}
+
+function reverseGeoCode(latLon) {
+    var resp = $.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latLon["lat"] + "," + latLon["lng"] + "&key=" + GOOGLE_API_KEY);
+    resp
+        
+        .then(function(resp) {
+            placePicMarker(latLon, resp);
+        })
+        .catch(function(error) {
+            console.log(error);
+        })
 }
 
 var markers = [];
 // Removes all markers from map and places new one when pic clicked
-function placePicMarker(latLon) {
+function placePicMarker(latLon, resp) {
+    console.log(resp);
     markers.forEach(function(marker) {
         marker.setMap(null);
     });
+    var formatted_address = resp["results"][0]["formatted_address"];
+    console.log(formatted_address);
+    var URI = encodeURI(formatted_address);
+    var link = "https://maps.google.com?q=" + URI;
+    var content = '<h6>' + formatted_address + '</h6>' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>';
     var icon = 'resources/images/photography+workshops.png';
 	var marker = new google.maps.Marker({
         position: latLon,
@@ -166,7 +177,31 @@ function placePicMarker(latLon) {
         icon: icon,
         animation: google.maps.Animation.DROP,
     })
+    var infoWindow = new google.maps.InfoWindow({
+        content: content
+    });
+    
+    console.log(link);
+    marker.addListener('click', function() {
+        console.log(content);
+        infoWindow.open(map, marker);
+    });
+    
     markers.push(marker);
+    // var contentReq = new Promise (
+    //     function(resolve, reject) {
+    //         var content = '<h6>' + formatted_address + '</h6><a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>';
+    //         resolve(content);
+    //     }
+    // )
+    // contentReq
+    //     .then(function(fulfilled) {
+    //         marker.addListener('click', function() {
+    //             console.log(fulfilled);
+    //             infoWindow.setContent(fulfilled);
+    //             infoWindow.open(map, marker);
+    //         })
+    //     })
 }
 
 // Adds click listener to all images within "picture-display" div, then gets coordinates with getPicGeo function
@@ -185,10 +220,6 @@ function printIt(thing) {
 // ******************************
 // ******************************
 
-
-// initializes search listener for clicking on picture and taking us to that location
-addSearchListener();
-addPictureListener();
 // photoSearch("33.7876133", "-84.3734643")
 // initMap();
 
@@ -236,6 +267,7 @@ $MENU_CONTAINER.hide();
 clickMenuShow();
 clickExitButton();
 
+// initializes search listener for clicking on picture and taking us to that location
 addSearchListener();
 addPictureListener();
 carouselControl();
