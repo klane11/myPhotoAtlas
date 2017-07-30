@@ -6,10 +6,12 @@ var GEOCODE = "https://maps.googleapis.com/maps/api/geocode/json?address=";
 var GOOGLE_API_KEY = "AIzaSyD8UFO6YBOxOpaAG0Q6BUg4iqd_9214ZWY";
 var FLICKR_API_KEY = "566ab7296356eb73e65e0d7f80743bde";
 var $pictureDisplay = $('[data-role="picture-display"]');
-var $MENU_CONTAINER = $('[data-text-role="menu"]')
-var $EXIT_ICON = $('[data-image-role="exit-container"]')
-var $HAMBURGER = $('[data-image-role="hamburger"]')
-var $ICON_BUTTON = $('[data-role="iconButtonpwd"]')
+var $MENU_CONTAINER = $('[data-text-role="menu"]');
+var $EXIT_ICON = $('[data-image-role="exit-container"]');
+var $HAMBURGER = $('[data-image-role="hamburger"]');
+var $ICON_BUTTON = $('[data-role="iconButtonpwd"]');
+var $HIDE_MAP = $('[data-images-role="hide-map"]');
+var $SHOW_MAP = $('[data-images-role="show-map"]');
 
 // "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CmRaAAAAMpgMQ3JyymBzblKvQn4p8rlAv9Oc_q613EzrWvmkUy_IGYwdJaHEet7sN7aKJRXiUdWRdZh7vp7wcHWXjL8WPrq22PlfX9JzpswrwS-r4bRq7WvQ99wGyjVvZUDkT6sMEhCfmuf4mAkhW91E04hpKbU8GhSLBVRuXF3WE7-KkTPSETcF2msYwg&key=AIzaSyD8UFO6YBOxOpaAG0Q6BUg4iqd_9214ZWY"
 
@@ -231,22 +233,22 @@ $(window).scroll(function() {
 });
 
 
-// function clickShowMap(){
-//     $('[data-role-images="show-map"]').click(function (){
-//         console.log("hi")
-//         $('[data-images-role="hide-map"]').show();
-//         $(this).hide();
-//         // $(".map-container").show();
-//     });
-// }
-// function clickHideMap(){
-//     $('[data-role-images="hide-map"]').click(function (){
-//         console.log("maybe")
-//         $('[data-images-role="show-map"]').show();
-//         $(this).hide();
-//         // $(".map-container").hide();
-//     });
-// }
+function clickShowMap(){
+    $SHOW_MAP.click(function (){
+        console.log("hi")
+        $('[data-images-role="hide-map"]').show();
+        $(this).hide();
+        $(".map-container").show();
+    });
+}
+function clickHideMap(){
+    $HIDE_MAP.click(function (){
+        console.log("maybe")
+        $('[data-images-role="show-map"]').show();
+        $(this).hide();
+        $(".map-container").hide();
+    });
+}
 
 
 
@@ -289,8 +291,7 @@ function carouselControl() {
 
 
 // starts off DOM with exit and menu-container hidden until clicked
-$('[data-images-role="hide-map"]').hide();
-
+$HIDE_MAP.hide();
 $EXIT_ICON.hide();
 $MENU_CONTAINER.hide();
 // initializes hamburger meniu
