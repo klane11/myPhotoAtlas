@@ -1,4 +1,3 @@
-
 // html data roles
 var $mainMap = $('[data-role="main-map"]');
 var $searchField = $('[data-role="search-form"]');
@@ -10,8 +9,6 @@ var $MENU_CONTAINER = $('[data-text-role="menu"]')
 var $EXIT_ICON = $('[data-image-role="exit-container"]')
 var $HAMBURGER = $('[data-image-role="hamburger"]')
 var $ICON_BUTTON = $('[data-role="iconButtonpwd"]')
-
-// "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CmRaAAAAMpgMQ3JyymBzblKvQn4p8rlAv9Oc_q613EzrWvmkUy_IGYwdJaHEet7sN7aKJRXiUdWRdZh7vp7wcHWXjL8WPrq22PlfX9JzpswrwS-r4bRq7WvQ99wGyjVvZUDkT6sMEhCfmuf4mAkhW91E04hpKbU8GhSLBVRuXF3WE7-KkTPSETcF2msYwg&key=AIzaSyD8UFO6YBOxOpaAG0Q6BUg4iqd_9214ZWY"
 
 // Uses Google API to get latitude and longitude from searched value, sends to photoSearch function to find pictures pased on coordinates
 // 1.2
@@ -32,7 +29,6 @@ function photoSearch(resp, tags) {
     }
     // gets tags from checkbox
     var tags = chooseTags();
-    console.log(tags)
     // Adds in tags. Tags are essential in the search process,as well as radius units. These aspects will be changed later to get respnoses from the user
     var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"]+ "&tags=" + tags + "&tag_mode=any&radius=20&radius_units=mi&format=json&nojsoncallback=1");
     resp
@@ -147,7 +143,7 @@ function placePicMarker(latLon, resp) {
     var formatted_address = checkAddress(resp);
     var URI = encodeURI(formatted_address);
     var link = "https://maps.google.com?q=" + URI;
-    var content = '<h6>' + formatted_address + '</h6>' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' + '<a href="#" data-role="save"> Add to myPlaces</a>';
+    var content = '<h6>' + formatted_address + '</h6>' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' + '<a href="#" data-role="save">Add to myPlaces</a>';
     var icon = 'resources/images/markiethemarker.png';
 
 	  var marker = new google.maps.Marker({
@@ -164,11 +160,13 @@ function placePicMarker(latLon, resp) {
         infoWindow.open(map, marker);
     });
     markers.push(marker);
-    $('[data-role="save"]').on('click', function(event) {
-        event.preventDefault();
-        console.log("heeey");
-        addPlace($(this));
-    })
+
+    google.maps.event.addListener(infoWindow, 'domready', function() {
+        document.querySelector('[data-role="save"]').addEventListener("click", function(e) {
+            e.preventDefault();
+            console.log("hi!");
+        });
+    });
 }
 
 function addPlace(thing) {
