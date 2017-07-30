@@ -20,7 +20,6 @@ function getGeoCoords(searchValue) {
         .then(photoSearch)
 }
 
-
 // 1.3.1
 // Searches Flickr API for images based on latitude and longitude from Google Search, sends pictues to createPicture function
 function photoSearch(resp, tags) {
@@ -104,29 +103,33 @@ function addSearchListener() {
 // Gets latitude and longitude for clicked pic from Flickr API
 function getPicGeo(picture) {
     var picId = picture[0]["attributes"][2]["nodeValue"];
+    var photoURL = picture[0]["attributes"][0]["nodeValue"];
+    console.log(photoURL);
     var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.geo.getLocation&api_key=" + FLICKR_API_KEY + "&photo_id=" + picId + "&format=json&nojsoncallback=1");
     
     resp
-        .then(mapSetCenterPic)
+        .then(function(resp) {
+            mapSetCenterPic(resp, photoURL);
+        })
 }
 
 // Resets map center when picture is clicked
-function mapSetCenterPic(picture) {
+function mapSetCenterPic(picture, photoURL) {
     var latLon = {};
     latLon["lat"] = Number(picture["photo"]["location"]["latitude"]);
     latLon["lng"] = Number(picture["photo"]["location"]["longitude"]);
     map.setZoom(12);
 	map.setCenter(latLon);
-    reverseGeoCode(latLon);
+    reverseGeoCode(latLon, photoURL);
 }
 
 // Takes latitude and longitude, obtains address
-function reverseGeoCode(latLon) {
+function reverseGeoCode(latLon, photoURL) {
     var resp = $.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latLon["lat"] + "," + latLon["lng"] + "&key=" + GOOGLE_API_KEY);
     resp
         
         .then(function(resp) {
-            placePicMarker(latLon, resp);
+            placePicMarker(latLon, resp, photoURL);
         })
         .catch(function(error) {
             console.log(error);
@@ -135,18 +138,18 @@ function reverseGeoCode(latLon) {
 
 var markers = [];
 // Removes all markers from map and places new one when pic clicked
-function placePicMarker(latLon, resp) {
+function placePicMarker(latLon, resp, photoURL) {
     markers.forEach(function(marker) {
         marker.setMap(null);
     });
-
+    console.log(photoURL);
     var formatted_address = checkAddress(resp);
     var URI = encodeURI(formatted_address);
     var link = "https://maps.google.com?q=" + URI;
     var content = '<h6>' + formatted_address + '</h6>' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' + '<a href="#" data-role="save">Add to myPlaces</a>';
     var icon = 'resources/images/markiethemarker.png';
 
-	  var marker = new google.maps.Marker({
+	var marker = new google.maps.Marker({
         position: latLon,
         map: map,
         icon: icon,
@@ -164,19 +167,25 @@ function placePicMarker(latLon, resp) {
     google.maps.event.addListener(infoWindow, 'domready', function() {
         document.querySelector('[data-role="save"]').addEventListener("click", function(e) {
             e.preventDefault();
-            console.log("hi!");
+            addPlace(formatted_address, photoURL);
         });
     });
 }
 
-function addPlace(thing) {
-    console.log(thing);
-    var places = JSON.parse(localStorage.getItem('myPlaces'));
+function addPlace(address, photoURL) {
+    var myPlaces = JSON.parse(localStorage.getItem('myPlaces'));
+    myPlaces[photoURL] = address;
+    localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
 }
 
 function createMyPlaces() {
-    var myPlaces = {};
-    localStorage.setItem('myPlaces', JSON.stringify(myPlaces))
+    var myPlaces = JSON.parse(localStorage.getItem('myPlaces'));
+    if (myPlaces) {
+        localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
+    } else {
+        myPlaces = {};
+        localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
+    }
 }
 
 // Check to see if address exists in reverseGeoCode response
@@ -193,8 +202,8 @@ function checkAddress(resp) {
 // Adds click listener to all images within "picture-display" div, then gets coordinates with getPicGeo function
 function addPictureListener() {
     $('[data-role="picture-display"]').on('click', $('img'), function(event) {
-    event.preventDefault();
-    getPicGeo($(event.target));
+        event.preventDefault();
+        getPicGeo($(event.target));
     });
 }
 
@@ -223,10 +232,6 @@ $(window).scroll(function() {
         
     }
 });
-
-
-
-
 
 
 
@@ -262,7 +267,7 @@ function carouselControl() {
         swipeToSlide: true,
         }); 
     });
-};
+}
 
 
 
