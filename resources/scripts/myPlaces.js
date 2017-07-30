@@ -11,10 +11,15 @@ function displayMyPlaces () {
         'class': 'place',
         'data-role': 'place'
     })
-        $place.append(myPlaces[key]);
+        var $image = $('<img>', {
+            'src': myPlaces[key]['src'],
+            'alt': myPlaces[key]['alt'],
+            'id': myPlaces[key]['id']
+        })
+        $place.append($image);
         $address = $('<span></span>', {
             'text': key
-        })
+        });
         $place.append($address);
         $myPlacesContainer.append($place);
     }

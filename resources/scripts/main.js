@@ -85,7 +85,6 @@ function createPicture(resp) {
 // Creates DOM picture elements from array of returned photos
 function makePicture(farmID, serverID, photoID, secret, title) {
     return $('<img>', {
-
         'src': "https://farm" + farmID + ".staticflickr.com/" + serverID + "/" + photoID + "_" + secret + "_m.jpg",
         'alt': title,
         'id': photoID
@@ -112,32 +111,35 @@ function addSearchListener() {
 function getPicGeo(picture) {
     console.log(picture);
     var picId = picture[0]["attributes"][2]["nodeValue"];
-    var photoURL = picture[0]["attributes"][0]["nodeValue"];
+    var picInfo = {};
+    picInfo["src"] = picture[0]["attributes"][0]["nodeValue"];
+    picInfo["alt"] = picture[0]["attributes"][1]["nodeValue"];
+    picInfo["id"] = picId;
     var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.geo.getLocation&api_key=" + FLICKR_API_KEY + "&photo_id=" + picId + "&format=json&nojsoncallback=1");
     
     resp
         .then(function(resp) {
-            mapSetCenterPic(resp, picture);
+            mapSetCenterPic(resp, picInfo);
         })
 }
 
 // Resets map center when picture is clicked
-function mapSetCenterPic(picture, photoURL) {
+function mapSetCenterPic(resp, picInfo) {
     var latLon = {};
-    latLon["lat"] = Number(picture["photo"]["location"]["latitude"]);
-    latLon["lng"] = Number(picture["photo"]["location"]["longitude"]);
+    latLon["lat"] = Number(resp["photo"]["location"]["latitude"]);
+    latLon["lng"] = Number(resp["photo"]["location"]["longitude"]);
     map.setZoom(12);
 	map.setCenter(latLon);
-    reverseGeoCode(latLon, picture);
+    reverseGeoCode(latLon, picInfo);
 }
 
 // Takes latitude and longitude, obtains address
-function reverseGeoCode(latLon, picture) {
+function reverseGeoCode(latLon, picInfo) {
     var resp = $.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latLon["lat"] + "," + latLon["lng"] + "&key=" + GOOGLE_API_KEY);
     resp
         
         .then(function(resp) {
-            placePicMarker(latLon, resp, picture);
+            placePicMarker(latLon, resp, picInfo);
         })
         .catch(function(error) {
             console.log(error);
@@ -146,7 +148,7 @@ function reverseGeoCode(latLon, picture) {
 
 var markers = [];
 // Removes all markers from map and places new one when pic clicked
-function placePicMarker(latLon, resp, picture) {
+function placePicMarker(latLon, resp, picInfo) {
     markers.forEach(function(marker) {
         marker.setMap(null);
     });
@@ -175,14 +177,15 @@ function placePicMarker(latLon, resp, picture) {
     google.maps.event.addListener(infoWindow, 'domready', function() {
         document.querySelector('[data-role="save"]').addEventListener("click", function(e) {
             e.preventDefault();
-            addPlace(formatted_address, picture);
+            addPlace(formatted_address, picInfo);
         });
     });
 }
 
-function addPlace(address, picture) {
+function addPlace(address, picInfo) {
+    console.log(picInfo);
     var myPlaces = JSON.parse(localStorage.getItem('myPlaces'));
-    myPlaces[address] = picture;
+    myPlaces[address] = picInfo;
     localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
 }
 
