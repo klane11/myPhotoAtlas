@@ -45,7 +45,7 @@
             </nav>
         </div>
         <!-- menu for hamburger menu -->
-        <div class="menu-container " data-text-role="menu">
+        <div class="menu-container" data-text-role="menu">
             <ul class="">
                 <li class="active"><a>Explore</a></li>
                 <li class="active"><a>Start a project</a></li>
@@ -57,9 +57,12 @@
         
             <div class="map-container container-fluid">
                 <div class="row">
-                    <div data-role="main-map" class="main-map" id="map"></div>
-                </div>            
-            </div>   
+                    <div data-role="main-map" class="main-map container-fluid" id="map"></div>
+                </div>
+            </div> 
+            <div class="close-map">
+                
+            </div>  
         </banner> 
 
     </header>
@@ -67,9 +70,17 @@
 
     <!--main content  -->
     <main>
-        <div class="main-container container-fluid">
-            <div class="container gallery-heading">
-                <h2>Where Will You Discover Next?</h2>
+        <div class="main-container container">
+            <div class="row">
+                <div class="container-fluid hidden-heading">
+                    <h1>Explore The World Around You</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="container-fluid gallery-heading">
+                    <h2>Where Will You Discover Next?</h2>
+                </div>
             </div>
 
             
@@ -147,18 +158,12 @@
             </div>
         </div>
 
-        <div class="container-fluid">
+        <div class="container picture-containers">
             <div data-role="picture-display">
 
             </div>
         </div>
 
-
-
-        <div class="container">
-
-            <div data-role="picture-display"></div>
-        </div>
 
     </main>
 

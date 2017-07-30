@@ -178,14 +178,14 @@ $(window).scroll(function() {
     console.log(a)
     console.log(pos)
     if (pos < a) {
-        targetClass.css("top", "50px");
-        $(".main-container").css("margin-top", "400px")
-        $(".footer-container").css("background", "pink");
+        targetClass.css("top", "50px", "z-index", "1");
+        $(".menu-container").css("z-index", "100")
+        // $(".main-container").css("margin-top", "400px")
         console.log("nope")
     } else {
-        targetClass.css("top", "0");
-        $(".main-container").css("margin-top", "400px")
-        $(".footer-container").css("background", "black");
+        targetClass.css("top", "0", "z-index", "1");
+        $(".menu-container").css("z-index", "100")
+        // $(".main-container").css("margin-top", "400px")
         console.log("yup")
         
     }
@@ -208,6 +208,7 @@ function clickMenuShow(){
     $HAMBURGER.click(function (){
         $EXIT_ICON.show();
         $(this).hide();
+        $(".map-container").css("left", "170px", "width", "80%");
         $MENU_CONTAINER.show("slow")
     });
 }
@@ -216,6 +217,7 @@ function clickExitButton(){
     $EXIT_ICON.click(function (){
         $HAMBURGER.show();
         $(this).hide();
+        $(".map-container").css("left", "0", "width", "100%");
         $MENU_CONTAINER.hide("slow");
     });
 }
