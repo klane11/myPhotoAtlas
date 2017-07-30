@@ -58,7 +58,6 @@ body {
     background-color: #2C6675;
     width: 100%;
     position: fixed;
-    transition: all 1s;
     margin: 0 auto;
     z-index: 100;
 }
@@ -76,7 +75,6 @@ body {
     background-color: white;
     border-bottom: 1px solid #023E58;
     height: 20px;
-    transition: all 1s;
 }
 .open-close-map {
     position: fixed;
@@ -91,9 +89,26 @@ main {
 /*search area  */
 /* modifies gallery heading, located above picture-container & images */
 .search-input {
-    width: 100%;
 }
 
+.search-box-container {
+    max-width: 1024px;
+    text-align: center; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+.location-search-container {
+    margin-right: 60px;
+}
+.location-search-container{
+    width: 200px;
+    padding-right: 0;
+}
+.radius {
+
+}
 .top-search-container {
     background-color: white;
     border-bottom: 2px solid #023E58;
@@ -119,10 +134,7 @@ main {
     text-align: center;
 }
 
-.location-search-container{
-    width: 300px;
-    padding-right: 0;
-}
+
 .btn {
     z-index: 50;
 }
@@ -212,6 +224,25 @@ main {
 }
 
 
+
+
+
+/*-------------------------------MEDIA QUERIES-------------------------------*/
+
+@media only screen and (min-width: 768px){
+    .search-box-container {
+        max-width: 1024px;
+        text-align: center; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+    }
+    .location-search-container {
+        margin-right: 60px;
+        width: 300px;
+    }
+}
 
 @media only screen and (min-width: 976px){
     /* .jumbotron {

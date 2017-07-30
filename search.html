@@ -98,15 +98,33 @@
 
                 
                 <!--search bar and checkbox container-->
-                <div class="search-input row">
+                <div class="search-input">
 
-                    <form class="input-group containe col-xs-12"  data-role="search-form">
-                        <div class="container-fluid location-search-container">
-                            <input class="form-control row col-xs-8 search-location" placeholder="Explore" name="srch-term" id="srch-term" type="text" data-role="search">
-                            <div class="input-group-btn row col-xs-2">
-                                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                    <form class="input-group"  data-role="search-form">
+
+                        <div class="search-box-container">
+                            <div class="location-search-container">
+                                <input class="form-control search-location" placeholder="Explore a City" name="srch-term" id="srch-term" type="text" data-role="search">
+                                <div class="input-group-btn row col-xs-2">
+                                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+
+                        <!--radius-->
+                            <div class="radius">
+                                <select id="radius" 
+                                name="Size"
+                                data-input="radius">
+                                    <option default>Radius</option>
+                                    <option value="1">1 mile</option>
+                                    <option value="2">2 miles</option>
+                                    <option value="5">5 miles</option>
+                                    <option value="10">10 miles</option>
+                                    <option value="20">20 miles</option>
+                                </select>
                             </div>
                         </div>
+                        
 
                         <div class="checkbox-container">
                             
@@ -129,11 +147,6 @@
                                 <input type="checkbox" id="wildflowers" value="wildflowers" data-role="checkbox"> 
                                 <label for="wildflowers" class="checkbox-name"> Wildflowers</label>
                             </div>
-
-                            <!-- <div class="garden-box">
-                                <input type="checkbox" id="garden" value="garden" data-role="checkbox"> 
-                                <label for="garden" class="checkbox-name"> Gardens</label>
-                            </div> -->
 
                             <div class="sunset-box">    
                                 <input type="checkbox" id="sunset" value="sunset" data-role="checkbox"> 

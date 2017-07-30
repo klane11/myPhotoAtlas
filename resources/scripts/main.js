@@ -231,11 +231,9 @@ $(window).scroll(function() {
     var pos = $(window).scrollTop();
     if (pos < a) {
         targetClass.css("top", "50px", "z-index", "1");
-        $(".menu-container").css("z-index", "100")
         // $(".main-container").css("margin-top", "400px")
     } else {
         targetClass.css("top", "0", "z-index", "1");
-        $(".menu-container").css("z-index", "100")
         // $(".main-container").css("margin-top", "400px")
         
     }
@@ -247,7 +245,8 @@ function clickShowMap(){
         console.log("hi")
         $('[data-images-role="hide-map"]').show();
         $(this).hide();
-        $(".map-container").show("slow");
+         $(".white-space").show();
+        $(".map-container").slideDown(1000);
     });
 }
 function clickHideMap(){
@@ -255,7 +254,8 @@ function clickHideMap(){
         console.log("maybe")
         $('[data-images-role="show-map"]').show();
         $(this).hide();
-        $(".map-container").hide("slow");
+        $(".white-space").hide();
+        $(".map-container").slideUp(1000);
     });
 }
 
@@ -296,7 +296,7 @@ function carouselControl() {
 
 
 // starts off DOM with exit and menu-container hidden until clicked
-$HIDE_MAP.hide();
+$SHOW_MAP.hide();
 $EXIT_ICON.hide();
 $MENU_CONTAINER.hide();
 // initializes hamburger meniu
