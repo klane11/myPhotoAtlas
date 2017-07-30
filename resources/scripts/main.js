@@ -170,7 +170,9 @@ function placePicMarker(latLon, resp) {
 //    '<h6>' + resp["responseJSON"]["results"][1]["address_components"][0]["long_name"] + '</h6>'
     markers.push(marker);
     var infoWindow = new google.maps.InfoWindow({});
-    var content = '<h6>' + resp["responseJSON"]["results"][0]["formatted_address"] + '</h6>';
+    var formatted_address = resp["responseJSON"]["results"][0]["formatted_address"];
+    var URI = encodeURI(formatted_address);
+    var content = '<h6>' + formatted_address + '</h6><a href=https://maps.google.com?q=' + URI + '>Directions</a>';
     marker.addListener('click', function() {
 		infoWindow.setContent(content);
 		infoWindow.open(map, marker);
