@@ -1,5 +1,6 @@
-/* font-family: 'Homemade Apple', cursive;
-font-family: 'Raleway', sans-serif; */
+/* font-family: 'Raleway', sans-serif;
+font-family: 'Rock Salt', cursive;
+font-family: 'Caveat', cursive; */
 .header {
     height: 60px;
     width: 100%;
@@ -54,6 +55,8 @@ font-family: 'Raleway', sans-serif; */
 
 .jumbotron-title h1 {
     font-size: 150px;
+    font-family: sans-serif;
+    font-weight: bold;
     text-shadow: -2px 2px 1px black;
 }
 
