@@ -148,7 +148,6 @@ function mapSetCenterPic(picture) {
 
 function reverseGeoCode(latLon) {
     var resp = $.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latLon["lat"] + "," + latLon["lng"] + "&key=" + GOOGLE_API_KEY);
-    console.log(resp);
     resp
         .then(function() {
             placePicMarker(latLon, resp);
@@ -158,7 +157,6 @@ function reverseGeoCode(latLon) {
 var markers = [];
 // Removes all markers from map and places new one when pic clicked
 function placePicMarker(latLon, resp) {
-    console.log(resp);
     markers.forEach(function(marker) {
         marker.setMap(null);
     });
@@ -169,8 +167,10 @@ function placePicMarker(latLon, resp) {
         icon: icon,
         animation: google.maps.Animation.DROP,
     })
+//    '<h6>' + resp["responseJSON"]["results"][1]["address_components"][0]["long_name"] + '</h6>'
     markers.push(marker);
     var infoWindow = new google.maps.InfoWindow({});
+    var content = '<h6>' + resp["responseJSON"]["results"][0]["formatted_address"] + '</h6>';
     marker.addListener('click', function() {
 		infoWindow.setContent(content);
 		infoWindow.open(map, marker);
