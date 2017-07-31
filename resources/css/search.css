@@ -311,11 +311,21 @@ main {
     color: darkblue;
 }
 
+.iw-container a {
+    margin-right: 10px;
+}
+
 .save:hover {
     text-decoration: underline;
     cursor: pointer;
 }
 
+.error-message {
+    font-size: 18px;
+    color: white;
+    font-weight: 900;
+    text-align: center;
+}
 
 
 
