@@ -28,10 +28,13 @@ function photoSearch(resp, tags) {
     if ($pictureDisplay.children()) {
         $pictureDisplay.empty();
     }
-    // gets tags from checkbox
+    // gets radius, units and tags
+    var radius = getRadius();
+    var units = getUnits();
     var tags = chooseTags();
+
     // Adds in tags. Tags are essential in the search process,as well as radius units. These aspects will be changed later to get respnoses from the user
-    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"]+ "&tags=" + tags + "&tag_mode=any&radius=20&radius_units=mi&format=json&nojsoncallback=1");
+    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"]+ "&tags=" + tags + "&tag_mode=any&radius=" + radius + "&radius_units=" + units + "&format=json&nojsoncallback=1");
     resp
         .then(createPicture)
 }
@@ -57,6 +60,18 @@ function chooseTags() {
         }
     }
     return types;
+}
+// 1.3.3
+//gets radius user inputs
+function getRadius() {
+    var $radiusChoosen = $('[data-input="radius"]');
+    return $radiusChoosen.val();
+}
+//1.3.4
+// get units of miles or kelometers. miles is default
+function getUnits() {
+    var $units = $('[data-input="units"]');
+    return $units.val();
 }
 
 // 1.4
@@ -85,8 +100,7 @@ function createPicture(resp) {
 // Creates DOM picture elements from array of returned photos
 function makePicture(farmID, serverID, photoID, secret, title) {
     return $('<img>', {
-
-        'src': "https://farm" + farmID + ".staticflickr.com/" + serverID + "/" + photoID + "_" + secret + "_m.jpg",
+        'src': "https://farm" + farmID + ".staticflickr.com/" + serverID + "/" + photoID + "_" + secret + "_z.jpg",
         'alt': title,
         'id': photoID
     });
@@ -112,41 +126,53 @@ function addSearchListener() {
 function getPicGeo(picture) {
     console.log(picture);
     var picId = picture[0]["attributes"][2]["nodeValue"];
-    var photoURL = picture[0]["attributes"][0]["nodeValue"];
+    var picInfo = {};
+    picInfo["src"] = picture[0]["attributes"][0]["nodeValue"];
+    picInfo["alt"] = picture[0]["attributes"][1]["nodeValue"];
+    picInfo["id"] = picId;
     var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.geo.getLocation&api_key=" + FLICKR_API_KEY + "&photo_id=" + picId + "&format=json&nojsoncallback=1");
     
     resp
         .then(function(resp) {
-            mapSetCenterPic(resp, picture);
+            mapSetCenterPic(resp, picInfo);
         })
 }
 
 // Resets map center when picture is clicked
-function mapSetCenterPic(picture, photoURL) {
+function mapSetCenterPic(resp, picInfo) {
     var latLon = {};
-    latLon["lat"] = Number(picture["photo"]["location"]["latitude"]);
-    latLon["lng"] = Number(picture["photo"]["location"]["longitude"]);
+    latLon["lat"] = Number(resp["photo"]["location"]["latitude"]);
+    latLon["lng"] = Number(resp["photo"]["location"]["longitude"]);
     map.setZoom(12);
 	map.setCenter(latLon);
-    reverseGeoCode(latLon, picture);
+    reverseGeoCode(latLon, picInfo);
 }
 
 // Takes latitude and longitude, obtains address
-function reverseGeoCode(latLon, picture) {
+function reverseGeoCode(latLon, picInfo) {
     var resp = $.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latLon["lat"] + "," + latLon["lng"] + "&key=" + GOOGLE_API_KEY);
     resp
         
         .then(function(resp) {
-            placePicMarker(latLon, resp, picture);
+            placePicMarker(latLon, resp, picInfo);
         })
         .catch(function(error) {
             console.log(error);
         })
 }
 
+function checkMyPlaces(address) {
+    var myPlaces = JSON.parse(localStorage.getItem('myPlaces'));
+    if (myPlaces[address] !== undefined) {
+        return "<span data-role='saved' class='saved'>\u2713Saved to myPlaces</span>";
+    } else {
+        return "<span data-role='save' class='save'>Add to myPlaces</span>";
+    }
+}
+
 var markers = [];
 // Removes all markers from map and places new one when pic clicked
-function placePicMarker(latLon, resp, picture) {
+function placePicMarker(latLon, resp, picInfo) {
     markers.forEach(function(marker) {
         marker.setMap(null);
     });
@@ -154,10 +180,11 @@ function placePicMarker(latLon, resp, picture) {
     var formatted_address = checkAddress(resp);
     var URI = encodeURI(formatted_address);
     var link = "https://maps.google.com?q=" + URI;
-    var content = '<h6>' + formatted_address + '</h6>' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' + '<a href="#" data-role="save">Add to myPlaces</a>';
+    var save = checkMyPlaces(formatted_address);
+    var content = '<div class="iw-container">' + '<h6>' + formatted_address + '</h6>' + '<div class="iw-options">' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' + save + '<a href=' + link + + '</div>' + '</div>';
     var icon = 'resources/images/markiethemarker.png';
 
-	  var marker = new google.maps.Marker({
+	var marker = new google.maps.Marker({
         position: latLon,
         map: map,
         icon: icon,
@@ -171,18 +198,25 @@ function placePicMarker(latLon, resp, picture) {
         infoWindow.open(map, marker);
     });
     markers.push(marker);
-
+    
     google.maps.event.addListener(infoWindow, 'domready', function() {
-        document.querySelector('[data-role="save"]').addEventListener("click", function(e) {
-            e.preventDefault();
-            addPlace(formatted_address, picture);
-        });
+        if (document.querySelector('[data-role="save"]')) {
+            document.querySelector('[data-role="save"]').addEventListener("click", function(e) {
+                e.preventDefault();
+                this.textContent = '\u2713Saved to myPlaces';
+                this.setAttribute('data-role', 'saved');
+                console.log(this.getAttribute('data-role'));
+                addPlace(formatted_address, picInfo);
+            });
+        }
     });
+
 }
 
-function addPlace(address, picture) {
+function addPlace(address, picInfo) {
+    console.log(picInfo);
     var myPlaces = JSON.parse(localStorage.getItem('myPlaces'));
-    myPlaces[address] = picture;
+    myPlaces[address] = picInfo;
     localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
 }
 
@@ -225,21 +259,19 @@ function printIt(thing) {
 
 
 
-$(window).scroll(function() {
-    var targetClass = $(".map-container");
-    var a = 30;
-    var pos = $(window).scrollTop();
-    if (pos < a) {
-        targetClass.css("top", "50px", "z-index", "1");
-        $(".menu-container").css("z-index", "100")
-        // $(".main-container").css("margin-top", "400px")
-    } else {
-        targetClass.css("top", "0", "z-index", "1");
-        $(".menu-container").css("z-index", "100")
-        // $(".main-container").css("margin-top", "400px")
+// $(window).scroll(function() {
+//     var targetClass = $(".map-container");
+//     var a = 30;
+//     var pos = $(window).scrollTop();
+//     if (pos < a) {
+//         targetClass.css("top", "50px", "z-index", "1");
+//         // $(".main-container").css("margin-top", "400px")
+//     } else {
+//         targetClass.css("top", "0", "z-index", "1");
+//         // $(".main-container").css("margin-top", "400px")
         
-    }
-});
+//     }
+// });
 
 
 function clickShowMap(){
@@ -247,7 +279,9 @@ function clickShowMap(){
         console.log("hi")
         $('[data-images-role="hide-map"]').show();
         $(this).hide();
-        $(".map-container").show();
+        $(".click-to-close").hide();
+        $(".click-to-open").show();
+        $(".map-banner-container").slideDown(1000);
     });
 }
 function clickHideMap(){
@@ -255,7 +289,9 @@ function clickHideMap(){
         console.log("maybe")
         $('[data-images-role="show-map"]').show();
         $(this).hide();
-        $(".map-container").hide();
+        $(".click-to-close").show();
+        $(".click-to-open").hide();
+        $(".map-banner-container").slideUp(1000);
     });
 }
 
@@ -264,7 +300,7 @@ function clickMenuShow(){
     $HAMBURGER.click(function (){
         $EXIT_ICON.show();
         $(this).hide();
-        $(".map-container").css("left", "170px");
+        // $(".map-container").css("left", "170px");
         $MENU_CONTAINER.show("slow");
     });
 }
@@ -273,7 +309,7 @@ function clickExitButton(){
     $EXIT_ICON.click(function (){
         $HAMBURGER.show();
         $(this).hide();
-        $(".map-container").css("left", "0");
+        // $(".map-container").css("left", "0");
         $MENU_CONTAINER.hide("slow");
     });
 }
@@ -284,7 +320,7 @@ function carouselControl() {
         $('.carousel').slick({
         autoplay: true,
         mobileFirst: true,
-        autoplaySpeed: 4000,
+        autoplaySpeed: 4500,
         arrows: false,
         pauseOnFocus: false,
         pauseOnHover: false,
@@ -296,14 +332,16 @@ function carouselControl() {
 
 
 // starts off DOM with exit and menu-container hidden until clicked
-$HIDE_MAP.hide();
+$SHOW_MAP.hide();
 $EXIT_ICON.hide();
 $MENU_CONTAINER.hide();
+$(".click-to-close").hide();
 // initializes hamburger meniu
 clickMenuShow();
 clickExitButton();
 clickHideMap();
 clickShowMap();
+
 
 // initializes search listener for clicking on picture and taking us to that location
 addSearchListener();

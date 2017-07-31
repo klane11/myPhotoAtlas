@@ -40,22 +40,15 @@ font-family: 'Caveat', cursive; */
     font-weight: bold; 
 }
 
-.button-container button {
-    height: 60px;
-    width: 150px;
-    font-size: 20px;
-    border: 1px solid grey;
-}
-
 .banner-container {
     text-align: center;
     color: white;
     background-color: none;
-    height: 1000px;
+    height: 500px;
 }
 
 .jumbotron-title h1 {
-    font-size: 150px;
+    font-size: 75px;
     font-family: sans-serif;
     font-weight: bold;
     text-shadow: -2px 2px 1px black;
@@ -65,7 +58,7 @@ font-family: 'Caveat', cursive; */
 .jumbotron-2,
 .jumbotron-3,
 .jumbotron-4 {
-    height: 1000px; 
+    height: 500px; 
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -73,7 +66,6 @@ font-family: 'Caveat', cursive; */
     flex-direction: column;
     justify-content: center;
     align-content: center;
-    align-items: center;
 }
 .jumbotron-1 {
     background-image: url("../images/golden-clouds.jpg")
@@ -92,22 +84,29 @@ font-family: 'Caveat', cursive; */
 }
 
 .jumbotron-4 h1 {
-    font-size: 130px;
+    font-size: 50px;
+    margin: 20px;
 }
 
 .home-search-btn {
     background-color: white;
     color: grey;
     height: 40px;
-    width: 125px;
-    font-size: 1.25em;
+    width: 100px;
+    font-size: 13px;
+    box-shadow: 2px 2px 2px grey;
     margin-top: 50px;
-    border: none;
     cursor: pointer;
 }
 
 .glyphicon {
     Margin-right: 10px;
+}
+.button-container button {
+    height: 40px;
+    width: 100px;
+    font-size: 13px;
+    border: 1px solid grey;
 }
 
 
@@ -152,23 +151,49 @@ font-family: 'Caveat', cursive; */
 
 /* Small Screens */
 @media only screen and (min-width: 360px) {
-    .jumbotron {
-        height: 350px;
-    }
-    .title {
-        font-size: 45px;
-    }   
+
 }
 
 
 /* Medium Screens */
 @media only screen and (min-width: 768px){
-    .jumbotron {
-        height: 500px;
+    .banner-container {
+        height: 800px;
     }
     .title {
         font-size: 60px;
     }
+    .jumbotron-1,
+    .jumbotron-2,
+    .jumbotron-3,
+    .jumbotron-4 {
+        height: 800px; 
+    }
+    .jumbotron-title h1 {
+        font-size: 130px;
+        text-shadow: -2px 2px 1px black;
+        margin: 10px;
+    }
+
+    .jumbotron-4 h1 {
+        font-size: 100px;
+    }
+    
+    .button-container button {
+        height: 50px;
+        width: 130px;
+        font-size: 20px;
+        border: 1px solid grey;
+    }
 }
 
+@media only screen and (min-width: 992px){
+    .jumbotron-title h1 {
+        font-size: 150px;
+        text-shadow: -2px 2px 1px black;
+    }
+    .jumbotron-4 h1 {
+        font-size: 130px;
+    }
+}
 /*---------------------------------------------------------------------------*/
