@@ -77,21 +77,11 @@ body {
     color: white;
     font-weight: bold;
 }
-/* .click-to-open span,
-.click-to-close span {
-    display: none;
-} */
+
 /**************************  */
 /*main  */
 main {
-    background-color: #2C6675
-}
-/*search area  */
-/* modifies gallery heading, located above picture-container & images */
-.top-search-container {
     background-color: white;
-    border-bottom: 2px solid #023E58;
-    width: 100%;
 }
 .space-behind-map {
     height: 325px;
@@ -102,150 +92,51 @@ main {
     background-size: cover;
     opacity: .3;
 }
-.search-input {
-    width: 100%;
-}
-.search-box-container {
-    text-align: center; 
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    align-items: center;
-    align-content: center;
-}
-.location-search-container {
-    margin-right: 60px;
-    display: flex;
-}
-.location-search-container{
-    width: 200px;
-    margin-top: 20px;
-}
-.search-units {
-    display: flex;
-    margin-top: 20px;
-}
-.radius {
-    margin-right: 5px;
-}
-
-.main-container {
-    width: 100%;
-    padding: 20px;
-    text-align: center;
-    transition: all .5s ease-in;
-}
 .gallery-heading {
     font-family: 'Rock Salt', cursive;
-    display: flex;
-    justify-content: center;
     text-align: center;
     margin: 0 auto;
     color: grey;
-    margin-top: 40px;
 }
 .gallery-heading h2 {
     line-height: 7rem;
 }
 /*explain site section  */
 .explain-site-container {
-    display: flex;
-    justify-content: space-around;
     margin-bottom: 40px;
 }
-.explain-site {
-    text-align: left;
-    font-size: 14px;
-    width: 40%;
-}
-.input-group{
+.place {
+    border: 1px solid #2C6675;
+    box-shadow: 5px 5px 10px #2C6675;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
 }
-
-.btn {
-    z-index: 50;
+.place span {
+    max-width: 400px;
+    margin-bottom: 10px;
 }
-.search-location{
-    width: 100%;
+.place a {
+    margin-bottom: 10px;
 }
-/* ************************ */
-/*checkbox animation  */
-.checkbox-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-    max-width: 1024px;
-}
-.checkbox-name {
-    margin-bottom: 15px;
-    margin-right: 15px;
-    margin-top: 20px;
+.place img {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    max-height: 300px;
+    max-width: 300px;
     cursor: pointer;
-    letter-spacing: 2px;
 }
-.checkbox-name:after,
-.checkbox-name:before {
-    border: 1px solid white;
-    bottom: 0px;
-    content: " ";
-    display: block;
-    transition: all 280ms ease-in-out;
-    width: 0;
-}
-.checkbox-name:hover:after,
-.checkbox-name:hover:before {
-    border-color:black;
-    transition: width 350ms ease-in-out;
-    width: 100%;
-    
-}
-.checkbox-name:hover:before {
-    bottom: auto;
-    top: 0;
-    width: 100%;
-}
-
-/* ************************ */
-/* modifies picture-container class(created by Sarah on the DOM), within picture-display div in HTML  */
-.picture-container {
-    display: flex;
-    max-width: 1024px;
-    margin: 0 auto;
-    justify-content: center;
-    flex-flow: wrap;
-    align-items: center;
-    padding: 10px;
-    text-align: center;
-    background-color: white;
-}
-.picture-box {
-    height: 250px;
-    width: 400px;
-    overflow: hidden;
-    margin: 10px;
+.myplaces-display {
+    margin: 20px auto;
     transition: all .75s;
     display: flex;
     align-content: center;
     align-items: center;
     justify-content: center;
 }
-.picture-container img {
-    max-height: 400px;
-    max-width: 400px;
-    opacity: .8;
-    cursor: pointer;
-    transition: all .75s;
-}
-.picture-box:hover {
-    box-shadow: 5px 5px 10px grey;
-}
-.picture-container img:hover{
-    opacity: 1;
-    /* box-shadow: 5px 5px 10px grey; */
-    transform: scale(1.02); 
-}
+
 .back-to-top img{
     background-color: #8CC3B7;
     border-radius: 100%;
@@ -254,10 +145,16 @@ main {
     bottom: 10px;
     left: 10px;
 }
+
+
+
+
+
+
 /* ************************ */
 /*footer  */
 .footer-container {
-    height: 300px;
+    height: 250px;
     background: #023E58;
     border-top: 2px solid black;
     display: flex;
@@ -312,35 +209,6 @@ main {
 /*-------------------------------MEDIA QUERIES-------------------------------*/
 
 @media only screen and (min-width: 768px){
-    .logo-title {
-        display: unset;
-    }
-    .space-behind-map {
-        height: 375px;
-    }
-    .explain-site {
-        font-size: 18px;
-    }
-    .search-box-container {
-        max-width: 1024px;
-        text-align: center; 
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        align-content: center;
-    }
-    .location-search-container {
-        margin-right: 60px;
-        width: 300px;
-        margin-top: 0;
-    }
-    .search-units {
-        display: flex;
-        margin-top: 0;
-    }
-    .navigation-icons {
-        margin-left: 10px;
-    }
     #map {
         height: 350px;
     }
@@ -348,66 +216,25 @@ main {
         margin-left: 10px;
         margin-right: 10px;
     }
+    .space-behind-map {
+         height: 350px;
+    }
     .menu-container span {
         margin-left: 10px;
     }
     .logo {
         margin-right: 20px;
     }
-    .search-box-container {
-        max-width: 1024px;
-    }
-    .input-group {
-        max-width: 1024px;
-    }
-    .main-container{
-        margin: 0 auto;
-        width: 100%;
-        text-align: center;
-    }
-    .picture-box {
-        height: 200px;
-        width: 250px;
-    }
-    .picture-container img {
-        max-width: 400px;
-    }
-    .picture-container {
-        border-left: 2px solid #023E58;
-        border-right: 2px solid #023E58;
-    }
+
 }
 
 @media only screen and (min-width: 976px){
-    /* .jumbotron {
-        height: 500px;
-    }  */
     #map {
         height: 400px;
         width: 100%;
     }
-    .main-container{
-        margin: 0 auto;
-        max-width: 1024px;
-        text-align: center;
-    }
-    .search-input {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-content: center;
-    }
-    .gallery-heading {
-        font-size: 60px;
-        padding: 40px;
-    }
-    .picture-box {
-        height: 225px;
-        width: 300px;
-    }
-    .picture-container img {
-        /* max-height: 400px; */
-        max-width: 400px;
+    .space-behind-map {
+         height: 400px;
     }
 }
 
