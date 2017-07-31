@@ -18,13 +18,24 @@ function getGeoCoords(searchValue) {
     var URI = encodeURI(searchValue);
     var resp = $.get(GEOCODE + URI + "&key=" + GOOGLE_API_KEY);
     resp
+        .catch(errorMessage)
         .then(mapSetCenterSearch)
         .then(photoSearch)
 }
 
+
+function errorMessage(error) {
+    console.log(error);
+    var $errorDiv = $('<div></div', {
+        'text': 'No coordinates were found for this location, please try your search again.',
+        'class': 'error-message'
+    })
+    $pictureDisplay.append($errorDiv);
+}
+
 // 1.3.1
 // Searches Flickr API for images based on latitude and longitude from Google Search, sends pictues to createPicture function
-function photoSearch(resp, tags) {
+function photoSearch(resp) {
     if ($pictureDisplay.children()) {
         $pictureDisplay.empty();
     }
@@ -77,7 +88,6 @@ function getUnits() {
 // 1.4
 // Creates array from picture search results, creates picture-container div, loops through array, creates picture for each with makePicture function, appends to picture-container div, appends div to DOM
 function createPicture(resp) {
-    console.log(resp)
     var pictureArray = resp["photos"]["photo"];
     var $pictureContainer = $('<div></div>', {
         'class': 'picture-container',
@@ -107,20 +117,11 @@ function makePicture(farmID, serverID, photoID, secret, title) {
 }
 
 
-// Adds listener to search form, takes search value and gets Google coordinates
-// 1.1
-function addSearchListener() {
-    $searchField.on("submit", function (event) {
-        event.preventDefault();
-        var searchValue = $('[data-role="search"]').val();
-        getGeoCoords(searchValue);
-        });
-}
+// ******************************
+// ******************************
+// ******************************
 
 
-// ******************************
-// ******************************
-// ******************************
 // when photo is clicked to get location of photo
 // Gets latitude and longitude for clicked pic from Flickr API
 function getPicGeo(picture) {
@@ -201,16 +202,17 @@ function placePicMarker(latLon, resp, picInfo) {
     
     google.maps.event.addListener(infoWindow, 'domready', function() {
         if (document.querySelector('[data-role="save"]')) {
-            document.querySelector('[data-role="save"]').addEventListener("click", function(e) {
+            document.querySelector('[data-role="save"]').addEventListener("click", function handler(e) {
                 e.preventDefault();
                 this.textContent = '\u2713Saved to myPlaces';
                 this.setAttribute('data-role', 'saved');
+                this.setAttribute('class', 'saved');
                 console.log(this.getAttribute('data-role'));
                 addPlace(formatted_address, picInfo);
+                e.currentTarget.removeEventListener('click', handler);
             });
         }
     });
-
 }
 
 function addPlace(address, picInfo) {
@@ -240,6 +242,15 @@ function checkAddress(resp) {
     }
 }
 
+// Adds listener to search form, takes search value and gets Google coordinates
+// 1.1
+function addSearchListener() {
+    $searchField.on("submit", function (event) {
+        event.preventDefault();
+        var searchValue = $('[data-role="search"]').val();
+        getGeoCoords(searchValue);
+    });
+}
 
 // Adds click listener to all images within "picture-display" div, then gets coordinates with getPicGeo function
 function addPictureListener() {
@@ -253,30 +264,15 @@ function addPictureListener() {
 function printIt(thing) {
     console.log(thing);
 }
+
+
+
 // ******************************
+// *******HAMBURGER MENU*********
 // ******************************
-// ******************************
 
-
-
-// $(window).scroll(function() {
-//     var targetClass = $(".map-container");
-//     var a = 30;
-//     var pos = $(window).scrollTop();
-//     if (pos < a) {
-//         targetClass.css("top", "50px", "z-index", "1");
-//         // $(".main-container").css("margin-top", "400px")
-//     } else {
-//         targetClass.css("top", "0", "z-index", "1");
-//         // $(".main-container").css("margin-top", "400px")
-        
-//     }
-// });
-
-
-function clickShowMap(){
-    $SHOW_MAP.click(function (){
-        console.log("hi")
+function clickShowMap() {
+    $SHOW_MAP.click(function () {
         $('[data-images-role="hide-map"]').show();
         $(this).hide();
         $(".click-to-close").hide();
@@ -284,9 +280,9 @@ function clickShowMap(){
         $(".map-banner-container").slideDown(1000);
     });
 }
-function clickHideMap(){
-    $HIDE_MAP.click(function (){
-        console.log("maybe")
+
+function clickHideMap() {
+    $HIDE_MAP.click(function () {
         $('[data-images-role="show-map"]').show();
         $(this).hide();
         $(".click-to-close").show();
@@ -296,8 +292,8 @@ function clickHideMap(){
 }
 
 // when hamburger menu icon is clicked, the hamburger icon hids, the exit icon shows and the menu-container shows slowly
-function clickMenuShow(){
-    $HAMBURGER.click(function (){
+function clickMenuShow() {
+    $HAMBURGER.click(function () {
         $EXIT_ICON.show();
         $(this).hide();
         // $(".map-container").css("left", "170px");
@@ -305,8 +301,8 @@ function clickMenuShow(){
     });
 }
 // when exit icon is clicked, the exit icon hids, the hamburger menu shows, and the menu-container hids slowly
-function clickExitButton(){
-    $EXIT_ICON.click(function (){
+function clickExitButton() {
+    $EXIT_ICON.click(function () {
         $HAMBURGER.show();
         $(this).hide();
         // $(".map-container").css("left", "0");
@@ -314,7 +310,10 @@ function clickExitButton(){
     });
 }
 
-//////////////////Carousel for index.html//////////////////
+// ******************************
+// *****INDEX.HTML CAROUSEL******
+// ******************************
+
 //Carousel control; rotates through jumbotron images
 function carouselControl() {
     $(document).ready(function(){
@@ -349,6 +348,7 @@ function addListeners() {
     addPictureListener();
 }
 
+// Calls all init functions
 function main() {
     hideElements();
     addListeners();
@@ -370,6 +370,19 @@ main();
 
 
 // ****************************************
+// $(window).scroll(function() {
+//     var targetClass = $(".map-container");
+//     var a = 30;
+//     var pos = $(window).scrollTop();
+//     if (pos < a) {
+//         targetClass.css("top", "50px", "z-index", "1");
+//         // $(".main-container").css("margin-top", "400px")
+//     } else {
+//         targetClass.css("top", "0", "z-index", "1");
+//         // $(".main-container").css("margin-top", "400px")
+        
+//     }
+// });
 //  various ways to get Pictures from FLICKR
 // Gets Flickr "place_id" for searched place, uses ID to perform photo search
 // function getPlaceId(resp) {
