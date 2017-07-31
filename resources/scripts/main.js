@@ -313,7 +313,8 @@ function clickExitButton(){
         $MENU_CONTAINER.hide("slow");
     });
 }
-// index.html carousel
+
+//////////////////Carousel for index.html//////////////////
 //Carousel control; rotates through jumbotron images
 function carouselControl() {
     $(document).ready(function(){
@@ -330,26 +331,32 @@ function carouselControl() {
 }
 
 
-
 // starts off DOM with exit and menu-container hidden until clicked
-$SHOW_MAP.hide();
-$EXIT_ICON.hide();
-$MENU_CONTAINER.hide();
-$(".click-to-close").hide();
-// initializes hamburger meniu
-clickMenuShow();
-clickExitButton();
-clickHideMap();
-clickShowMap();
+function hideElements() {
+    $SHOW_MAP.hide();
+    $EXIT_ICON.hide();
+    $MENU_CONTAINER.hide();
+    $(".click-to-close").hide();
+}
 
+// initializes all listeners
+function addListeners() {
+    clickMenuShow();
+    clickExitButton();
+    clickHideMap();
+    clickShowMap();
+    addSearchListener();
+    addPictureListener();
+}
 
-// initializes search listener for clicking on picture and taking us to that location
-addSearchListener();
-addPictureListener();
-createMyPlaces();
-// carousel on landing page
-carouselControl();
+function main() {
+    hideElements();
+    addListeners();
+    createMyPlaces();
+    carouselControl();
+}
 
+main();
 
 
 
