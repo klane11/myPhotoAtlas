@@ -320,7 +320,7 @@ function carouselControl() {
         $('.carousel').slick({
         autoplay: true,
         mobileFirst: true,
-        autoplaySpeed: 4500,
+        autoplaySpeed: 5000,
         arrows: false,
         pauseOnFocus: false,
         pauseOnHover: false,
