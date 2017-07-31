@@ -28,10 +28,14 @@ function photoSearch(resp, tags) {
     if ($pictureDisplay.children()) {
         $pictureDisplay.empty();
     }
-    // gets tags from checkbox
+    // gets radius, units and tags
+    var radius = getRadius();
+    var units = getUnits();
     var tags = chooseTags();
+
     // Adds in tags. Tags are essential in the search process,as well as radius units. These aspects will be changed later to get respnoses from the user
-    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"]+ "&tags=" + tags + "&tag_mode=any&radius=20&radius_units=mi&format=json&nojsoncallback=1");
+    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"]+ "&tags=" + tags + "&tag_mode=any&radius=" + radius + "&radius_units=" + units + "&format=json&nojsoncallback=1");
+
     resp
         .then(createPicture)
 }
@@ -57,6 +61,16 @@ function chooseTags() {
         }
     }
     return types;
+}
+//gets radius user inputs
+function getRadius() {
+    var $radiusChoosen = $('[data-input="radius"]');
+    return $radiusChoosen.val();
+}
+// get units of miles or kelometers. miles is default
+function getUnits() {
+    var $units = $('[data-input="units"]');
+    return $units.val();
 }
 
 // 1.4
