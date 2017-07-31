@@ -166,7 +166,7 @@ function placePicMarker(latLon, resp, picInfo) {
     var URI = encodeURI(formatted_address);
     var link = "https://maps.google.com?q=" + URI;
     var save = checkMyPlaces(formatted_address);
-    var content = '<h6>' + formatted_address + '</h6>' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' + save + '<a href=' + link ;
+    var content = '<div class="iw-container">' + '<h6>' + formatted_address + '</h6>' + '<div class="iw-options">' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' + save + '<a href=' + link + + '</div>' + '</div>';
     var icon = 'resources/images/markiethemarker.png';
 
 	  var marker = new google.maps.Marker({
@@ -184,8 +184,8 @@ function placePicMarker(latLon, resp, picInfo) {
     });
     markers.push(marker);
     
-    if (document.querySelector('[data-role="save"]')) {
-        google.maps.event.addListener(infoWindow, 'domready', function() {
+    google.maps.event.addListener(infoWindow, 'domready', function() {
+        if (document.querySelector('[data-role="save"]')) {
             document.querySelector('[data-role="save"]').addEventListener("click", function(e) {
                 e.preventDefault();
                 this.textContent = '\u2713Saved to myPlaces';
@@ -193,8 +193,9 @@ function placePicMarker(latLon, resp, picInfo) {
                 console.log(this.getAttribute('data-role'));
                 addPlace(formatted_address, picInfo);
             });
-        });
-    }
+        }
+    });
+
 }
 
 function addPlace(address, picInfo) {

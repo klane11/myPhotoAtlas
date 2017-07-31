@@ -202,7 +202,30 @@ main {
     border-top: 2px solid black;
 }
 
-.save {
+.gm-style-iw {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: darkblue;
+    font-family: 'Raleway', sans-serif;
+    overflow-x: scroll;
+    text-align: center;
+}
+
+.iw-container h6 {
+    font-size: 14px;
+    font-weight: 900;
+    color: black;
+}
+
+.iw-options {
+    display: flex;
+    justify-content: space-between;
+}
+
+.save, 
+.saved,
+.iw-container a {
     color: darkblue;
 }
 
