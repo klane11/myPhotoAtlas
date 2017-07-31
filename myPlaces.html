@@ -9,10 +9,10 @@
     <link rel="shortcut icon" href="resources/images/favicon.png" type="image/x-icon">
     <link rel="icon" href="resources/images/favicon.png" type="image/x-icon">
     <!--<link rel="icon" href="resources/images/favicon.png" type="image/x-icon">-->
+    <!--fonts  -->
+    <link href="https://fonts.googleapis.com/css?family=Caveat|Raleway|Rock+Salt" rel="stylesheet">
     <!--NORMALIZE-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.css">
-    <!--bootstrap-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <!--css link  -->
     <link rel="stylesheet" href="resources/css/search.css">
   
@@ -20,13 +20,15 @@
 <body>
     <!--header  -->
     <header>
-        
-        <div class="header">
-            <!--top navigation  -->
-            <nav "navbar navbar-default navbar-fixed-top">
-                <div class="container-fluid navigation">
-                    
-                    <div class="hamburger-menu-icon navbar-left">
+        <div class="map-container">
+            <div class="map">
+                <!--whole map  -->
+                <div class="map-banner-container">
+                    <div data-role="main-map" class="main-map" id="map"></div>
+                </div>
+                <!--space behind fixed map / fixed to bottom of map  -->
+                <div class="white-space">
+                    <div class="navigation-icons">
                         <!--hamburger icon  -->
                         <button class="hamburger" data-image-role="hamburger" data-role="iconButton">
                             <img src="resources/images/hamburgermenu.png" alt="menu button">
@@ -35,25 +37,42 @@
                         <button class="icon exit" data-image-role="exit-container">
                             <img src="resources/images/exit.png" alt="exit out of menu">
                         </button>
+                        <!--hidden menu  -->
+                        <div class="menu-container" data-text-role="menu">
+                            <span class="active"><a href="index.html">Home</a></span>
+                            <span class="active"><a href="search.html">Search</a></span>
+                            <span class="active"><a href="about.html">About us</a></span>
+                            <span class="active"><a href="about.html">Contact</a></span>
+                        </div>
+                        <!--open close map button  -->
+                        
                     </div>
-
-                    <!-- project name  -->
-                    <div class="logo col-xs-4 col-xs-offset-6 col-s-2 col-md-offset-9 navbar-right">
-                        <span class="navbar-brand" href="#">Project name</span>
+                    
+                    <!--logo  -->
+                    <div class="logo">
+                        <div class="click-to-open">
+                            <span>Hide Map</span>
+                        </div>
+                        <div class="click-to-close">
+                            <span>Show Map</span>
+                        </div>
+                        <div class="open-close-map">
+                            <div class="map-icons">
+                                <button class="show-map" data-images-role="show-map">
+                                    <img src="resources/images/showcircleicon.png" alt="show map icon">
+                                </button>
+                                <button class="hide-map" data-images-role="hide-map">
+                                    <img src="resources/images/hidecircleicon.png" alt="hide map icon">
+                                </button>
+                            </div>
+                        </div class="">
+                            <a href="myPlaces.html"><span class="logo-title" href="#">myAtlas</span></a>
+                        </div>
                     </div>
                 </div>
-            </nav>
+                
+            </div>
         </div>
-        <!-- menu for hamburger menu -->
-        <div class="menu-container" data-text-role="menu">
-            <ul class="">
-                <li class="active"><a>Explore</a></li>
-                <li class="active"><a>Start a project</a></li>
-                <li class="active"><a>About us</a></li>
-                <li class="active"><a>Contact</a></li>
-            </ul>
-        </div>
-
     </header>
 
 

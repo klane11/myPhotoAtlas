@@ -14,8 +14,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.css">
     <!--slick carousel link for images-->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"/>
-    <!--bootstrap-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <!--css link  -->
     <link rel="stylesheet" href="resources/css/search.css">
   
@@ -29,7 +27,7 @@
             <div class="map">
                 <!--whole map  -->
                 <div class="map-banner-container">
-                    <div data-role="main-map" class="main-map container-fluid" id="map"></div>
+                    <div data-role="main-map" class="main-map" id="map"></div>
                 </div>
                 <!--space behind fixed map / fixed to bottom of map  -->
                 <div class="white-space">
@@ -108,9 +106,9 @@
                     <form class="input-group"  data-role="search-form">
                         <div class="search-box-container">
                             <div class="location-search-container">
-                                <input class="form-control search-location" placeholder="Explore a City" name="srch-term" id="srch-term" type="text" data-role="search">
+                                <input class="form-control search-location" placeholder=" Explore a City" name="srch-term" id="srch-term" type="text" data-role="search">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                                    <button class="search-button" type="submit"><img src="resources/images/search-icon-png.png" alt="search icon"></button>
                                 </div>
                             </div>
 
@@ -143,64 +141,62 @@
 
                         <div class="checkbox-container">
                             
-                            <div class="waterfall-box"> 
-                                <input type="checkbox" id="waterfall" value="waterfall" data-role="checkbox"> 
-                                <label for="waterfall" class="checkbox-name" > Waterfalls</label>
+                            <div class="checkbox-box"> 
+                                <label for="waterfall" class="checkbox-name" > Waterfalls <input type="checkbox" id="waterfall" value="waterfall" data-role="checkbox"> 
+                                </label>
                             </div>
                 
-                            <div class="nature-box">
-                                <input type="checkbox"  id="nature" value="nature" data-role="checkbox"> 
-                                <label for="nature" class="checkbox-name"> Nature</label>
+                            <div class="checkbox-box">
+                                <label for="nature" class="checkbox-name"> Nature <input type="checkbox"  id="nature" value="nature" data-role="checkbox"> 
+                                </label>
                             </div>
                             
-                            <div class="park-box">
-                                <input type="checkbox" id="park" value="park" data-role="checkbox"> 
-                                <label for="park" class="checkbox-name"> Parks</label>
+                            <div class="checkbox-box">
+                                <label for="park" class="checkbox-name"> Parks <input type="checkbox" id="park" value="park" data-role="checkbox"> 
+                                </label>
                             </div>
 
-                            <div class="wildflowers-box"> 
-                                <input type="checkbox" id="wildflowers" value="wildflowers" data-role="checkbox"> 
-                                <label for="wildflowers" class="checkbox-name"> Wildflowers</label>
+                            <div class="checkbox-box"> 
+                                <label for="wildflowers" class="checkbox-name"> Wildflowers <input type="checkbox" id="wildflowers" value="wildflowers" data-role="checkbox"> </label>
                             </div>
 
-                            <div class="sunset-box">    
-                                <input type="checkbox" id="sunset" value="sunset" data-role="checkbox"> 
-                                <label for="sunset" class="checkbox-name"> Sunsets</label>
+                            <div class="checkbox-box">    
+                                <label for="sunset" class="checkbox-name"> Sunsets <input type="checkbox" id="sunset" value="sunset" data-role="checkbox"> 
+                                </label>
                             </div>
 
-                            <div class="sculpture">
-                                <input type="checkbox" id="sculpture" value="sculpture" data-role="checkbox"> 
-                                <label for="sculpture" class="checkbox-name"> Sculptures</label>
+                            <div class="checkbox-box">
+                                <label for="sculpture" class="checkbox-name"> Sculptures <input type="checkbox" id="sculpture" value="sculpture" data-role="checkbox"> 
+                                </label>
                             </div>
                             
-                            <div class="art-box">   
-                                <input type="checkbox" id="art" value="art" data-role="checkbox"> 
-                                <label for="art" class="checkbox-name"> Art</label>
+                            <div class="checkbox-box">   
+                                <label for="art" class="checkbox-name"> Art<input type="checkbox" id="art" value="art" data-role="checkbox"> 
+                                </label>
                             </div>
 
-                            <div class="bridge-box">
-                                <input type="checkbox" id="bridge" value="bridge" data-role="checkbox"> 
-                                <label for="bridge" class="checkbox-name"> Bridges</label>
+                            <div class="checkbox-box">
+                                <label for="bridge" class="checkbox-name"> Bridges<input type="checkbox" id="bridge" value="bridge" data-role="checkbox"> 
+                                </label>
                             </div>
 
-                            <div class="beach-box">
-                                <input type="checkbox" id="beach" value="beach" data-role="checkbox"> 
-                                <label for="beach" class="checkbox-name"> Beaches</label>
+                            <div class="checkbox-box">
+                                <label for="beach" class="checkbox-name"> Beaches<input type="checkbox" id="beach" value="beach" data-role="checkbox"></label>
                             </div>
 
-                            <div class="pier">
-                                <input type="checkbox" id="pier" value="pier" data-role="checkbox"> 
-                                <label for="pier" class="checkbox-name"> Piers</label>
+                            <div class="checkbox-box">
+                                <label for="pier" class="checkbox-name"> Piers <input type="checkbox" id="pier" value="pier" data-role="checkbox"> 
+                                </label>
                             </div>
 
-                            <div class="graffiti-box">
-                                <input type="checkbox"  id="graffiti" value="graffiti" data-role="checkbox"> 
-                                <label for="graffiti" class="checkbox-name"> Graffiti</label>
+                            <div class="checkbox-box">
+                                <label for="graffiti" class="checkbox-name"> Graffiti <input type="checkbox"  id="graffiti" value="graffiti" data-role="checkbox"> 
+                                </label>
                             </div>
 
-                            <div class="night-box">
-                                <input type="checkbox"  id="night" value="night" data-role="checkbox"> 
-                                <label for="night" class="checkbox-name"> Night</label>
+                            <div class="checkbox-box">
+                                <label for="night" class="checkbox-name"> Night <input type="checkbox"  id="night" value="night" data-role="checkbox"> 
+                                </label>
                             </div>
                         </div>
                     </form>
