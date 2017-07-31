@@ -23,13 +23,15 @@
 <body>
     <!--header  -->
     <header>
+        <!--banner section if we want one / like jumbotron -->
         
-        <div class="header">
-            <!--top navigation  -->
-            <nav "navbar navbar-default navbar-fixed-top">
-                <div class="container-fluid navigation">
-                    
-                    <div class="hamburger-menu-icon navbar-left">
+        <div class="map-container">
+            <div class="map">
+                <div class="map-banner-container">
+                    <div data-role="main-map" class="main-map container-fluid" id="map"></div>
+                </div>
+                <div class="white-space">
+                    <div class="navigation-icons">
                         <!--hamburger icon  -->
                         <button class="hamburger" data-image-role="hamburger" data-role="iconButton">
                             <img src="resources/images/hamburgermenu.png" alt="menu button">
@@ -38,46 +40,42 @@
                         <button class="icon exit" data-image-role="exit-container">
                             <img src="resources/images/exit.png" alt="exit out of menu">
                         </button>
+                        <div class="open-close-map">
+                            <div class="map-icons">
+                                <button class="show-map" data-images-role="show-map">
+                                    <img src="resources/images/showcircleicon.png" alt="show map icon">
+                                </button>
+                                <button class="hide-map" data-images-role="hide-map">
+                                    <img src="resources/images/hidecircleicon.png" alt="hide map icon">
+                                </button>
+                            </div>
+                        </div>
+                        <div class="click-to-open">
+                            <span>Click to Hide Map</span>
+                        </div>
+                        <div class="click-to-close">
+                            <span>Click to See Map</span>
+                        </div>
                     </div>
-
-
-
-                    <!-- project name  -->
-                    <div class="logo col-xs-4 col-xs-offset-6 col-s-2 col-md-offset-9 navbar-right">
+                    
+                    <div class="logo">
                         <span class="navbar-brand" href="#">myPlaces</span>
                     </div>
+                    <!-- menu for hamburger menu -->
+                    <div class="menu-container" data-text-role="menu">
+                        <ul class="">
+                            <li class="active"><a href="index.html">Home</a></li>
+                            <li class="active"><a href="myPlaces.html">myPlaces</a></li>
+                            <li class="active"><a href="about.html">About us</a></li>
+                            <li class="active"><a>Contact</a></li>
+                        </ul>
+                    </div>
                 </div>
-            </nav>
+                
+            </div>
+            
         </div>
-        <!-- menu for hamburger menu -->
-        <div class="menu-container" data-text-role="menu">
-            <ul class="">
-                <li class="active"><a href="index.html">Home</a></li>
-                <li class="active"><a href="myPlaces.html">myPlaces</a></li>
-                <li class="active"><a href="about.html">About us</a></li>
-                <li class="active"><a>Contact</a></li>
-            </ul>
-        </div>
-        <!--banner section if we want one / like jumbotron -->
         
-        <div class="map-container container-fluid">
-            <div class="row">
-                <div data-role="main-map" class="main-map container-fluid" id="map"></div>
-                <div class="white-space">
-                    
-                </div>
-            </div>
-        </div>
-        <div class="open-close-map col-xs-2">
-            <div class="map-icons">
-                <button class="show-map" data-images-role="show-map">
-                    <img src="resources/images/showcircleicon.png" alt="show map icon">
-                </button>
-                <button class="hide-map" data-images-role="hide-map">
-                    <img src="resources/images/hidecircleicon.png" alt="hide map icon">
-                </button>
-            </div>
-        </div> 
              
         </banner> 
 
@@ -131,7 +129,7 @@
                                 name="Size"
                                 data-input="units">
                                     <option default value="mi">Miles</option>
-                                    <option value="km">Kelometers</option>
+                                    <option value="km">Kilometers</option>
                                 </select>
                             </div>
                         </div>

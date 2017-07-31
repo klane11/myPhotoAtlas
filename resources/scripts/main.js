@@ -241,19 +241,19 @@ function printIt(thing) {
 
 
 
-$(window).scroll(function() {
-    var targetClass = $(".map-container");
-    var a = 30;
-    var pos = $(window).scrollTop();
-    if (pos < a) {
-        targetClass.css("top", "50px", "z-index", "1");
-        // $(".main-container").css("margin-top", "400px")
-    } else {
-        targetClass.css("top", "0", "z-index", "1");
-        // $(".main-container").css("margin-top", "400px")
+// $(window).scroll(function() {
+//     var targetClass = $(".map-container");
+//     var a = 30;
+//     var pos = $(window).scrollTop();
+//     if (pos < a) {
+//         targetClass.css("top", "50px", "z-index", "1");
+//         // $(".main-container").css("margin-top", "400px")
+//     } else {
+//         targetClass.css("top", "0", "z-index", "1");
+//         // $(".main-container").css("margin-top", "400px")
         
-    }
-});
+//     }
+// });
 
 
 function clickShowMap(){
@@ -261,8 +261,9 @@ function clickShowMap(){
         console.log("hi")
         $('[data-images-role="hide-map"]').show();
         $(this).hide();
-         $(".white-space").show();
-        $(".map-container").slideDown(1000);
+        $(".click-to-close").hide();
+        $(".click-to-open").show();
+        $(".map-banner-container").slideDown(1000);
     });
 }
 function clickHideMap(){
@@ -270,8 +271,9 @@ function clickHideMap(){
         console.log("maybe")
         $('[data-images-role="show-map"]').show();
         $(this).hide();
-        $(".white-space").hide();
-        $(".map-container").slideUp(1000);
+        $(".click-to-close").show();
+        $(".click-to-open").hide();
+        $(".map-banner-container").slideUp(1000);
     });
 }
 
@@ -280,7 +282,7 @@ function clickMenuShow(){
     $HAMBURGER.click(function (){
         $EXIT_ICON.show();
         $(this).hide();
-        $(".map-container").css("left", "170px");
+        // $(".map-container").css("left", "170px");
         $MENU_CONTAINER.show("slow");
     });
 }
@@ -289,7 +291,7 @@ function clickExitButton(){
     $EXIT_ICON.click(function (){
         $HAMBURGER.show();
         $(this).hide();
-        $(".map-container").css("left", "0");
+        // $(".map-container").css("left", "0");
         $MENU_CONTAINER.hide("slow");
     });
 }
@@ -315,11 +317,13 @@ function carouselControl() {
 $SHOW_MAP.hide();
 $EXIT_ICON.hide();
 $MENU_CONTAINER.hide();
+$(".click-to-close").hide();
 // initializes hamburger meniu
 clickMenuShow();
 clickExitButton();
 clickHideMap();
 clickShowMap();
+
 
 // initializes search listener for clicking on picture and taking us to that location
 addSearchListener();
