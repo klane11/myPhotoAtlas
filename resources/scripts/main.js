@@ -96,7 +96,13 @@ function chooseTags() {
 //gets radius user inputs
 function getRadius() {
     var $radiusChoosen = $('[data-input="radius"]');
-    return $radiusChoosen.val();
+    console.log($radiusChoosen.val())
+    if ($radiusChoosen.val() === "Radius"){
+        $radiusChoosen = 20;
+    } else {
+        $radiusChoosen = $radiusChoosen.val();
+    }
+    return  $radiusChoosen;
 }
 
 //1.3.4

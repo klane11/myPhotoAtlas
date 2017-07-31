@@ -55,9 +55,8 @@
 .about-developers {
     display: flex;
     flex-direction: row;
-
     justify-content: space-between; 
-    margin-top: 50px;
+    margin-top: 25px;
 }
 
 .dev-image img {
@@ -81,6 +80,13 @@
     align-items: center;
     align-content: center;
     width: 30%;
+    /*border: 1px solid pink;*/
+}
+
+.line {
+    border: 1px solid black;
+    color: black;
+    margin-top: 25px;
 }
 
 .sarah, 
@@ -92,18 +98,20 @@
     align-items: center;
     align-content: center;
     width: 30%;
+    /*border: 1px solid pink;*/
 }
 
 p {
     margin-top: 20px;
 }
 
-/*---------------------------------------------------------------------------*/
-
 .footer {
     height: 60px;
-
 }
+
+/*---------------------------------------------------------------------------*/
+
+
 
 
 
