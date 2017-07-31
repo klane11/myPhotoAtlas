@@ -49,6 +49,9 @@ body {
     display: flex;
     align-items: center;
 }
+.logo-title {
+    display: none;
+}
 /*retractable menu  */
 .hamburger,
 .exit,
@@ -144,6 +147,7 @@ main {
 .gallery-heading h2 {
     line-height: 7rem;
 }
+/*explain site section  */
 .explain-site-container {
     display: flex;
     justify-content: space-around;
@@ -151,7 +155,7 @@ main {
 }
 .explain-site {
     text-align: left;
-    font-size: 18px;
+    font-size: 14px;
     width: 40%;
 }
 .input-group{
@@ -308,12 +312,14 @@ main {
 /*-------------------------------MEDIA QUERIES-------------------------------*/
 
 @media only screen and (min-width: 768px){
-    .click-to-open span,
-    .click-to-close span {
+    .logo-title {
         display: unset;
     }
     .space-behind-map {
-        height: 400px;
+        height: 375px;
+    }
+    .explain-site {
+        font-size: 18px;
     }
     .search-box-container {
         max-width: 1024px;
