@@ -17,7 +17,6 @@ function displayMyPlaces () {
             'alt': myPlaces[key]['alt'],
             'id': myPlaces[key]['id']
         });
-
         $place.append($image);
         var $address = $('<span></span>', {
             'text': key
