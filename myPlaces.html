@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>myPlaces</title>
+    <title>myPhotoAtlas</title>
     <!--favicon icon  -->
     <link rel="shortcut icon" href="resources/images/favicon.png" type="image/x-icon">
     <link rel="icon" href="resources/images/favicon.png" type="image/x-icon">
@@ -14,7 +14,7 @@
     <!--NORMALIZE-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.css">
     <!--css link  -->
-    <link rel="stylesheet" href="resources/css/search.css">
+    <link rel="stylesheet" href="resources/css/myPlaces.css">
   
 </head>
 <body>
@@ -41,11 +41,16 @@
                         <div class="menu-container" data-text-role="menu">
                             <span class="active"><a href="index.html">Home</a></span>
                             <span class="active"><a href="search.html">Search</a></span>
-                            <span class="active"><a href="about.html">About us</a></span>
+                            <span class="active"><a href="about.html">About</a></span>
                             <span class="active"><a href="about.html">Contact</a></span>
                         </div>
-                        <!--open close map button  -->
-                        
+                        <!--large menu  -->
+                        <div class="large-menu-container">
+                            <span class="active"><a href="index.html">Home</a></span>
+                            <span class="active"><a href="search.html">Search</a></span>
+                            <span class="active"><a href="about.html">About</a></span>
+                            <span class="active"><a href="about.html">Contact</a></span>
+                        </div>
                     </div>
                     
                     <!--logo  -->
@@ -65,25 +70,61 @@
                                     <img src="resources/images/hidecircleicon.png" alt="hide map icon">
                                 </button>
                             </div>
-                        </div class="">
-                            <a href="myPlaces.html"><span class="logo-title" href="#">myAtlas</span></a>
+                        </div class="myAtlas-logo">
+                            <span class="logo-title" href="#">myPhotoAtlas</span>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <!--fixed back to top icon  -->
+        <div class="back-to-top">
+            <a href="#"><img src="resources/images/backtotop.png" alt="back to top"></a>
         </div>
     </header>
 
 
     <!--main content  -->
     <main>
-     
-        <div data-role="myplaces-display"></div>
+
+        <div class="explain-site-container">
+
+            <div class="space-behind-map">
+                <p>Explore</p>
+            </div>
+
+            <div class="gallery-heading">
+                <h2>Explore the world around you</h2>
+            </div>
+
+            <div class="explain-myplaces">
+
+            </div>
+        </div>
+
+
+        <div class="myplaces-display" data-role="myplaces-display">
+
+        </div>
 
 
     </main>
 
+        <!--footer/ logo / home, about etc  -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-menu">
+                <span class="active"><a href="index.html" style="color: #8CC3B7">Home</a></span>
+                <span class="active"><a href="myPlaces.html"style="color: #8CC3B7">myPlaces</a></span>
+                <span class="active"><a href="about.html"style="color: #8CC3B7">About us</a></span>
+                <span class="active"><a href="about.html"style="color: #8CC3B7">Contact</a></span>
+            </div>
+            <div class="logo-image">    
+                <a href="about.html"><img src="resources/images/myphotoatlas.png" alt="myphoto Atlas logo"></a>
+            </div>
 
+        </div>
+    </footer>
 
 
 

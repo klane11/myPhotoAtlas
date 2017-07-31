@@ -12,9 +12,7 @@ function displayMyPlaces () {
         'class': 'place',
         'data-role': 'place'
         });
-        
         appendImages(myPlaces[key]["images"], $place);
-       
         var $address = $('<span></span>', {
             'text': key
         });
