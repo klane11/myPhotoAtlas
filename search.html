@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Photography</title>
+    <title>myAtlas</title>
     <!--favicon icon  -->
     <link rel="shortcut icon" href="resources/images/favicon.png" type="image/x-icon">
     <link rel="icon" href="resources/images/favicon.png" type="image/x-icon">
@@ -27,9 +27,11 @@
         
         <div class="map-container">
             <div class="map">
+                <!--whole map  -->
                 <div class="map-banner-container">
                     <div data-role="main-map" class="main-map container-fluid" id="map"></div>
                 </div>
+                <!--space behind fixed map / fixed to bottom of map  -->
                 <div class="white-space">
                     <div class="navigation-icons">
                         <!--hamburger icon  -->
@@ -40,11 +42,24 @@
                         <button class="icon exit" data-image-role="exit-container">
                             <img src="resources/images/exit.png" alt="exit out of menu">
                         </button>
+                        <!--hidden menu  -->
                         <div class="menu-container" data-text-role="menu">
                             <span class="active"><a href="index.html">Home</a></span>
                             <span class="active"><a href="myPlaces.html">myPlaces</a></span>
                             <span class="active"><a href="about.html">About us</a></span>
                             <span class="active"><a href="about.html">Contact</a></span>
+                        </div>
+                        <!--open close map button  -->
+                        
+                    </div>
+                    
+                    <!--logo  -->
+                    <div class="logo">
+                        <div class="click-to-open">
+                            <span>Hide Map</span>
+                        </div>
+                        <div class="click-to-close">
+                            <span>Show Map</span>
                         </div>
                         <div class="open-close-map">
                             <div class="map-icons">
@@ -55,18 +70,10 @@
                                     <img src="resources/images/hidecircleicon.png" alt="hide map icon">
                                 </button>
                             </div>
-                            
+                        </div class="logo-title">
+
+                            <a href="myPlaces.html"><span class="navbar-brand" href="#">myAtlas</span></a>
                         </div>
-                        <div class="click-to-open">
-                            <span>Click to Hide Map</span>
-                        </div>
-                        <div class="click-to-close">
-                            <span>Click to See Map</span>
-                        </div>
-                    </div>
-                    
-                    <div class="logo">
-                        <a href="myPlaces.html"><span class="navbar-brand" href="#">myPlaces</span></a>
                     </div>
                 </div>
                 
@@ -81,25 +88,25 @@
     <main>
         
         <div class="top-search-container">
-            <div class="space-behind-map">
-                    
-            </div>
+            <!--space behind map that holds background image if map is raised  -->
+            <div class="space-behind-map"></div>
+            <!--main container with title, explanation of site, search options  -->
             <div class="main-container">
-
-                
-
+                <!--heading  -->
                 <div class="gallery-heading-container">
                     <div class="gallery-heading">
                         <h2>Where Will You Discover Next?</h2>
                     </div>
                 </div>
-
+                <!--explains website  -->
+                <div class="explain-site-container">
+                    <div class="explain-site"><p>Ever seen a photo and wondered where it was captured? Atlas brings your curiosity to life. Input a location, select the types of photos you'd like to discover, and search away!</p></div>
+                    <div class="explain-site"><p>Click on the photo you'd like to explore and check out your map. If you'd like to save a place, add it to myPlaces.</div>
+                </div>
                 
                 <!--search bar and checkbox container-->
                 <div class="search-input">
-
                     <form class="input-group"  data-role="search-form">
-
                         <div class="search-box-container">
                             <div class="location-search-container">
                                 <input class="form-control search-location" placeholder="Explore a City" name="srch-term" id="srch-term" type="text" data-role="search">
@@ -186,9 +193,17 @@
                                 <input type="checkbox" id="pier" value="pier" data-role="checkbox"> 
                                 <label for="pier" class="checkbox-name"> Piers</label>
                             </div>
-                        </div>
 
-                        
+                            <div class="graffiti-box">
+                                <input type="checkbox"  id="graffiti" value="graffiti" data-role="checkbox"> 
+                                <label for="graffiti" class="checkbox-name"> Graffiti</label>
+                            </div>
+
+                            <div class="night-box">
+                                <input type="checkbox"  id="night" value="night" data-role="checkbox"> 
+                                <label for="night" class="checkbox-name"> Night</label>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -199,21 +214,22 @@
 
             </div>
         </div>
+        <!--fixed back to top icon  -->
         <div class="back-to-top">
             <a href="#"><img src="resources/images/backtotop.png" alt="back to top"></a>
         </div>
-
-    
     </main>
-
-
-
 
 
     <!--footer/ logo / home, about etc  -->
     <footer>
         <div class="footer-container">
-        
+            <div class="footer-menu">
+                <span class="active"><a href="index.html" style="color: #8CC3B7">Home</a></span>
+                <span class="active"><a href="myPlaces.html"style="color: #8CC3B7">myPlaces</a></span>
+                <span class="active"><a href="about.html"style="color: #8CC3B7">About us</a></span>
+                <span class="active"><a href="about.html"style="color: #8CC3B7">Contact</a></span>
+            </div>
 
         </div>
     </footer>

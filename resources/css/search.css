@@ -44,8 +44,10 @@ body {
     margin-right: 5px;
 }
 .logo {
-    font-size: 10px;
+    font-size: 15px;
     margin-right: 0;
+    display: flex;
+    align-items: center;
 }
 /*retractable menu  */
 .hamburger,
@@ -72,10 +74,10 @@ body {
     color: white;
     font-weight: bold;
 }
-.click-to-open span,
+/* .click-to-open span,
 .click-to-close span {
     display: none;
-}
+} */
 /**************************  */
 /*main  */
 main {
@@ -137,13 +139,21 @@ main {
     text-align: center;
     margin: 0 auto;
     color: grey;
-    margin-top: 75px;
-    margin-bottom: 15px;
+    margin-top: 40px;
 }
 .gallery-heading h2 {
     line-height: 7rem;
 }
-
+.explain-site-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 40px;
+}
+.explain-site {
+    text-align: left;
+    font-size: 18px;
+    width: 40%;
+}
 .input-group{
     text-align: center;
 }
@@ -203,8 +213,6 @@ main {
     flex-flow: wrap;
     align-items: center;
     padding: 10px;
-    border-left: 2px solid #023E58;
-    border-right: 2px solid #023E58;
     text-align: center;
     background-color: white;
 }
@@ -239,8 +247,8 @@ main {
     border-radius: 100%;
     height: 50px;
     position: fixed;
-    bottom: 0;
-    left: 0;
+    bottom: 10px;
+    left: 10px;
 }
 /* ************************ */
 /*footer  */
@@ -248,8 +256,20 @@ main {
     height: 300px;
     background: #023E58;
     border-top: 2px solid black;
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+.footer-menu {
+    margin-left: 30px;
+}
+.footer-menu span {
+    margin-left: 10px;
+    font-size: 20px;
 }
 
+
+/*google maps pop up style  */
 .gm-style-iw {
     display: flex;
     justify-content: center;
@@ -293,7 +313,7 @@ main {
         display: unset;
     }
     .space-behind-map {
-        height: 350px;
+        height: 400px;
     }
     .search-box-container {
         max-width: 1024px;
@@ -345,6 +365,10 @@ main {
     }
     .picture-container img {
         max-width: 400px;
+    }
+    .picture-container {
+        border-left: 2px solid #023E58;
+        border-right: 2px solid #023E58;
     }
 }
 
