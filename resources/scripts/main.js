@@ -146,6 +146,15 @@ function reverseGeoCode(latLon, picInfo) {
         })
 }
 
+function checkMyPlaces(address) {
+    var myPlaces = JSON.parse(localStorage.getItem('myPlaces'));
+    if (myPlaces[address] !== undefined) {
+        return "data-role='saved'>&#10003;Saved to myPlaces</a>";
+    } else {
+        return "data-role = 'save'>Add to myPlaces</a>";
+    }
+}
+
 var markers = [];
 // Removes all markers from map and places new one when pic clicked
 function placePicMarker(latLon, resp, picInfo) {
@@ -156,7 +165,8 @@ function placePicMarker(latLon, resp, picInfo) {
     var formatted_address = checkAddress(resp);
     var URI = encodeURI(formatted_address);
     var link = "https://maps.google.com?q=" + URI;
-    var content = '<h6>' + formatted_address + '</h6>' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' + '<a href="#" data-role="save">Add to myPlaces</a>' + '<a href=' + link ;
+    var save = checkMyPlaces(formatted_address);
+    var content = '<h6>' + formatted_address + '</h6>' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' + '<a href="#" ' + save + '<a href=' + link ;
     var icon = 'resources/images/markiethemarker.png';
 
 	  var marker = new google.maps.Marker({
