@@ -81,38 +81,48 @@ main {
 }
 /*search area  */
 /* modifies gallery heading, located above picture-container & images */
-.search-input {
-    width: 100%;
-}
-.search-box-container {
-    max-width: 400px;
-    text-align: center; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-}
-.location-search-container {
-    margin-right: 60px;
-}
-.location-search-container{
-    width: 200px;
-    padding-right: 0;
-}
-.radius {
-    margin-right: 5px;
-}
 .top-search-container {
     background-color: white;
     border-bottom: 2px solid #023E58;
     width: 100%;
 }
-.checkbox-container {
-    max-width: 400px;
-    text-align: center;
+.space-behind-map {
+    height: 325px;
+    width: 100%;
+    background-image: url("../images/golden-clouds.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    opacity: .3;
 }
+.search-input {
+    width: 100%;
+}
+.search-box-container {
+    text-align: center; 
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+}
+.location-search-container {
+    margin-right: 60px;
+    display: flex;
+}
+.location-search-container{
+    width: 200px;
+    margin-top: 20px;
+}
+.search-units {
+    display: flex;
+    margin-top: 20px;
+}
+.radius {
+    margin-right: 5px;
+}
+
 .main-container {
-    margin-top: 300px;
     width: 100%;
     padding: 20px;
     text-align: center;
@@ -147,6 +157,7 @@ main {
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
+    max-width: 1024px;
 }
 .checkbox-name {
     margin-bottom: 15px;
@@ -228,6 +239,9 @@ main {
 /*-------------------------------MEDIA QUERIES-------------------------------*/
 
 @media only screen and (min-width: 768px){
+    .space-behind-map {
+        height: 400px;
+    }
     .search-box-container {
         max-width: 1024px;
         text-align: center; 
@@ -239,9 +253,11 @@ main {
     .location-search-container {
         margin-right: 60px;
         width: 300px;
+        margin-top: 0;
     }
-    .radius {
-        margin-right: 10px;
+    .search-units {
+        display: flex;
+        margin-top: 0;
     }
     .navigation-icons {
         margin-left: 10px;
@@ -256,6 +272,9 @@ main {
     .search-box-container {
         max-width: 1024px;
     }
+    .input-group {
+        max-width: 1024px;
+    }
 }
 
 @media only screen and (min-width: 976px){
@@ -263,12 +282,11 @@ main {
         height: 500px;
     }  */
     #map {
-        height: 350px;
+        height: 400px;
         width: 100%;
     }
     .main-container{
         margin: 0 auto;
-        margin-top: 250px;
         max-width: 1024px;
         text-align: center;
     }

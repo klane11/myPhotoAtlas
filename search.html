@@ -86,6 +86,9 @@
     <main>
         
         <div class="top-search-container">
+            <div class="space-behind-map">
+                    
+            </div>
             <div class="main-container">
 
                 
@@ -105,32 +108,34 @@
                         <div class="search-box-container">
                             <div class="location-search-container">
                                 <input class="form-control search-location" placeholder="Explore a City" name="srch-term" id="srch-term" type="text" data-role="search">
-                                <div class="input-group-btn row col-xs-2">
+                                <div class="input-group-btn">
                                     <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                                 </div>
                             </div>
 
                         <!--radius-->
-                            <div class="radius">
-                                <select id="radius" 
-                                name="Size"
-                                data-input="radius">
-                                    <option default>Radius</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="5">5</option>
-                                    <option value="10">10</option>
-                                    <option value="20">20</option>
-                                </select>
-                            </div>
-                            <!--units of miles or kelomets  -->
-                            <div class="units"> 
-                                 <select id="units" 
-                                name="Size"
-                                data-input="units">
-                                    <option default value="mi">Miles</option>
-                                    <option value="km">Kilometers</option>
-                                </select>
+                            <div class="search-units">
+                                <div class="radius">
+                                    <select id="radius" 
+                                    name="Size"
+                                    data-input="radius">
+                                        <option default>Radius</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                    </select>
+                                </div>
+                                <!--units of miles or kelomets  -->
+                                <div class="units"> 
+                                    <select id="units" 
+                                    name="Size"
+                                    data-input="units">
+                                        <option default value="mi">Miles</option>
+                                        <option value="km">Kilometers</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         
