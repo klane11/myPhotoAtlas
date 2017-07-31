@@ -28,10 +28,13 @@ function photoSearch(resp, tags) {
     if ($pictureDisplay.children()) {
         $pictureDisplay.empty();
     }
-    // gets tags from checkbox
+    // gets radius, units and tags
+    var radius = getRadius();
+    var units = getUnits();
     var tags = chooseTags();
+
     // Adds in tags. Tags are essential in the search process,as well as radius units. These aspects will be changed later to get respnoses from the user
-    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"] + "&tags=" + tags + "&tag_mode=any&radius=20&radius_units=mi&format=json&nojsoncallback=1");
+    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"]+ "&tags=" + tags + "&tag_mode=any&radius=" + radius + "&radius_units=" + units + "&format=json&nojsoncallback=1");
     resp
         .then(createPicture)
 }
@@ -57,6 +60,18 @@ function chooseTags() {
         }
     }
     return types;
+}
+// 1.3.3
+//gets radius user inputs
+function getRadius() {
+    var $radiusChoosen = $('[data-input="radius"]');
+    return $radiusChoosen.val();
+}
+//1.3.4
+// get units of miles or kelometers. miles is default
+function getUnits() {
+    var $units = $('[data-input="units"]');
+    return $units.val();
 }
 
 // 1.4
@@ -244,21 +259,19 @@ function printIt(thing) {
 
 
 
-$(window).scroll(function() {
-    var targetClass = $(".map-container");
-    var a = 30;
-    var pos = $(window).scrollTop();
-    if (pos < a) {
-        targetClass.css("top", "50px", "z-index", "1");
-        $(".menu-container").css("z-index", "100")
-        // $(".main-container").css("margin-top", "400px")
-    } else {
-        targetClass.css("top", "0", "z-index", "1");
-        $(".menu-container").css("z-index", "100")
-        // $(".main-container").css("margin-top", "400px")
+// $(window).scroll(function() {
+//     var targetClass = $(".map-container");
+//     var a = 30;
+//     var pos = $(window).scrollTop();
+//     if (pos < a) {
+//         targetClass.css("top", "50px", "z-index", "1");
+//         // $(".main-container").css("margin-top", "400px")
+//     } else {
+//         targetClass.css("top", "0", "z-index", "1");
+//         // $(".main-container").css("margin-top", "400px")
         
-    }
-});
+//     }
+// });
 
 
 function clickShowMap(){
@@ -266,7 +279,9 @@ function clickShowMap(){
         console.log("hi")
         $('[data-images-role="hide-map"]').show();
         $(this).hide();
-        $(".map-container").show();
+        $(".click-to-close").hide();
+        $(".click-to-open").show();
+        $(".map-banner-container").slideDown(1000);
     });
 }
 function clickHideMap(){
@@ -274,7 +289,9 @@ function clickHideMap(){
         console.log("maybe")
         $('[data-images-role="show-map"]').show();
         $(this).hide();
-        $(".map-container").hide();
+        $(".click-to-close").show();
+        $(".click-to-open").hide();
+        $(".map-banner-container").slideUp(1000);
     });
 }
 
@@ -283,7 +300,7 @@ function clickMenuShow(){
     $HAMBURGER.click(function (){
         $EXIT_ICON.show();
         $(this).hide();
-        $(".map-container").css("left", "170px");
+        // $(".map-container").css("left", "170px");
         $MENU_CONTAINER.show("slow");
     });
 }
@@ -292,7 +309,7 @@ function clickExitButton(){
     $EXIT_ICON.click(function (){
         $HAMBURGER.show();
         $(this).hide();
-        $(".map-container").css("left", "0");
+        // $(".map-container").css("left", "0");
         $MENU_CONTAINER.hide("slow");
     });
 }
@@ -303,7 +320,7 @@ function carouselControl() {
         $('.carousel').slick({
         autoplay: true,
         mobileFirst: true,
-        autoplaySpeed: 4000,
+        autoplaySpeed: 4500,
         arrows: false,
         pauseOnFocus: false,
         pauseOnHover: false,
@@ -315,21 +332,23 @@ function carouselControl() {
 
 
 // starts off DOM with exit and menu-container hidden until clicked
-$HIDE_MAP.hide();
+$SHOW_MAP.hide();
 $EXIT_ICON.hide();
 $MENU_CONTAINER.hide();
+$(".click-to-close").hide();
 // initializes hamburger meniu
 clickMenuShow();
 clickExitButton();
 clickHideMap();
 clickShowMap();
 
+
 // initializes search listener for clicking on picture and taking us to that location
 addSearchListener();
 addPictureListener();
 createMyPlaces();
 // carousel on landing page
-// carouselControl();
+carouselControl();
 
 
 
