@@ -188,12 +188,15 @@ function reverseGeoCode(latLon, picInfo) {
         })
 }
 
-function checkMyPlaces(address) {
+function checkMyPlaces(address, picInfo) {
     var myPlaces = JSON.parse(localStorage.getItem('myPlaces'));
-    if (myPlaces[address] !== undefined) {
-        return "<span data-role='saved' class='saved'>\u2713Saved to myPlaces</span>";
-    } else {
+    var id = picInfo["id"];
+    if (myPlaces[address] === undefined) {
+        return "<span data-role='save' class='save'>Add to myPlaces</span>"
+    } else if (myPlaces[address]["images"][id] === undefined) {
         return "<span data-role='save' class='save'>Add to myPlaces</span>";
+    } else {
+        return "<span data-role='saved' class='saved'>\u2713Saved to myPlaces</span>";
     }
 }
 
@@ -207,7 +210,7 @@ function placePicMarker(latLon, resp, picInfo) {
     var formatted_address = checkAddress(resp);
     var URI = encodeURI(formatted_address);
     var link = "https://maps.google.com?q=" + URI;
-    var save = checkMyPlaces(formatted_address);
+    var save = checkMyPlaces(formatted_address, picInfo);
     var content = '<div class="iw-container">' + '<h6>' + formatted_address + '</h6>' + '<div class="iw-options">' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' + save + '<a href=' + link + + '</div>' + '</div>';
     var icon = 'resources/images/markiethemarker.png';
 
@@ -234,17 +237,27 @@ function placePicMarker(latLon, resp, picInfo) {
                 this.setAttribute('data-role', 'saved');
                 this.setAttribute('class', 'saved');
                 console.log(this.getAttribute('data-role'));
-                addPlace(formatted_address, picInfo);
+                addPlace(formatted_address, picInfo, latLon);
                 e.currentTarget.removeEventListener('click', handler);
             });
         }
     });
 }
 
-function addPlace(address, picInfo) {
+function addPlace(address, picInfo, latLon) {
     console.log(picInfo);
     var myPlaces = JSON.parse(localStorage.getItem('myPlaces'));
-    myPlaces[address] = picInfo;
+    var id = picInfo["id"]
+    if (myPlaces[address] === undefined) {
+        myPlaces[address] = {};
+        myPlaces[address]["latLon"] = latLon;
+        myPlaces[address]["images"] = {};
+
+    } else if (myPlaces[address]["images"] === undefined) {
+        myPlaces[address]["images"] = {};
+        
+    }
+    myPlaces[address]["images"][id] = picInfo;
     localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
 }
 
@@ -296,8 +309,6 @@ function addPictureListener() {
 function printIt(thing) {
     console.log(thing);
 }
-
-
 
 // ******************************
 // *******HAMBURGER MENU*********

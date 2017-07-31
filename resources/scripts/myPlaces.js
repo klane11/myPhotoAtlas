@@ -12,12 +12,7 @@ function displayMyPlaces () {
         'class': 'place',
         'data-role': 'place'
         });
-        var $image = $('<img>', {
-            'src': myPlaces[key]['src'],
-            'alt': myPlaces[key]['alt'],
-            'id': myPlaces[key]['id']
-        });
-        $place.append($image);
+        appendImages(myPlaces[key]["images"], $place);
         var $address = $('<span></span>', {
             'text': key
         });
@@ -43,6 +38,20 @@ function displayMyPlaces () {
     }
     $myPlacesDisplay.append($myPlacesContainer);
 }
+
+//Appends images to each div 
+function appendImages(dictionary, appendTo) {
+    for (var key in dictionary) {
+        var $image = $('<img>', {
+            'src': dictionary[key]['src'],
+            'alt': dictionary[key]['alt'],
+            'id': dictionary[key]['id']
+        });
+    appendTo.append($image);
+    }
+}
+
+
 
 // Deletes clicked element from DOM and localStorage
 function deletePlace(element, key) {
