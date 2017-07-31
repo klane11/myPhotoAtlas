@@ -16,21 +16,22 @@ var $SHOW_MAP = $('[data-images-role="show-map"]');
 // 1.2
 function getGeoCoords(searchValue) {
     var URI = encodeURI(searchValue);
+    var errorCoords = errorMessage('No coordinates were found for this location, please try your search again.');
     var resp = $.get(GEOCODE + URI + "&key=" + GOOGLE_API_KEY);
     resp
-        .catch(errorMessage)
+        .catch(errorCoords)
         .then(mapSetCenterSearch)
         .then(photoSearch)
 }
 
-
-function errorMessage(error) {
-    console.log(error);
-    var $errorDiv = $('<div></div', {
-        'text': 'No coordinates were found for this location, please try your search again.',
-        'class': 'error-message'
-    })
-    $pictureDisplay.append($errorDiv);
+function errorMessage(message) {
+    return function(error) {
+        var $errorDiv = $('<div></div', {
+            'text': message,
+            'class': 'error-message'
+        })
+        $pictureDisplay.append($errorDiv);
+    }
 }
 
 // 1.3.1
@@ -44,10 +45,14 @@ function photoSearch(resp) {
     var units = getUnits();
     var tags = chooseTags();
 
+    //Creates error function w/message to be returned if no pictures found
+    var errorPics = errorMessage('No pictures were found for this location, radius, and tags, please try your search again.');
     // Adds in tags. Tags are essential in the search process,as well as radius units. These aspects will be changed later to get respnoses from the user
     var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"]+ "&tags=" + tags + "&tag_mode=any&radius=" + radius + "&radius_units=" + units + "&format=json&nojsoncallback=1");
+    console.log(resp);
     resp
-        .then(createPicture)
+        .catch(errorPics)
+        .then(checkForPics)
 }
 
 // after photos are set, when photos are clicked on, takes you to that point on map
@@ -57,7 +62,22 @@ function mapSetCenterSearch(resp) {
     latLon["lng"] = Number(resp["results"][0]["geometry"]["location"]["lng"]);
     map.setZoom(10);
     map.setCenter(latLon);
+    console.log(latLon);
     return resp;
+}
+
+// Checks to see if returned response contains pictures
+function checkForPics(resp) {
+    var pictureArray = resp["photos"]["photo"];
+    if (pictureArray.length > 0) {
+        createPicture(pictureArray);
+    } else {
+        var $errorDiv = $('<div></div', {
+            'text': 'No pictures were found for this location, radius, and tags, please try your search again.',
+            'class': 'error-message'
+        })
+        $pictureDisplay.append($errorDiv);
+    }
 }
 
 // 1.3.2
@@ -70,6 +90,7 @@ function chooseTags() {
             types.push(($checkboxes[i].value) + "%2C+");
         }
     }
+    console.log(types);
     return types;
 }
 // 1.3.3
@@ -87,8 +108,7 @@ function getUnits() {
 
 // 1.4
 // Creates array from picture search results, creates picture-container div, loops through array, creates picture for each with makePicture function, appends to picture-container div, appends div to DOM
-function createPicture(resp) {
-    var pictureArray = resp["photos"]["photo"];
+function createPicture(pictureArray) {
     var $pictureContainer = $('<div></div>', {
         'class': 'picture-container',
         'data-role': 'picture-container'
