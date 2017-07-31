@@ -73,7 +73,7 @@ body {
     z-index: 100;
     width: 100%;
     background-color: white;
-    border-bottom: 1px solid #023E58;
+    border-bottom: 1px solid #8CC3B7;
     height: 20px;
 }
 .open-close-map {
@@ -107,7 +107,7 @@ main {
     padding-right: 0;
 }
 .radius {
-
+    margin-right: 10px;
 }
 .top-search-container {
     background-color: white;

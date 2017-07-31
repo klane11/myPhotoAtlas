@@ -62,11 +62,13 @@ function chooseTags() {
     }
     return types;
 }
+// 1.3.3
 //gets radius user inputs
 function getRadius() {
     var $radiusChoosen = $('[data-input="radius"]');
     return $radiusChoosen.val();
 }
+//1.3.4
 // get units of miles or kelometers. miles is default
 function getUnits() {
     var $units = $('[data-input="units"]');
