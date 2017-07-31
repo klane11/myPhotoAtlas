@@ -149,9 +149,9 @@ function reverseGeoCode(latLon, picInfo) {
 function checkMyPlaces(address) {
     var myPlaces = JSON.parse(localStorage.getItem('myPlaces'));
     if (myPlaces[address] !== undefined) {
-        return "data-role='saved'>&#10003;Saved to myPlaces</a>";
+        return "<span data-role='saved' class='saved'>\u2713Saved to myPlaces</span>";
     } else {
-        return "data-role = 'save'>Add to myPlaces</a>";
+        return "<span data-role='save' class='save'>Add to myPlaces</span>";
     }
 }
 
@@ -166,7 +166,7 @@ function placePicMarker(latLon, resp, picInfo) {
     var URI = encodeURI(formatted_address);
     var link = "https://maps.google.com?q=" + URI;
     var save = checkMyPlaces(formatted_address);
-    var content = '<h6>' + formatted_address + '</h6>' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' + '<a href="#" ' + save + '<a href=' + link ;
+    var content = '<h6>' + formatted_address + '</h6>' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' + save + '<a href=' + link ;
     var icon = 'resources/images/markiethemarker.png';
 
 	  var marker = new google.maps.Marker({
@@ -183,13 +183,18 @@ function placePicMarker(latLon, resp, picInfo) {
         infoWindow.open(map, marker);
     });
     markers.push(marker);
-
-    google.maps.event.addListener(infoWindow, 'domready', function() {
-        document.querySelector('[data-role="save"]').addEventListener("click", function(e) {
-            e.preventDefault();
-            addPlace(formatted_address, picInfo);
+    
+    if (document.querySelector('[data-role="save"]')) {
+        google.maps.event.addListener(infoWindow, 'domready', function() {
+            document.querySelector('[data-role="save"]').addEventListener("click", function(e) {
+                e.preventDefault();
+                this.textContent = '\u2713Saved to myPlaces';
+                this.setAttribute('data-role', 'saved');
+                console.log(this.getAttribute('data-role'));
+                addPlace(formatted_address, picInfo);
+            });
         });
-    });
+    }
 }
 
 function addPlace(address, picInfo) {
