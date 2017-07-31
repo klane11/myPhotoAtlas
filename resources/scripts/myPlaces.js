@@ -1,5 +1,6 @@
 var $myPlacesDisplay = $('[data-role="myplaces-display"]');
 
+// Takes myPlaces from local storage and prints information to screen
 function displayMyPlaces () {
     var myPlaces = JSON.parse(localStorage.getItem('myPlaces'));
     var $myPlacesContainer = $('<div></div>', {
@@ -44,6 +45,7 @@ function displayMyPlaces () {
     $myPlacesDisplay.append($myPlacesContainer);
 }
 
+// Deletes clicked element from DOM and localStorage
 function deletePlace(element, key) {
      var myPlaces = JSON.parse(localStorage.getItem('myPlaces'));
      delete myPlaces[key];
@@ -51,7 +53,7 @@ function deletePlace(element, key) {
     element.remove();
 }
 
-
+// Adds listener to "delete" link
 function addDeleteListener() {
     $myPlacesDisplay.on('click', "[data-role='delete']", function(event) {
     event.preventDefault();
