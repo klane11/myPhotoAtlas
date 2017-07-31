@@ -310,7 +310,7 @@ addSearchListener();
 addPictureListener();
 createMyPlaces();
 // carousel on landing page
-// carouselControl();
+carouselControl();
 
 
 
