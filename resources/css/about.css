@@ -44,51 +44,27 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    border: 1px solid green;
 }
-
+.about-developers,
 .about-project {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-between;   
+    border: 1px solid blue;
 }
 
-.about-developers {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between; 
-    margin-top: 25px;
-}
-
-.dev-image img {
+.dev-image img,
+.project-image img {
     width: 250px;
     height: 250px;
     border-radius: 100%;
 }
 
-.project-image img {
-    width: 250px;
-    height: 250px;
-    border-radius: 100%; 
-}
-
 .vision,
 .methods,
-.tools {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    width: 30%;
-    /*border: 1px solid pink;*/
-}
-
-.line {
-    border: 1px solid black;
-    color: black;
-    margin-top: 25px;
-}
-
+.tools, 
 .sarah, 
 .katie, 
 .steph {
@@ -97,8 +73,14 @@
     justify-content: center;
     align-items: center;
     align-content: center;
-    width: 30%;
-    /*border: 1px solid pink;*/
+    width: 100%;
+    border: 1px solid pink;
+}
+
+.line {
+    border: 1px solid grey;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 p {
@@ -117,17 +99,81 @@ p {
 
 /*-------------------------------MEDIA QUERIES-------------------------------*/
 
-/* Small Screens */
-@media only screen and (min-width: 360px) {
+/* small screens */
+@media only screen and (min-width: 500px) {
+    .about-project,
+    .about-developers {
+        flex-wrap: none;  
+    }
+
+    .vision,
+    .methods,
+    .tools,
+    .sarah, 
+    .katie, 
+    .steph {
+        width: 30%;     
+    }
+
+    .dev-image img,
+    .project-image img {
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    }
   
 }
 
 
-/* Medium Screens */
-@media only screen and (min-width: 768px){
 
+/* medium screens */
+@media only screen and (min-width: 750px){
+    .about-project,
+    .about-developers {
+        flex-wrap: none;  
+    }
+
+    .vision,
+    .methods,
+    .tools,
+    .sarah, 
+    .katie, 
+    .steph {
+        width: 30%;     
+    }
+
+    .dev-image img,
+    .project-image img {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    }
+ 
 }
 
+/* large screens */
+@media only screen and (min-width: 992px){
+    .about-project,
+    .about-developers {
+        flex-wrap: none;  
+    }
 
-/*1024 breakpoint for images*/
+    .vision,
+    .methods,
+    .tools,
+    .sarah, 
+    .katie, 
+    .steph {
+        width: 30%;     
+    }
+
+    .dev-image img,
+    .project-image img {
+    width: 250px;
+    height: 250px;
+    border-radius: 100%;
+    }
+ 
+}
 /*---------------------------------------------------------------------------*/
+
