@@ -1,16 +1,19 @@
 var $myPlacesDisplay = $('[data-role="myplaces-display"]');
 
 // Takes myPlaces from local storage and prints information to screen
-function displayMyPlaces () {
+function displayMyPlaces() {
     var myPlaces = JSON.parse(localStorage.getItem('myPlaces'));
     var $myPlacesContainer = $('<div></div>', {
         'class': 'places-container',
         'data-role': 'places-container'
     })
+
+    // placeMarkers(myPlaces);
     for (var key in myPlaces) {
         var $place = $('<div></div>', {
         'class': 'place',
-        'data-role': 'place'
+        'data-role': 'place',
+        'id': key
         });
         appendImages(myPlaces[key]["images"], $place);
         var $address = $('<span></span>', {
@@ -51,22 +54,48 @@ function appendImages(dictionary, appendTo) {
     }
 }
 
+function placeMarkers(myPlaces) {
+    var markers = [];
+    for (key in myPlaces) {
+        var URI = encodeURI(key);
+        var link = "https://maps.google.com?q=" + URI;
+        var section = "#" + key;
+        var content = '<div class="iw-container">' + '<h6>' + key + '</h6>' + '<div class="iw-options">' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' +  + '<a href=' + section + 'Show in myPlaces</a></div>' + '</div>';
+        var icon = 'resources/images/markiethemarker.png';
 
+        var marker = new google.maps.Marker({
+            position: myPlaces[key]["latLon"],
+            map: map,
+            icon: icon,
+            animation: google.maps.Animation.DROP,
+        })
+        var infoWindow = new google.maps.InfoWindow({
+            content: content
+        });
+        
+        marker.addListener('click', function() {
+            infoWindow.open(map, marker);
+        });
+        markers.push(marker);
+    }
+}
 
 // Deletes clicked element from DOM and localStorage
 function deletePlace(element, key) {
-     var myPlaces = JSON.parse(localStorage.getItem('myPlaces'));
-     delete myPlaces[key];
-     localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
+    console.log(key);
+    var myPlaces = JSON.parse(localStorage.getItem('myPlaces'));
+    delete myPlaces[key];
+    localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
     element.remove();
 }
 
 // Adds listener to "delete" link
 function addDeleteListener() {
     $myPlacesDisplay.on('click', "[data-role='delete']", function(event) {
-    event.preventDefault();
-    $element = $(event.target.parentNode);
-    deletePlace($element, $element[0]["childNodes"][1]["innerText"]);
+        event.preventDefault();
+        $element = $(event.target.parentNode);
+        console.log($element);
+        deletePlace($element, $element[0]["id"]);
     })
 }
 

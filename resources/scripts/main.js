@@ -211,7 +211,7 @@ function placePicMarker(latLon, resp, picInfo) {
     var URI = encodeURI(formatted_address);
     var link = "https://maps.google.com?q=" + URI;
     var save = checkMyPlaces(formatted_address, picInfo);
-    var content = '<div class="iw-container">' + '<h6>' + formatted_address + '</h6>' + '<div class="iw-options">' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' + save + '<a href=' + link + + '</div>' + '</div>';
+    var content = '<div class="iw-container">' + '<h6>' + formatted_address + '</h6>' + '<div class="iw-options">' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' + save + '</div>' + '</div>';
     var icon = 'resources/images/markiethemarker.png';
 
 	var marker = new google.maps.Marker({
