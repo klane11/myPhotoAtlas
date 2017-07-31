@@ -50,7 +50,8 @@ body {
     align-items: center;
 }
 .logo-title {
-    display: none;
+    margin-right: 10px;
+    font-size: 20px;
 }
 /*retractable menu  */
 .hamburger,
@@ -64,13 +65,16 @@ body {
 .map-icons img {
     height: 30px;
 }
-
 .exit img {
     height: 25px;
 }
+.large-menu-container span,
 .menu-container span {
     color: #2C6675;
     margin-left: 5px;
+}
+.large-menu-container {
+    display: none;
 }
 .title {
     font-size: 40px;
@@ -99,7 +103,9 @@ main {
     color: grey;
 }
 .gallery-heading h2 {
-    line-height: 7rem;
+    line-height: 50px;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 /*explain site section  */
 .explain-site-container {
@@ -158,15 +164,20 @@ main {
     background: #023E58;
     border-top: 2px solid black;
     display: flex;
+    flex-direction: column;
     align-items: center;
     align-content: center;
+    justify-content: center;
 }
 .footer-menu {
-    margin-left: 30px;
 }
 .footer-menu span {
     margin-left: 10px;
     font-size: 20px;
+}
+.logo-image img {
+    height: 45px;
+    margin-top: 20px;
 }
 
 
@@ -224,6 +235,13 @@ main {
     }
     .logo {
         margin-right: 20px;
+    }
+    .hamburger img,
+    .exit img{
+        display: none;
+    }
+    .large-menu-container {
+        display: unset;
     }
 
 }
