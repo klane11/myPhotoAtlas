@@ -11,6 +11,7 @@ var $HAMBURGER = $('[data-image-role="hamburger"]');
 var $ICON_BUTTON = $('[data-role="iconButtonpwd"]');
 var $HIDE_MAP = $('[data-images-role="hide-map"]');
 var $SHOW_MAP = $('[data-images-role="show-map"]');
+var $errorDisplay = $('[data-role="error-display"]')
 
 // Uses Google API to get latitude and longitude from searched value, sends to photoSearch function to find pictures pased on coordinates
 // 1.2
@@ -30,16 +31,14 @@ function errorMessage(message) {
             'text': message,
             'class': 'error-message'
         })
-        $pictureDisplay.append($errorDiv);
+        $errorDisplay.append($errorDiv);
     }
 }
 
 // 1.3.1
 // Searches Flickr API for images based on latitude and longitude from Google Search, sends pictues to createPicture function
 function photoSearch(resp) {
-    if ($pictureDisplay.children()) {
-        $pictureDisplay.empty();
-    }
+
     // gets radius, units and tags
     var radius = getRadius();
     var units = getUnits();
@@ -47,9 +46,10 @@ function photoSearch(resp) {
 
     //Creates error function w/message to be returned if no pictures found
     var errorPics = errorMessage('No pictures were found for this location, radius, and tags, please try your search again.');
+
     // Adds in tags. Tags are essential in the search process,as well as radius units. These aspects will be changed later to get respnoses from the user
     var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"]+ "&tags=" + tags + "&tag_mode=any&radius=" + radius + "&radius_units=" + units + "&format=json&nojsoncallback=1");
-    console.log(resp);
+   
     resp
         .catch(errorPics)
         .then(checkForPics)
@@ -62,7 +62,6 @@ function mapSetCenterSearch(resp) {
     latLon["lng"] = Number(resp["results"][0]["geometry"]["location"]["lng"]);
     map.setZoom(10);
     map.setCenter(latLon);
-    console.log(latLon);
     return resp;
 }
 
@@ -76,7 +75,7 @@ function checkForPics(resp) {
             'text': 'No pictures were found for this location, radius, and tags, please try your search again.',
             'class': 'error-message'
         })
-        $pictureDisplay.append($errorDiv);
+        $errorDisplay.append($errorDiv);
     }
 }
 
@@ -90,15 +89,16 @@ function chooseTags() {
             types.push(($checkboxes[i].value) + "%2C+");
         }
     }
-    console.log(types);
     return types;
 }
+
 // 1.3.3
 //gets radius user inputs
 function getRadius() {
     var $radiusChoosen = $('[data-input="radius"]');
     return $radiusChoosen.val();
 }
+
 //1.3.4
 // get units of miles or kelometers. miles is default
 function getUnits() {
@@ -145,7 +145,7 @@ function makePicture(farmID, serverID, photoID, secret, title) {
 // when photo is clicked to get location of photo
 // Gets latitude and longitude for clicked pic from Flickr API
 function getPicGeo(picture) {
-    console.log(picture);
+    var errorPicGeo = errorMessage('The location of this photo is not specified. Please click another photo.');
     var picId = picture[0]["attributes"][2]["nodeValue"];
     var picInfo = {};
     picInfo["src"] = picture[0]["attributes"][0]["nodeValue"];
@@ -267,6 +267,12 @@ function checkAddress(resp) {
 function addSearchListener() {
     $searchField.on("submit", function (event) {
         event.preventDefault();
+        if ($pictureDisplay.children()) {
+            $pictureDisplay.empty();
+        }
+        if ($errorDisplay.children()) {
+            $errorDisplay.empty();
+        }
         var searchValue = $('[data-role="search"]').val();
         getGeoCoords(searchValue);
     });
