@@ -35,24 +35,6 @@ body {
     justify-content: space-between;
     align-items: center;
 }
-.navigation-icons {
-    display: flex;
-    align-items: center;
-    margin-left: 0;
-}
-.map-icons {
-    margin-right: 5px;
-}
-.logo {
-    font-size: 15px;
-    margin-right: 0;
-    display: flex;
-    align-items: center;
-}
-.logo-title {
-    display: none;
-}
-/*retractable menu  */
 .hamburger,
 .exit,
 .hide-map,
@@ -60,27 +42,57 @@ body {
     background: none;
     border: none;
 }
+.hamburger,
+.map-icons {
+    display: unset;
+}
 .hamburger img,
 .map-icons img {
     height: 30px;
 }
-
 .exit img {
-    height: 25px;
+    height: 20px;
+    margin-left: 5px;
 }
 .menu-container span {
     color: #2C6675;
     margin-left: 5px;
 }
-.title {
-    font-size: 40px;
-    color: white;
-    font-weight: bold;
+.menu-container a {
+    text-decoration: none;
 }
-/* .click-to-open span,
-.click-to-close span {
+button {
+    margin: 0;
+    padding: 0;
+}
+.navigation-left {
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+}
+.map-icons {
+    margin-right: 5px;
+}
+.map-control {
+    display: flex;
+    margin-left: 5px;
+}
+.click-to-open,
+.click-to-close,
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+.logo img {
+    margin-right: 5px;
+    height: 35px;
+}
+.logo-title {
     display: none;
-} */
+}
+/*retractable menu  */
+
+
 /**************************  */
 /*main  */
 main {
@@ -102,27 +114,53 @@ main {
     background-size: cover;
     opacity: .3;
 }
+.gallery-heading {
+    font-family: 'Rock Salt', cursive;
+    margin: 0 auto;
+    color: grey;
+    margin-top: 60px;
+}
+.gallery-heading h2 {
+    line-height: 40px;
+}
+/*explain site section  */
+.explain-site-container {
+    margin: 0 auto;
+    max-width: 600px;
+    display: flex;
+    justify-content: space-around;
+    padding: 40px 20px;
+}
+.explain-site {
+    font-size: 16px;
+    border-top: 1px solid #8CC3B7;
+    border-bottom: 1px solid #8CC3B7;
+}
 .search-input {
     width: 100%;
+    margin-bottom: 50px;
+    margin-top: 20px;
 }
 .search-box-container {
     text-align: center; 
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    align-items: center;
     align-content: center;
-    
+    margin-bottom: 20px;
 }
 .location-search-container {
     display: flex;
-    width: 400px;
     margin-top: 20px;
+    width: 300px;
     border-radius: 8px;
     border: 1px solid #2C6675;
     overflow: hidden;
 }
 .search-button {
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 2px;
     border: none;
     background: none;
 }
@@ -145,29 +183,7 @@ main {
     text-align: center;
     transition: all .5s ease-in;
 }
-.gallery-heading {
-    font-family: 'Rock Salt', cursive;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    margin: 0 auto;
-    color: grey;
-    margin-top: 40px;
-}
-.gallery-heading h2 {
-    line-height: 40px;
-}
-/*explain site section  */
-.explain-site-container {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 40px;
-}
-.explain-site {
-    text-align: left;
-    font-size: 14px;
-    width: 40%;
-}
+
 .input-group{
     text-align: center;
 }
@@ -188,12 +204,8 @@ main {
     flex-wrap: wrap;
     max-width: 1024px;
 }
-
-
 .checkbox-name {
-    margin-bottom: 15px;
-    margin-right: 15px;
-    margin-top: 20px;
+    padding: 20px;
     cursor: pointer;
     letter-spacing: 2px;
 }
@@ -261,7 +273,7 @@ main {
 .back-to-top img{
     background-color: #8CC3B7;
     border-radius: 100%;
-    height: 50px;
+    height: 40px;
     position: fixed;
     bottom: 10px;
     left: 10px;
@@ -269,20 +281,60 @@ main {
 /* ************************ */
 /*footer  */
 .footer-container {
-    height: 300px;
+    height: 250px;
     background: #023E58;
-    border-top: 2px solid black;
     display: flex;
     align-items: center;
-    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
 }
+
 .footer-menu {
-    margin-left: 30px;
+    display: flex;
+    margin-left: 10px;
+    font-size: 18px;
+}
+.footer-menu a {
+    text-decoration: none;
 }
 .footer-menu span {
-    margin-left: 10px;
-    font-size: 20px;
+    padding: 20px;
+    cursor: pointer;
+    letter-spacing: 2px;
 }
+.footer-menu span:after,
+.footer-menu span:before {
+    border: 1px solid #023E58;
+    bottom: 0px;
+    content: " ";
+    display: block;
+    transition: all 280ms ease-in-out;
+    width: 0;
+}
+.footer-menu span:hover:after,
+.footer-menu span:hover:before {
+    border-color:#2C6675;
+    transition: width 350ms ease-in-out;
+    width: 100%;
+    
+}
+.footer-menu span:hover:before {
+    bottom: auto;
+    top: 0;
+    width: 100%;
+}
+.powered-by img {
+    height: 25px;
+}
+.flickr,
+.google {
+    color: #8CC3B7;
+    text-align: center;
+    margin-top: 20px;
+    margin-right: 20px;
+    font-size: 12px;
+}
+
 
 
 /*google maps pop up style  */
@@ -338,14 +390,11 @@ main {
         line-height: 0px;
         font-size: 30px;
     }
-    .logo-title {
-        display: unset;
-    }
     .space-behind-map {
         height: 375px;
     }
     .explain-site {
-        font-size: 18px;
+        font-size: 20px;
     }
     .search-box-container {
         max-width: 1024px;
@@ -380,10 +429,9 @@ main {
     .logo {
         margin-right: 20px;
     }
+
+    .input-group,
     .search-box-container {
-        max-width: 1024px;
-    }
-    .input-group {
         max-width: 1024px;
     }
     .main-container{
@@ -402,16 +450,17 @@ main {
         border-left: 2px solid #023E58;
         border-right: 2px solid #023E58;
     }
+    .flickr,
+    .google {
+        text-align: left;
+    }
+    .footer-container{
+        justify-content: space-between;
+    }
+
 }
 
 @media only screen and (min-width: 976px){
-    /* .jumbotron {
-        height: 500px;
-    }  */
-    #map {
-        height: 400px;
-        width: 100%;
-    }
     .main-container{
         margin: 0 auto;
         max-width: 1024px;
@@ -432,7 +481,6 @@ main {
         width: 300px;
     }
     .picture-container img {
-        /* max-height: 400px; */
         max-width: 400px;
     }
 }

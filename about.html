@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>About</title>
+    <title>myPhotoAtlas: About</title>
     <!--favicon icon  -->
     <link rel="shortcut icon" href="resources/images/favicon.png" type="image/x-icon">
     <link rel="icon" href="resources/images/favicon.png" type="image/x-icon">
     <!--<link rel="icon" href="resources/images/favicon.png" type="image/x-icon">-->
     <!--NORMALIZE-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.css">
-    <!--slick carousel link for images-->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"/>
+    <!--fonts  -->
+    <link href="https://fonts.googleapis.com/css?family=Caveat|Raleway|Rock+Salt" rel="stylesheet">
     <!--bootstrap-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <!--css link  -->
@@ -39,7 +39,10 @@
                     </div>
 
                     <div class="logo">
-                        <span class="navbar-brand" href="#"></span>
+                        <div class="logo">
+                            <a href="myPlaces.html"><img id="logo" src="resources/images/logo.png" alt="my photo atlas logo">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -48,9 +51,8 @@
         <div class="menu-container " data-text-role="menu">
             <ul class="">
                 <li class="active"><a href="index.html">Home</a></li>
-                <li class="active"><a href="search.html">Explore</a></li>
+                <li class="active"><a href="search.html">Search</a></li>
                 <li class="active"><a href="myPlaces.html">myPlaces</a></li>
-                <li class="active"><a href="about.html">About</a></li>
             </ul>
         </div>
     </header>
@@ -124,7 +126,24 @@
         </div>
 
     <footer>
-        <div class="footer"></div>
+        <div class="footer-container">
+            <div class="footer-menu">
+                <span class="active"><a href="index.html" style="color: #8CC3B7">Home</a></span>
+                <span class="active"><a href="search.html"style="color: #8CC3B7">Search</a></span>
+                <span class="active"><a href="myPlaces.html"style="color: #8CC3B7">myPlaces</a></span>
+            </div>
+            <div class="powered-by">
+                <div class="flickr">
+                    <img src="resources/images/Flickr_logo.png" alt="powered by flickr">
+                    <div>Powered by Flickr API</div>
+                </div>
+                <div class="google">
+                    <img src="resources/images/googlelogo.png" alt="powered by google">
+                    <div>Powered by Google API</div>
+                </div>
+            </div>
+
+        </div>
     </footer>
 
     <!--jQuery minified version -->

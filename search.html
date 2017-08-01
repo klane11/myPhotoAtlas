@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>myAtlas</title>
+    <title>myPhotoAtlas: Search</title>
 
     <!--favicon icon  -->
     <link rel="shortcut icon" href="resources/images/favicon.png" type="image/x-icon">
@@ -32,13 +32,13 @@
                 </div>
                 <!--space behind fixed map / fixed to bottom of map  -->
                 <div class="white-space">
-                    <div class="navigation-icons">
+                    <div class="navigation-left">
                         <!--hamburger icon  -->
                         <button class="hamburger" data-image-role="hamburger" data-role="iconButton">
                             <img src="resources/images/hamburgermenu.png" alt="menu button">
                         </button>
                         <!--exit icon  -->
-                        <button class="icon exit" data-image-role="exit-container">
+                        <button class="exit" data-image-role="exit-container">
                             <img src="resources/images/exit.png" alt="exit out of menu">
                         </button>
                         <!--hidden menu  -->
@@ -46,35 +46,38 @@
                             <span class="active"><a href="index.html">Home</a></span>
                             <span class="active"><a href="myPlaces.html">myPlaces</a></span>
                             <span class="active"><a href="about.html">About</a></span>
-                            <span class="active"><a href="about.html">Contact</a></span>
                         </div>
                         <!--open close map button  -->
+                        <div class="map-control">  
+                            <div class="open-close-map">
+                                <div class="map-icons">
+                                    <button class="show-map" data-images-role="show-map">
+                                        <img src="resources/images/showcircleicon.png" alt="show map icon">
+                                    </button>
+                                    <button class="hide-map" data-images-role="hide-map">
+                                        <img src="resources/images/hidecircleicon.png" alt="hide map icon">
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="click-to-open">
+                                <span>Hide</span>
+                            </div>
+                            <div class="click-to-close">
+                                <span>Show</span>
+                            </div>
+                        </div>
                         
                     </div>
                     
                     <!--logo  -->
-                    <div class="logo">
-                        <div class="click-to-open">
-                            <span>Hide Map</span>
-                        </div>
-                        <div class="click-to-close">
-                            <span>Show Map</span>
-                        </div>
-                        <div class="open-close-map">
-                            <div class="map-icons">
-                                <button class="show-map" data-images-role="show-map">
-                                    <img src="resources/images/showcircleicon.png" alt="show map icon">
-                                </button>
-                                <button class="hide-map" data-images-role="hide-map">
-                                    <img src="resources/images/hidecircleicon.png" alt="hide map icon">
-                                </button>
-                            </div>
-                        </div class="">
-                            <a href="myPlaces.html"><span class="logo-title" href="#">myAtlas</span></a>
+                    <div class="nav-right">
+                        
+                        <div class="logo">
+                            <img src="resources/images/logo.png" alt="myPhotoAtlas logo">
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
 
@@ -97,8 +100,9 @@
                 </div>
                 <!--explains website  -->
                 <div class="explain-site-container">
-                    <div class="explain-site"><p>Have you ever seen a photo and wondered where it was captured? Atlas brings your curiosity to life. Input a location, select the types of photos you'd like to discover, and search away!</p></div>
-                    <div class="explain-site"><p>Click on the photo you'd like to explore and check out your map. If you'd like to save a place, add it to myPlaces.</div>
+                    <div class="explain-site"><p>Have you ever seen a photo and wondered where it was captured? Atlas brings your curiosity to life. Input a location, select the types of photos you'd like to discover, and search away!</p>
+                        <br />
+                    <p>Click on the photo you'd like to explore and check out your map. If you'd like to save a place, add it to myPlaces.</div>
                 </div>
                 
                 <!--search bar and checkbox container-->
@@ -173,17 +177,17 @@
                             </div>
                             
                             <div class="checkbox-box">   
-                                <label for="art" class="checkbox-name"> Art<input type="checkbox" id="art" value="art" data-role="checkbox"> 
+                                <label for="art" class="checkbox-name"> Art <input type="checkbox" id="art" value="art" data-role="checkbox"> 
                                 </label>
                             </div>
 
                             <div class="checkbox-box">
-                                <label for="bridge" class="checkbox-name"> Bridges<input type="checkbox" id="bridge" value="bridge" data-role="checkbox"> 
+                                <label for="bridge" class="checkbox-name"> Bridges <input type="checkbox" id="bridge" value="bridge" data-role="checkbox"> 
                                 </label>
                             </div>
 
                             <div class="checkbox-box">
-                                <label for="beach" class="checkbox-name"> Beaches<input type="checkbox" id="beach" value="beach" data-role="checkbox"></label>
+                                <label for="beach" class="checkbox-name"> Beaches <input type="checkbox" id="beach" value="beach" data-role="checkbox"></label>
                             </div>
 
                             <div class="checkbox-box">
@@ -225,8 +229,17 @@
             <div class="footer-menu">
                 <span class="active"><a href="index.html" style="color: #8CC3B7">Home</a></span>
                 <span class="active"><a href="myPlaces.html"style="color: #8CC3B7">myPlaces</a></span>
-                <span class="active"><a href="about.html"style="color: #8CC3B7">About us</a></span>
-                <span class="active"><a href="about.html"style="color: #8CC3B7">Contact</a></span>
+                <span class="active"><a href="about.html"style="color: #8CC3B7">About</a></span>
+            </div>
+            <div class="powered-by">
+                <div class="flickr">
+                    <img src="resources/images/Flickr_logo.png" alt="powered by flickr">
+                    <div>Powered by Flickr API</div>
+                </div>
+                <div class="google">
+                    <img src="resources/images/googlelogo.png" alt="powered by google">
+                    <div>Powered by Google API</div>
+                </div>
             </div>
 
         </div>
