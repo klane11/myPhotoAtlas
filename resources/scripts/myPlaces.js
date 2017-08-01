@@ -21,6 +21,7 @@ function displayMyPlaces() {
         var $place = $('<div></div>', {
         'class': 'place',
         'data-role': 'place',
+        'name': key,
         'id': id
         });
         appendImages(myPlaces[key]["images"], $place);
@@ -77,7 +78,7 @@ function addDeleteListener() {
         event.preventDefault();
         $element = $(event.target.parentNode);
         console.log($element);
-        deletePlace($element, $element[0]["id"]);
+        deletePlace($element, $element[0]["attributes"][2]['nodeValue']);
     })
 }
 
