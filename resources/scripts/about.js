@@ -12,7 +12,7 @@ function addAboutListeners() {
     clickHideMap();
     clickShowMap();
 }
-
+// allows document to load before functions are called
 $(document).ready(function() {
     hideAboutElements();
     addAboutListeners();

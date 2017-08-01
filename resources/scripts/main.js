@@ -320,9 +320,8 @@ function printIt(thing) {
 }
 
 // ******************************
-// *******HAMBURGER MENU*********
+// *******REACTIVE MENUS*********
 // ******************************
-
 function clickShowMap() {
     $SHOW_MAP.click(function () {
         $('[data-images-role="hide-map"]').show();
@@ -360,4 +359,5 @@ function clickExitButton() {
         $(".myAtlas-logo").show("slow");
         $MENU_CONTAINER.hide("slow");
     });
+
 }
