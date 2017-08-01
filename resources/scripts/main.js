@@ -181,10 +181,9 @@ function mapSetCenterPic(resp, picInfo) {
 
 // Takes latitude and longitude, obtains address
 function reverseGeoCode(latLon, picInfo) {
-    console.log(latLon);
     var errorReverseGeo = errorMessage("The location of this photo is not specified. Please click another photo.");
     var resp = $.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latLon["lat"] + "," + latLon["lng"] + "&key=" + GOOGLE_API_KEY);
-    console.log(resp);
+    
     resp
         .catch(function() {
             errorReverseGeo(error);
