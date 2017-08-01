@@ -121,7 +121,7 @@ main {
     background-size: cover;
     opacity: .3;
 }
-.gallery-heading {
+.gallery-heading h2{
     font-family: 'Rock Salt', cursive;
     margin: 0 auto;
     color: grey;
@@ -129,6 +129,7 @@ main {
 }
 .gallery-heading h2 {
     line-height: 40px;
+    
 }
 /*explain site section  */
 .explain-site-container {
@@ -182,7 +183,7 @@ main {
     margin-top: 20px;
 }
 .radius {
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 .main-container {
@@ -210,6 +211,7 @@ main {
     flex-direction: row;
     flex-wrap: wrap;
     max-width: 1024px;
+    margin-bottom: 50px;
 }
 .checkbox-name {
     padding: 20px;
@@ -242,14 +244,16 @@ main {
 /* modifies picture-container class(created by Sarah on the DOM), within picture-display div in HTML  */
 .picture-container {
     display: flex;
-    max-width: 1024px;
+    max-width: 1200px;
     margin: 0 auto;
+    margin-top: -50px;
     justify-content: center;
     flex-flow: wrap;
     align-items: center;
     padding: 10px;
     text-align: center;
     background-color: white;
+    border-top: 1px solid #023E58;
 }
 .picture-box {
     height: 250px;
