@@ -266,7 +266,7 @@ main {
 
 .iw-options {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .save, 
@@ -286,7 +286,20 @@ main {
 /*-------------------------------MEDIA QUERIES-------------------------------*/
 
 @media only screen and (min-width: 768px){
+
+    #places-map {
+        height: 350px;
+    }
+    .map-icons {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .space-behind-map {
+         height: 350px;
+    }
+
     /*top menu  */
+
     .menu-container span {
         margin-left: 10px;
     }

@@ -4,8 +4,8 @@ function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 13.485790, lng: 4.218750},
         // 40.0000, lng: -98.0000
-        zoom: 2,
-        minZoom: 2,
+        zoom: 3,
+        minZoom: 3,
         keyboardShortcuts: false,
         scrollwheel: false,
         gestureHandling: 'cooperative',
@@ -248,6 +248,8 @@ function initMap() {
 
 // Creates myPlaces map
 function initPlacesMap(myPlaces) {
+    console.log(myPlaces);
+
     var placesMap = new google.maps.Map(document.getElementById('places-map'), {
         center: {lat: 13.485790, lng: 4.218750},
         zoom: 2,
@@ -493,8 +495,8 @@ function initPlacesMap(myPlaces) {
 }
 
 function placeMarkers(placesMap, myPlaces) {
-    var markers = [];
     var infos = [];
+    var bounds = new google.maps.LatLngBounds();
     for (key in myPlaces) {
         var id = stringMaker(key);
         var URI = encodeURI(key);
@@ -509,8 +511,11 @@ function placeMarkers(placesMap, myPlaces) {
             icon: icon,
             animation: google.maps.Animation.DROP,
         })
-        markers.push(marker);
-        var content = '<div class="iw-container">' + '<h6>' + key + '</h6>' + '<div class="iw-options">' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' + '<a href=' + section + '>Show in myPlaces</a></div>' + '</div>';
+
+        bounds.extend(marker.position);
+
+        var content = '<div class="iw-container">' + '<h6>' + key + '</h6>' + '<div class="iw-options">' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a></div>' + '</div>';
+        // + '<a href=' + section + '>Show in myPlaces</a><
         
         var infoWindow = new google.maps.InfoWindow();
         
@@ -523,6 +528,7 @@ function placeMarkers(placesMap, myPlaces) {
             };
         })(marker, content, infoWindow));
     }
+    placesMap.fitBounds(bounds);
 }
 
 //closes all open infoWindows
@@ -533,3 +539,9 @@ function closeInfos(infos) {
         infos.length = 0;
     }
 }
+
+// Could set zoom if we want to 
+// var listener = google.maps.event.addListener(placesMap, "idle", function () {
+    //     placesMap.setZoom(2);
+    //     google.maps.event.removeListener(listener);
+    // });
