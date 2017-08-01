@@ -22,35 +22,49 @@
 <body>
     <!--header  -->
     <header>
-        <div class="header">
-            <!--top navigation  -->
-            <div class="navigation-container"> 
-                <div class="navigation-icons">
+        <banner class="banner">
+            <div class="navigation-left">
+                <div class="hamburger-menu-container">
                     <!--hamburger icon  -->
                     <button class="hamburger" data-image-role="hamburger" data-role="iconButton">
                         <img src="resources/images/hamburgermenu.png" alt="menu button">
                     </button>
                     <!--exit icon  -->
-                    <button class="icon exit" data-image-role="exit-container">
+                    <button class="exit" data-image-role="exit-container">
                         <img src="resources/images/exit.png" alt="exit out of menu">
                     </button>
-
+                    <!--open close map button  -->
                 </div>
-                <div class="logo">
-                    <a href="myPlaces.html"><img id="logo" src="resources/images/logo.png" alt="my photo atlas logo">
-                     </a>
+                <!--large menu  -->
+                <div class="large-menu-container">
+                    <span class="active"><a href="index.html">Home</a></span>
+                    <span class="active"><a href="myPlaces.html">myPlaces</a></span>
+                    <span class="active"><a href="about.html">About</a></span>
                 </div>
             </div>
-            <div class="menu-container" data-text-role="menu">
-            <ul class="menu-items">
+            <div class="navigation-right">
+                <div class="myAtlas-logo">
+                    <img src="resources/images/logo.png" alt="myPhotoAtlas logo">
+                </div>
+            </div>
+            
+        </banner>
+        <!--hidden menu  -->
+        <div class="menu-container" data-text-role="menu">
+           <ul class="menu-items">
                 <li class="active"><a href="index.html">Home</a></li>
                 <li class="active"><a href="search.html">Search</a></li>
                 <li class="active"><a href="myPlaces.html">myPlaces</a></li>
+                <li class="active"><a href="about.html">About</a></li>
             </ul>
         </div>
-        </div>
     </header>
+
+
+
         <!--carousel/jumbotron section-->
+
+
     <banner>
 
         <div class="carousel">

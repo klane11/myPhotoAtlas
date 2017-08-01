@@ -2,16 +2,14 @@
 body {
     font-family: 'Raleway', sans-serif;
 }
-.header {
-    height: 60px;
-    width: 100%;
-}
 
-.navigation {
+
+.banner-container {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
     align-items: center;
+    height: 60px;
 }
 .logo img {
     height: 40px;
@@ -22,32 +20,64 @@ body {
     background: none;
     border: none;
 }
-
-.hamburger img {
+.navigation-left,
+.navigation-right {
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+}
+.large-menu-container {
+    display: none;
+}
+.hamburger-menu-container {
+    display: flex;
+    align-items: center;
+}
+.hamburger,
+.exit {
+    background: none;
+    border: none;
+}
+.hamburger img,
+.map-icons img {
     height: 30px;
 }
 .exit img {
     height: 25px;
 }
-.menu-container li {
-    list-style: none;
-    margin-bottom: 20px;
-}
-.menu-container ul a {
-    color: black;
+
+.menu-items li {
+    padding-top: 30px;
 }
 
-.title {
-    font-size: 40px;
-    color: white;
-    font-weight: bold; 
+.menu-container li,
+.large-menu-container span,
+.menu-container span {
+    color: #2C6675;
+    margin-left: 10px;
+    list-style: none;
 }
+.menu-container a{
+    color: #023E58;
+}
+.menu-container {
+    display: unset;
+}
+.large-menu-container {
+    display: none;
+}
+.myAtlas-logo img {
+    margin-right: 20px;
+    height: 40px;
+}
+
 /*----------------------------------------------------------------------------*/
 
 
 
 /*----------------ALL "ABOUT" DIVS & STYLING ARE LOCATED BELOW----------------*/
 .container {
+    margin-top: 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -59,13 +89,12 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;   
-    /*border: 1px solid blue;*/
 }
 
 .dev-image img,
 .project-image img {
-    width: 250px;
-    height: 250px;
+    width: 150px;
+    height: 150px;
     border-radius: 100%;
 }
 
@@ -87,8 +116,12 @@ body {
 
 .line {
     border: 1px solid grey;
-    margin-top: 30px;
+    margin-top: 40px;
     margin-bottom: 30px;
+}
+
+h3 {
+    font-size: 1.5em;
 }
 
 p {
@@ -97,7 +130,10 @@ p {
     max-width: 400px;
     max-height: 200px;
     overflow-y: auto;
+    overflow:scroll;
+    font-size: .85em;
     /*border: 1px solid pink;*/
+
 }
 
 .social-media {
@@ -112,7 +148,7 @@ p {
 .social-media img {
     max-height: 25px;
     max-width: 25px;
-    margin-top: 15px;
+    margin-top: 5px;
     margin-left: 5px;
     /*border: 1px solid pink;*/
 }
@@ -165,6 +201,10 @@ p {
     top: 0;
     width: 100%;
 }
+
+.powered-by {
+    display: flex;
+}
 .powered-by img {
     height: 25px;
 }
@@ -186,10 +226,31 @@ p {
 /*-------------------------------MEDIA QUERIES-------------------------------*/
 
 /* small screens */
+
 @media only screen and (min-width: 600px) {
+    .menu-container span {
+        margin-left: 10px;
+    }
+    .hamburger-menu-container {
+        display: none;
+    }
+    .menu-container {
+        display: none;
+    }
+    .large-menu-container {
+        display: flex;
+    }
+    .large-menu-container a {
+        text-decoration: none;
+        color: #023E58;
+        margin-left: 30px;
+    }
+
+@media only screen and (min-width: 475px) {
+
     .about-project,
     .about-developers {
-        flex-wrap: none;  
+        flex-wrap: wrap;  
     }
 
     .vision,
@@ -198,22 +259,22 @@ p {
     .sarah, 
     .katie, 
     .steph {
-        width: 30%;     
+        width: 100%;     
     }
 
     .dev-image img,
     .project-image img {
-    width: 150px;
-    height: 150px;
-    border-radius: 100%;
+        width: 250px;
+        height: 250px;
+        border-radius: 100%;
     }
 
     h3 {
-        font-size: 1.5em;
+        font-size: 2em;
     }
 
     p {
-        font-size: .85em;
+        font-size: 1em;
     }
     .footer-container {
         justify-content: space-between;
@@ -223,7 +284,7 @@ p {
 
 
 /* medium screens */
-@media only screen and (min-width: 750px){
+@media only screen and (min-width: 775px){
     .about-project,
     .about-developers {
         flex-wrap: none;  

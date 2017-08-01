@@ -24,6 +24,8 @@ body {
     width: 100%;
 }
 
+
+/* fixed navigation bar under map  */
 .white-space {
     position: fixed;
     z-index: 100;
@@ -54,21 +56,23 @@ body {
     height: 20px;
     margin-left: 5px;
 }
+
 .menu-container span {
     color: #2C6675;
-    margin-left: 5px;
+    margin-left: 10px;
 }
 .menu-container a {
     text-decoration: none;
 }
-button {
-    margin: 0;
-    padding: 0;
-}
+
+.click-to-open,
+.click-to-close,
+.nav-right,
+.hamburger-menu-container,
+.menu-container,
 .navigation-left {
     display: flex;
     align-items: center;
-    margin-left: 5px;
 }
 .map-icons {
     margin-right: 5px;
@@ -77,19 +81,21 @@ button {
     display: flex;
     margin-left: 5px;
 }
-.click-to-open,
-.click-to-close,
-.nav-right {
-    display: flex;
-    align-items: center;
-}
-.logo img {
+.myAtlas-logo img {
     margin-right: 5px;
     height: 35px;
 }
-.logo-title {
+.large-menu-container {
     display: none;
 }
+
+.menu-container a,
+.large-menu-container a {
+    text-decoration: none;
+    color: #023E58;
+
+}
+
 /*retractable menu  */
 
 
@@ -114,7 +120,7 @@ main {
     background-size: cover;
     opacity: .3;
 }
-.gallery-heading {
+.gallery-heading h2{
     font-family: 'Rock Salt', cursive;
     margin: 0 auto;
     color: grey;
@@ -122,6 +128,7 @@ main {
 }
 .gallery-heading h2 {
     line-height: 40px;
+    
 }
 /*explain site section  */
 .explain-site-container {
@@ -175,7 +182,7 @@ main {
     margin-top: 20px;
 }
 .radius {
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 .main-container {
@@ -203,6 +210,7 @@ main {
     flex-direction: row;
     flex-wrap: wrap;
     max-width: 1024px;
+    margin-bottom: 50px;
 }
 .checkbox-name {
     padding: 20px;
@@ -235,14 +243,16 @@ main {
 /* modifies picture-container class(created by Sarah on the DOM), within picture-display div in HTML  */
 .picture-container {
     display: flex;
-    max-width: 1024px;
+    max-width: 1020px;
     margin: 0 auto;
+    margin-top: -50px;
     justify-content: center;
     flex-flow: wrap;
     align-items: center;
     padding: 10px;
     text-align: center;
     background-color: white;
+    border-top: 1px solid #023E58;
 }
 .picture-box {
     height: 250px;
@@ -323,6 +333,10 @@ main {
     top: 0;
     width: 100%;
 }
+.powered-by {
+    display: flex;
+    align-items: center;
+}
 .powered-by img {
     height: 25px;
 }
@@ -386,6 +400,17 @@ main {
 /*-------------------------------MEDIA QUERIES-------------------------------*/
 
 @media only screen and (min-width: 768px){
+    .hamburger-menu-container {
+        display: none;
+    }
+    .large-menu-container {
+        display: flex;
+    }
+    .large-menu-container a {
+        text-decoration: none;
+        color: #023E58;
+        margin-left: 30px;
+    }
     .gallery-heading h2 {
         line-height: 0px;
         font-size: 30px;
@@ -394,7 +419,7 @@ main {
         height: 375px;
     }
     .explain-site {
-        font-size: 20px;
+        font-size: 18px;
     }
     .search-box-container {
         max-width: 1024px;
@@ -426,7 +451,7 @@ main {
     .menu-container span {
         margin-left: 10px;
     }
-    .logo {
+    .myAtlas-logo {
         margin-right: 20px;
     }
 

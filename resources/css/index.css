@@ -2,56 +2,88 @@
 font-family: 'Rock Salt', cursive;
 font-family: 'Caveat', cursive; */
 
-body {
-    font-family: 'Caveat', cursive;
-}
+
+
+/* navbar */
 .header {
     width: 100%;
     font-family: 'Raleway', sans-serif;
 }
 
-.navigation-container {
-    height: 60px;
+.banner {
     display: flex;
     justify-content: space-between;
+    flex-direction: row;
     align-items: center;
-    align-content: center;
+    height: 60px;
 }
-button {
+.logo img {
+    height: 40px;
+    margin-right: 20px;
+}
+.hamburger,
+.exit {
     background: none;
     border: none;
 }
-.hamburger img {
+.navigation-left,
+.navigation-right {
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+}
+.large-menu-container {
+    display: none;
+}
+.hamburger-menu-container {
+    display: flex;
+    align-items: center;
+}
+.hamburger,
+.exit {
+    background: none;
+    border: none;
+}
+.hamburger img,
+.map-icons img {
     height: 30px;
-    margin-left: 20px;
 }
 .exit img {
     height: 25px;
-    margin-left: 20px;
 }
-.menu-container li {
+.menu-items li {
+    padding-bottom: 30px;
+}
+.menu-container li,
+.large-menu-container span,
+.menu-container span {
+    color: #2C6675;
+    margin-left: 10px;
     list-style: none;
-    margin-bottom: 20px;
 }
 .menu-container a {
-    color: black;
+    color: #023E58;
     text-decoration: none;
 }
-.logo img {
-    height: 50px;
-    margin-right: 20px;
+.menu-container {
+    display: unset;
 }
-#logo {
-    height: 50px;
+.large-menu-container {
+    display: none;
+}
+.myAtlas-logo img {
     margin-right: 20px;
+    height: 40px;
 }
 .banner-container {
-    height: 500px; 
+    height: 600px; 
     text-align: center;
     color: white;
     background-color: none;
 }
 
+
+/*jumbotron/carousel*/
 .jumbotron-title h1 {
     font-size: 75px;
     font-family: sans-serif;
@@ -63,7 +95,7 @@ button {
 .jumbotron-2,
 .jumbotron-3,
 .jumbotron-4 {
-    height: 500px; 
+    height: 600px; 
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -89,7 +121,7 @@ button {
 }
 
 .jumbotron-4 h1 {
-    font-size: 50px;
+    font-size: 60px;
     margin: 20px;
 }
 
@@ -98,9 +130,9 @@ button {
     color: grey;
     height: 40px;
     width: 100px;
-    font-size: 13px;
+    font-size: 50px;
     box-shadow: 2px 2px 2px grey;
-    margin-top: 50px;
+    margin-top: 30px;
     cursor: pointer;
 }
 
@@ -109,15 +141,13 @@ button {
 }
 .button-container button {
     height: 40px;
-    width: 100px;
-    font-size: 13px;
-    border: 1px solid grey;
+    width: 90px;
+    font-size: 50px;
 }
 
 
+/* footer  */
 
-/* ************************ */
-/*footer  */
 .footer-container {
     height: 100px;
     background: white;
@@ -137,6 +167,7 @@ button {
     display: flex;
     flex-direction: column;
     margin-right: 30px;
+    font-size: 13px;
 }
 .powered-by {
     display: flex;
@@ -150,6 +181,23 @@ button {
 @media only screen and (min-width: 768px){
     .banner-container {
         height: 600px;
+    }
+    .menu-container span {
+        margin-left: 10px;
+    }
+    .hamburger-menu-container {
+        display: none;
+    }
+    .menu-container {
+        display: none;
+    }
+    .large-menu-container {
+        display: flex;
+    }
+    .large-menu-container a {
+        text-decoration: none;
+        color: #023E58;
+        margin-left: 30px;
     }
     .title {
         font-size: 60px;
@@ -182,6 +230,8 @@ button {
     }
 }
 
+
+ /* large screens */
 @media only screen and (min-width: 992px){
     .jumbotron-title h1 {
         font-size: 150px;
