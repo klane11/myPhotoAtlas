@@ -228,6 +228,7 @@ function placePicMarker(latLon, resp, picInfo) {
         infoWindow.open(map, marker);
     });
     markers.push(marker);
+    marker.setMap(map);
     
     google.maps.event.addListener(infoWindow, 'domready', function() {
         if (document.querySelector('[data-role="save"]')) {
@@ -393,13 +394,16 @@ function addListeners() {
 
 // Calls all init functions
 function main() {
+    initMap();
     hideElements();
     addListeners();
     createMyPlaces();
     carouselControl();
 }
 
-main();
+window.onload = function() {
+    main();
+};
 
 
 

@@ -54,9 +54,10 @@ function appendImages(dictionary, appendTo) {
     }
 }
 
-function placeMarkers(myPlaces) {
+function placeMarkers(obj) {
     var markers = [];
-    for (key in myPlaces) {
+    console.log(obj);
+    for (key in obj) {
         var URI = encodeURI(key);
         var link = "https://maps.google.com?q=" + URI;
         var section = "#" + key;
@@ -64,8 +65,8 @@ function placeMarkers(myPlaces) {
         var icon = 'resources/images/markiethemarker.png';
 
         var marker = new google.maps.Marker({
-            position: myPlaces[key]["latLon"],
-            map: map,
+            position: obj[key]["latLon"],
+            map: map2,
             icon: icon,
             animation: google.maps.Animation.DROP,
         })
@@ -74,9 +75,10 @@ function placeMarkers(myPlaces) {
         });
         
         marker.addListener('click', function() {
-            infoWindow.open(map, marker);
+            infoWindow.open(map2, marker);
         });
         markers.push(marker);
+        marker.setMap(map2);
     }
 }
 
@@ -99,5 +101,8 @@ function addDeleteListener() {
     })
 }
 
-addDeleteListener();
-displayMyPlaces();
+window.onload = function() {
+    addDeleteListener();
+    displayMyPlaces();
+    initPlacesMap();
+}
