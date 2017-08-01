@@ -3,7 +3,9 @@ var $myPlacesDisplay = $('[data-role="myplaces-display"]');
 
 function stringMaker(string) {
     var arr = string.split(' ');
-    var key2 = 
+    var key2 = arr.join('');
+    var key2 = key2.replace(/,/g, '');
+    return key2;
 }
 // Takes myPlaces from local storage and prints information to screen
 function displayMyPlaces() {
@@ -19,7 +21,7 @@ function displayMyPlaces() {
         var $place = $('<div></div>', {
         'class': 'place',
         'data-role': 'place',
-        'id': key
+        'id': id
         });
         appendImages(myPlaces[key]["images"], $place);
         var $address = $('<span></span>', {

@@ -496,10 +496,10 @@ function placeMarkers(placesMap, myPlaces) {
     var markers = [];
     var infos = [];
     for (key in myPlaces) {
-        
+        var id = stringMaker(key);
         var URI = encodeURI(key);
         var link = "https://maps.google.com?q=" + URI;
-        var section = "#" + key;
+        var section = "#" + id;
         
         var icon = 'resources/images/markiethemarker.png';
 
