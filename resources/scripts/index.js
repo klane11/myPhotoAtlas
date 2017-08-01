@@ -13,14 +13,14 @@ function carouselControl() {
     });
 }
 
-function hidePlacesElements() {
+function hideIndexElements() {
     $SHOW_MAP.hide();
     $EXIT_ICON.hide();
     $MENU_CONTAINER.hide();
     $(".click-to-close").hide();
 }
 
-function addPlacesListeners() {
+function addIndexListeners() {
     clickMenuShow();
     clickExitButton();
     clickHideMap();
@@ -28,7 +28,7 @@ function addPlacesListeners() {
 }
 
 window.onload = function() {
-    hidePlacesElements();
-    addPlacesListeners();
+    hideIndexElements();
+    addIndexListeners();
     carouselControl();
 }

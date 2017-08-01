@@ -379,7 +379,6 @@ function main() {
     hideElements();
     addListeners();
     createMyPlaces();
-    carouselControl();
 }
 
 window.onload = function() {
