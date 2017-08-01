@@ -105,6 +105,6 @@
 <img src="" alt="">
 <img src="" alt="">
 <img src="" alt="">
-<img src="resources/images/about.png" alt="About Landing Page">
+<img src="resources/images/About.png" alt="About Landing Page">
 
        
