@@ -23,6 +23,7 @@ function main() {
     hideElements();
     addListeners();
     createMyPlaces();
+    google.maps.event.addDomListener(window, 'load', autocomplete);
 }
 
 $(document).ready(function() {

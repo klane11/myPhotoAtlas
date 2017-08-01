@@ -96,7 +96,6 @@ function chooseTags() {
 //gets radius user inputs
 function getRadius() {
     var $radiusChoosen = $('[data-input="radius"]');
-    console.log($radiusChoosen.val())
     if ($radiusChoosen.val() === "Radius"){
         $radiusChoosen = 20;
     } else {
@@ -237,7 +236,6 @@ function placePicMarker(latLon, resp, picInfo) {
                 this.textContent = '\u2713Saved to myPlaces';
                 this.setAttribute('data-role', 'saved');
                 this.setAttribute('class', 'saved');
-                console.log(this.getAttribute('data-role'));
                 addPlace(formatted_address, picInfo, latLon);
                 e.currentTarget.removeEventListener('click', handler);
             });
@@ -246,7 +244,6 @@ function placePicMarker(latLon, resp, picInfo) {
 }
 
 function addPlace(address, picInfo, latLon) {
-    console.log(picInfo);
     var myPlaces = JSON.parse(localStorage.getItem('myPlaces'));
     var id = picInfo["id"]
     if (myPlaces[address] === undefined) {
@@ -354,12 +351,10 @@ function clickExitButton() {
     });
 }
 
-
-
-
-
-
-
+function autocomplete() {
+    var input = document.getElementById('srch-term');
+    var autocomplete = new google.maps.places.Autocomplete(input);
+}
 
 
 
