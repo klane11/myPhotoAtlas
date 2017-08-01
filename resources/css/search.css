@@ -54,6 +54,9 @@ body {
     height: 20px;
     margin-left: 5px;
 }
+.hamburger-menu-container {
+    display: flex;
+}
 .menu-container span {
     color: #2C6675;
     margin-left: 5px;
@@ -83,13 +86,17 @@ button {
     display: flex;
     align-items: center;
 }
-.logo img {
+.myAtlas-logo img {
     margin-right: 5px;
     height: 35px;
+}
+.large-menu-container {
+    display: none;
 }
 .logo-title {
     display: none;
 }
+
 /*retractable menu  */
 
 
@@ -386,6 +393,17 @@ main {
 /*-------------------------------MEDIA QUERIES-------------------------------*/
 
 @media only screen and (min-width: 768px){
+    .hamburger-menu-container {
+        display: none;
+    }
+    .large-menu-container {
+        display: flex;
+    }
+    .large-menu-container a {
+        text-decoration: none;
+        color: #023E58;
+        margin-left: 30px;
+    }
     .gallery-heading h2 {
         line-height: 0px;
         font-size: 30px;
@@ -426,7 +444,7 @@ main {
     .menu-container span {
         margin-left: 10px;
     }
-    .logo {
+    .myAtlas-logo {
         margin-right: 20px;
     }
 
