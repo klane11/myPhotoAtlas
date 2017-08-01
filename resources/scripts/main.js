@@ -351,11 +351,6 @@ function clickExitButton() {
     });
 }
 
-function autocomplete() {
-    var input = document.getElementById('srch-term');
-    var autocomplete = new google.maps.places.Autocomplete(input);
-}
-
 
 
 

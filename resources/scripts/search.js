@@ -7,6 +7,12 @@ function hideElements() {
     $(".click-to-close").hide();
 }
 
+// Adds autocomplete from Google Places library
+function autocomplete() {
+    var input = document.getElementById('srch-term');
+    var autocomplete = new google.maps.places.Autocomplete(input);
+}
+
 // initializes all listeners
 function addListeners() {
     clickMenuShow();
@@ -15,6 +21,7 @@ function addListeners() {
     clickShowMap();
     addSearchListener();
     addPictureListener();
+    google.maps.event.addDomListener(window, 'load', autocomplete);
 }
 
 // Calls all init functions
@@ -23,7 +30,6 @@ function main() {
     hideElements();
     addListeners();
     createMyPlaces();
-    google.maps.event.addDomListener(window, 'load', autocomplete);
 }
 
 $(document).ready(function() {
