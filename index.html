@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home</title>
+    <title>myPhotoAtlas: Home</title>
     <!--favicon icon  -->
     <link rel="shortcut icon" href="resources/images/favicon.png" type="image/x-icon">
     <link rel="icon" href="resources/images/favicon.png" type="image/x-icon">
@@ -34,25 +34,20 @@
                     <button class="icon exit" data-image-role="exit-container">
                         <img src="resources/images/exit.png" alt="exit out of menu">
                     </button>
-                    <!--hidden menu  -->
-                    <div class="menu-container" data-text-role="menu">
-                        <span class="active"><a href="index.html">Home</a></span>
-                        <span class="active"><a href="myPlaces.html">myPlaces</a></span>
-                        <span class="active"><a href="about.html">About us</a></span>
-                        <span class="active"><a href="about.html">Contact</a></span>
-                    </div>
-                    <!--open close map button  -->
-                    <div class="large-menu-container">
-                        <span class="active"><a href="index.html">Home</a></span>
-                        <span class="active"><a href="search.html">Search</a></span>
-                        <span class="active"><a href="about.html">About</a></span>
-                        <span class="active"><a href="about.html">Contact</a></span>
-                    </div>
+
                 </div>
-                <div class="">
-                    <a href="myPlaces.html"><span class="logo-title" href="#">myAtlas</span></a>
+                <div class="logo">
+                    <a href="myPlaces.html"><img id="logo" src="resources/images/logo.png" alt="my photo atlas logo">
+                     </a>
                 </div>
             </div>
+            <div class="menu-container" data-text-role="menu">
+            <ul class="menu-items">
+                <li class="active"><a href="index.html">Home</a></li>
+                <li class="active"><a href="search.html">Search</a></li>
+                <li class="active"><a href="myPlaces.html">myPlaces</a></li>
+            </ul>
+        </div>
         </div>
     </header>
         <!--carousel/jumbotron section-->
@@ -65,7 +60,7 @@
                         <h1>Explore.</h1>
                     </div>
                     <div class="button-container">
-                        <a href="search.html"><button class="home-search-btn" href="#"><i class="glyphicon glyphicon-search"></i>Search</button></a>
+                        <a href="search.html"><button class="home-search-btn" href="#">Search</button></a>
                     </div>
                 </div>
             </div>
@@ -75,7 +70,8 @@
                         <h1>Discover.</h1>
                     </div>
                     <div class="button-container">
-                        <a href="search.html"><button class="home-search-btn" href="#"><i class="glyphicon glyphicon-search"></i>Search</button></a>
+                        <a href="search.html"><button class="home-search-btn" href="#"> Search</button></a>
+                        <!--redo search  -->
                     </div>
                 </div>
             </div>
@@ -86,7 +82,7 @@
                     </div>
 
                     <div class="button-container">
-                        <a href="search.html"><button class="home-search-btn" href="#"><i class="glyphicon glyphicon-search"></i>Search</button></a>
+                        <a href="search.html"><button class="home-search-btn" href="#">Search</button></a>
                     </div>
                 </div>
             </div>
@@ -96,7 +92,7 @@
                         <h1>Where will you go next?</h1>
                     </div>
                     <div class="button-container">
-                        <a href="search.html"><button class="home-search-btn" href="#"><i class="glyphicon glyphicon-search"></i>Search</button></a>
+                        <a href="search.html"><button class="home-search-btn" href="#">Search</button></a>
                     </div>
                 </div>
             </div>
@@ -112,13 +108,17 @@
     <!--footer/ logo / home, about etc  -->
     <footer>
         <div class="footer-container">
-            <div class="footer-menu">
-                <span class="active"><a href="index.html" style="color: #8CC3B7">Home</a></span>
-                <span class="active"><a href="myPlaces.html"style="color: #8CC3B7">myPlaces</a></span>
-                <span class="active"><a href="about.html"style="color: #8CC3B7">About us</a></span>
-                <span class="active"><a href="about.html"style="color: #8CC3B7">Contact</a></span>
+            
+            <div class="powered-by">
+                <div class="flickr">
+                    <img src="resources/images/Flickr_logo.png" alt="powered by flickr">
+                    <span>Powered by Flickr API</span>
+                </div>
+                <div class="google">
+                    <img src="resources/images/googlelogo.png" alt="powered by google">
+                    <span>Powered by Google API</span>
+                </div>
             </div>
-
         </div>
 
     </footer>
