@@ -286,6 +286,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .footer-menu {
@@ -322,6 +323,19 @@ main {
     top: 0;
     width: 100%;
 }
+.powered-by img {
+    height: 25px;
+}
+.flickr,
+.google {
+    color: #8CC3B7;
+    text-align: center;
+    margin-top: 20px;
+    margin-right: 20px;
+    font-size: 12px;
+}
+
+
 
 /*google maps pop up style  */
 .gm-style-iw {
@@ -436,9 +450,14 @@ main {
         border-left: 2px solid #023E58;
         border-right: 2px solid #023E58;
     }
-    .footer-container {
-        justify-content: flex-start;
+    .flickr,
+    .google {
+        text-align: left;
     }
+    .footer-container{
+        justify-content: space-between;
+    }
+
 }
 
 @media only screen and (min-width: 976px){

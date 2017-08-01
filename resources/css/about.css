@@ -1,4 +1,7 @@
 /*----------------------HEADER & HAMBURGER MENU BELOW------------------------*/
+body {
+    font-family: 'Raleway', sans-serif;
+}
 .header {
     height: 60px;
     width: 100%;
@@ -10,22 +13,26 @@
     flex-direction: row;
     align-items: center;
 }
-
+.logo img {
+    height: 40px;
+    margin-right: 20px;
+}
 .hamburger,
 .exit {
     background: none;
     border: none;
 }
 
-.hamburger img,
-.exit img {
+.hamburger img {
     height: 30px;
 }
-
-.menu-container ul {
-    list-style: none;
+.exit img {
+    height: 25px;
 }
-
+.menu-container li {
+    list-style: none;
+    margin-bottom: 20px;
+}
 .menu-container ul a {
     color: black;
 }
@@ -110,8 +117,64 @@ p {
     /*border: 1px solid pink;*/
 }
 
-.footer {
-    height: 60px;
+
+
+
+
+/*footer  */
+.footer-container {
+    height: 150px;
+    background: #023E58;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 50px;
+}
+.footer-menu {
+    display: flex;
+    margin-left: 10px;
+    font-size: 18px;
+}
+.footer-menu a {
+    text-decoration: none;
+}
+.footer-menu span {
+    padding: 20px;
+    cursor: pointer;
+    letter-spacing: 2px;
+}
+.footer-menu span:after,
+.footer-menu span:before {
+    border: 1px solid #023E58;
+    bottom: 0px;
+    content: " ";
+    display: block;
+    transition: all 280ms ease-in-out;
+    width: 0;
+}
+.footer-menu span:hover:after,
+.footer-menu span:hover:before {
+    border-color:#2C6675;
+    transition: width 350ms ease-in-out;
+    width: 100%;
+    
+}
+.footer-menu span:hover:before {
+    bottom: auto;
+    top: 0;
+    width: 100%;
+}
+.powered-by img {
+    height: 25px;
+}
+.flickr,
+.google {
+    color: #8CC3B7;
+    text-align: center;
+    margin-top: 20px;
+    margin-right: 20px;
+    font-size: 12px;
 }
 
 /*---------------------------------------------------------------------------*/
@@ -152,7 +215,9 @@ p {
     p {
         font-size: .85em;
     }
-  
+    .footer-container {
+        justify-content: space-between;
+    }
 }
 
 
