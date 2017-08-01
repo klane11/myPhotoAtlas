@@ -4,8 +4,8 @@ function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 13.485790, lng: 4.218750},
         // 40.0000, lng: -98.0000
-        zoom: 3,
-        minZoom: 3,
+        zoom: 2,
+        minZoom: 2,
         keyboardShortcuts: false,
         scrollwheel: false,
         gestureHandling: 'cooperative',
@@ -495,13 +495,12 @@ function initPlacesMap(myPlaces) {
 function placeMarkers(placesMap, myPlaces) {
     var markers = [];
     var infos = [];
-    console.log(myPlaces);
     for (key in myPlaces) {
-        console.log(key);
+        
         var URI = encodeURI(key);
         var link = "https://maps.google.com?q=" + URI;
-        var keyString = key.toString();
-        var section = "#" + keyString;
+        var section = "#" + key;
+        
         var icon = 'resources/images/markiethemarker.png';
 
         var marker = new google.maps.Marker({
@@ -511,13 +510,12 @@ function placeMarkers(placesMap, myPlaces) {
             animation: google.maps.Animation.DROP,
         })
         markers.push(marker);
-        var content = '<div class="iw-container">' + '<h6>' + key + '</h6>' + '<div class="iw-options">' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' +  + '<a href=' + section + 'Show in myPlaces</a></div>' + '</div>';
+        var content = '<div class="iw-container">' + '<h6>' + key + '</h6>' + '<div class="iw-options">' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' + '<a href=' + section + '>Show in myPlaces</a></div>' + '</div>';
         
         var infoWindow = new google.maps.InfoWindow();
         
         google.maps.event.addListener(marker, 'click', (function(marker, content, infoWindow) {
             return function () {
-                console.log("hi");
                 closeInfos(infos);
                 infoWindow.setContent(content);
                 infoWindow.open(placesMap, marker);
@@ -527,6 +525,7 @@ function placeMarkers(placesMap, myPlaces) {
     }
 }
 
+//closes all open infoWindows
 function closeInfos(infos) {
     if (infos.length > 0) {
         infos[0].set("marker", null);

@@ -1,5 +1,10 @@
 var $myPlacesDisplay = $('[data-role="myplaces-display"]');
 
+
+function stringMaker(string) {
+    var arr = string.split(' ');
+    var key2 = 
+}
 // Takes myPlaces from local storage and prints information to screen
 function displayMyPlaces() {
     var myPlaces = JSON.parse(localStorage.getItem('myPlaces'));
@@ -10,6 +15,7 @@ function displayMyPlaces() {
     initPlacesMap(myPlaces);
     
     for (var key in myPlaces) {
+        var id = stringMaker(key);
         var $place = $('<div></div>', {
         'class': 'place',
         'data-role': 'place',
@@ -88,8 +94,8 @@ function addPlacesListeners() {
     addDeleteListener();
 }
 
-window.onload = function() {
+$(document).ready(function() {
     hidePlacesElements();
     addPlacesListeners();
     displayMyPlaces();
-}
+});

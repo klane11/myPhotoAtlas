@@ -381,9 +381,9 @@ function main() {
     createMyPlaces();
 }
 
-window.onload = function() {
+$(document).ready(function() {
     main();
-};
+});
 
 
 

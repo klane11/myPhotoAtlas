@@ -12,7 +12,7 @@ function addAboutListeners() {
     clickShowMap();
 }
 
-window.onload = function() {
+$(document).ready(function() {
     hideAboutElements();
     addAboutListeners();
-}
+});

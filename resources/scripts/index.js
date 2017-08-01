@@ -27,8 +27,8 @@ function addIndexListeners() {
     clickShowMap();
 }
 
-window.onload = function() {
+$(document).ready(function() {
     hideIndexElements();
     addIndexListeners();
     carouselControl();
-}
+})
