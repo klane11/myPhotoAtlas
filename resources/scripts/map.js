@@ -489,17 +489,19 @@ function initPlacesMap(myPlaces) {
             }
             ]
     });
-    placeMarkers(myPlaces, placesMap);
+    placeMarkers(placesMap, myPlaces);
 }
 
-function placeMarkers(myPlaces, placesMap) {
+function placeMarkers(placesMap, myPlaces) {
     var markers = [];
+    var infos = [];
     console.log(myPlaces);
     for (key in myPlaces) {
+        console.log(key);
         var URI = encodeURI(key);
         var link = "https://maps.google.com?q=" + URI;
-        var section = "#" + key;
-        var content = '<div class="iw-container">' + '<h6>' + key + '</h6>' + '<div class="iw-options">' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' +  + '<a href=' + section + 'Show in myPlaces</a></div>' + '</div>';
+        var keyString = key.toString();
+        var section = "#" + keyString;
         var icon = 'resources/images/markiethemarker.png';
 
         var marker = new google.maps.Marker({
@@ -508,14 +510,27 @@ function placeMarkers(myPlaces, placesMap) {
             icon: icon,
             animation: google.maps.Animation.DROP,
         })
-        var infoWindow = new google.maps.InfoWindow({
-            content: content
-        });
-        
-        marker.addListener('click', function() {
-            infoWindow.open(placesMap, marker);
-        });
         markers.push(marker);
-        marker.setMap(placesMap);
+        var content = '<div class="iw-container">' + '<h6>' + key + '</h6>' + '<div class="iw-options">' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' +  + '<a href=' + section + 'Show in myPlaces</a></div>' + '</div>';
+        
+        var infoWindow = new google.maps.InfoWindow();
+        
+        google.maps.event.addListener(marker, 'click', (function(marker, content, infoWindow) {
+            return function () {
+                console.log("hi");
+                closeInfos(infos);
+                infoWindow.setContent(content);
+                infoWindow.open(placesMap, marker);
+                infos[0] = infoWindow;
+            };
+        })(marker, content, infoWindow));
+    }
+}
+
+function closeInfos(infos) {
+    if (infos.length > 0) {
+        infos[0].set("marker", null);
+        infos[0].close();
+        infos.length = 0;
     }
 }
