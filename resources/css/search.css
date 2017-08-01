@@ -112,13 +112,19 @@ main {
     width: 100%;
 }
 .space-behind-map {
-    height: 325px;
+    height: 315px;
     width: 100%;
-    background-image: url("../images/golden-clouds.jpg");
+    background-image: url("../images/sunrise.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    opacity: .3;
+    opacity: .4;
+}
+.pic-info {
+    position: relative;
+    top: 280px;
+    left: 20px;
+    font-weight: bolder;
 }
 .gallery-heading h2{
     font-family: 'Rock Salt', cursive;
@@ -130,6 +136,7 @@ main {
     line-height: 40px;
     
 }
+
 /*explain site section  */
 .explain-site-container {
     margin: 0 auto;
@@ -416,7 +423,7 @@ main {
         font-size: 30px;
     }
     .space-behind-map {
-        height: 375px;
+        height: 360px;
     }
     .explain-site {
         font-size: 18px;

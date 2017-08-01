@@ -5,8 +5,7 @@ font-family: 'Caveat', cursive; */
 
 
 /* navbar */
-.header {
-    width: 100%;
+body {
     font-family: 'Raleway', sans-serif;
 }
 
@@ -120,6 +119,7 @@ font-family: 'Caveat', cursive; */
     background-image: url("../images/galaxy.jpg");
 }
 
+.jumbotron-3 h1,
 .jumbotron-4 h1 {
     font-size: 60px;
     margin: 20px;
@@ -130,8 +130,8 @@ font-family: 'Caveat', cursive; */
     color: grey;
     height: 40px;
     width: 100px;
-    font-size: 50px;
-    box-shadow: 2px 2px 2px grey;
+    font-size: 15px;
+    box-shadow: -2px 2px 1px grey;
     margin-top: 30px;
     cursor: pointer;
 }
@@ -142,9 +142,13 @@ font-family: 'Caveat', cursive; */
 .button-container button {
     height: 40px;
     width: 90px;
-    font-size: 50px;
+    font-size: 15px;
 }
-
+.pic-info {
+    position: relative;
+    text-shadow: -2px 2px 1px black;
+    top: 100px;
+}
 
 /* footer  */
 
@@ -159,7 +163,7 @@ font-family: 'Caveat', cursive; */
 
 .flickr img,
 .google img {
-    height: 30px;
+    height: 35px;
 }
 
 .flickr,
@@ -179,8 +183,8 @@ font-family: 'Caveat', cursive; */
 
 /* Medium Screens */
 @media only screen and (min-width: 768px){
-    .banner-container {
-        height: 600px;
+    .home-search-btn {
+        font-size: 50px;
     }
     .menu-container span {
         margin-left: 10px;
@@ -193,6 +197,7 @@ font-family: 'Caveat', cursive; */
     }
     .large-menu-container {
         display: flex;
+        font-size: 20px;
     }
     .large-menu-container a {
         text-decoration: none;
@@ -202,19 +207,25 @@ font-family: 'Caveat', cursive; */
     .title {
         font-size: 60px;
     }
+    .banner-container {
+        height: 800px;
+    }
+    .pic-info {
+        top: 160px;
+    }
 
     .jumbotron-1,
     .jumbotron-2,
     .jumbotron-3,
     .jumbotron-4 {
-        height: 600px; 
+        height: 800px; 
     }
     .jumbotron-title h1 {
         font-size: 130px;
         text-shadow: -2px 2px 1px black;
         margin: 10px;
     }
-
+    .jumbotron-3 h1,
     .jumbotron-4 h1 {
         font-size: 100px;
     }
@@ -237,6 +248,7 @@ font-family: 'Caveat', cursive; */
         font-size: 150px;
         text-shadow: -2px 2px 1px black;
     }
+    .jumbotron-3 h1,
     .jumbotron-4 h1 {
         font-size: 130px;
     }

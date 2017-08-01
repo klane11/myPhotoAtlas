@@ -105,10 +105,16 @@ body {
 main {
     background-color: white;
 }
+.pic-info {
+    position: relative;
+    top: 280px;
+    left: 20px;
+    font-weight: bolder;
+}
 .space-behind-map {
-    height: 325px;
+    height: 315px;
     width: 100%;
-    background-image: url("../images/golden-clouds.jpg");
+    background-image: url("../images/sailboat1.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
