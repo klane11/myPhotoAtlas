@@ -81,6 +81,7 @@ function addDeleteListener() {
     })
 }
 
+
 function hidePlacesElements() {
     $SHOW_MAP.hide();
     $EXIT_ICON.hide();
@@ -96,6 +97,7 @@ function addPlacesListeners() {
     addDeleteListener();
 }
 
+// Initializes all functions needed for page after document loads
 $(document).ready(function() {
     hidePlacesElements();
     addPlacesListeners();

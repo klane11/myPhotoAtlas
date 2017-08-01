@@ -27,6 +27,7 @@ function addIndexListeners() {
     clickShowMap();
 }
 
+// Initializes all functions needed for page after document loads
 $(document).ready(function() {
     hideIndexElements();
     addIndexListeners();

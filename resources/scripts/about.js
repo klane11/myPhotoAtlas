@@ -1,3 +1,4 @@
+// Initializes all functions needed for page after document loads
 function hideAboutElements() {
     $SHOW_MAP.hide();
     $EXIT_ICON.hide();
