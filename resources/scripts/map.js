@@ -245,11 +245,13 @@ function initMap() {
     });
 }
 
-function initPlacesMap() {
+
+// Creates myPlaces map
+function initPlacesMap(myPlaces) {
     var placesMap = new google.maps.Map(document.getElementById('places-map'), {
         center: {lat: 13.485790, lng: 4.218750},
-        zoom: 3,
-        minZoom: 3,
+        zoom: 2,
+        minZoom: 2,
         keyboardShortcuts: false,
         scrollwheel: false,
         gestureHandling: 'cooperative',
@@ -487,4 +489,33 @@ function initPlacesMap() {
             }
             ]
     });
+    placeMarkers(myPlaces, placesMap);
+}
+
+function placeMarkers(myPlaces, placesMap) {
+    var markers = [];
+    console.log(myPlaces);
+    for (key in myPlaces) {
+        var URI = encodeURI(key);
+        var link = "https://maps.google.com?q=" + URI;
+        var section = "#" + key;
+        var content = '<div class="iw-container">' + '<h6>' + key + '</h6>' + '<div class="iw-options">' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' +  + '<a href=' + section + 'Show in myPlaces</a></div>' + '</div>';
+        var icon = 'resources/images/markiethemarker.png';
+
+        var marker = new google.maps.Marker({
+            position: myPlaces[key]["latLon"],
+            map: placesMap,
+            icon: icon,
+            animation: google.maps.Animation.DROP,
+        })
+        var infoWindow = new google.maps.InfoWindow({
+            content: content
+        });
+        
+        marker.addListener('click', function() {
+            infoWindow.open(placesMap, marker);
+        });
+        markers.push(marker);
+        marker.setMap(placesMap);
+    }
 }

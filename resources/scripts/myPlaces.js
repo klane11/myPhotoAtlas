@@ -7,8 +7,8 @@ function displayMyPlaces() {
         'class': 'places-container',
         'data-role': 'places-container'
     })
-
-    // placeMarkers(myPlaces);
+    initPlacesMap(myPlaces);
+    
     for (var key in myPlaces) {
         var $place = $('<div></div>', {
         'class': 'place',
@@ -54,34 +54,6 @@ function appendImages(dictionary, appendTo) {
     }
 }
 
-function placeMarkers(obj) {
-    var markers = [];
-    console.log(obj);
-    for (key in obj) {
-        var URI = encodeURI(key);
-        var link = "https://maps.google.com?q=" + URI;
-        var section = "#" + key;
-        var content = '<div class="iw-container">' + '<h6>' + key + '</h6>' + '<div class="iw-options">' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' +  + '<a href=' + section + 'Show in myPlaces</a></div>' + '</div>';
-        var icon = 'resources/images/markiethemarker.png';
-
-        var marker = new google.maps.Marker({
-            position: obj[key]["latLon"],
-            map: map2,
-            icon: icon,
-            animation: google.maps.Animation.DROP,
-        })
-        var infoWindow = new google.maps.InfoWindow({
-            content: content
-        });
-        
-        marker.addListener('click', function() {
-            infoWindow.open(map2, marker);
-        });
-        markers.push(marker);
-        marker.setMap(map2);
-    }
-}
-
 // Deletes clicked element from DOM and localStorage
 function deletePlace(element, key) {
     console.log(key);
@@ -120,5 +92,4 @@ window.onload = function() {
     hidePlacesElements();
     addPlacesListeners();
     displayMyPlaces();
-    initPlacesMap();
 }
