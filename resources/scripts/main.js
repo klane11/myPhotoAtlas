@@ -182,7 +182,6 @@ function mapSetCenterPic(resp, picInfo) {
 // Takes latitude and longitude, obtains address
 function reverseGeoCode(latLon, picInfo) {
     console.log(latLon);
-    console.log("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latLon["lat"] + "," + latLon["lng"] + "&key=" + GOOGLE_API_KEY);
     var errorReverseGeo = errorMessage("The location of this photo is not specified. Please click another photo.");
     var resp = $.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latLon["lat"] + "," + latLon["lng"] + "&key=" + GOOGLE_API_KEY);
     console.log(resp);
@@ -209,15 +208,23 @@ function checkMyPlaces(address, picInfo) {
     }
 }
 
+// If no address data found, returns latitude and longitude formatted for GoogleMaps search query
+function searchCheck(address, latLon) {
+    if (address === "No address data found for this picture.") {
+        return encodeURI(latLon["lat"] + "," + latLon["lng"]);
+    } else {
+        return encodeURI(address);
+    }
+}
+
 var markers = [];
 // Removes all markers from map and places new one when pic clicked
 function placePicMarker(latLon, resp, picInfo) {
     markers.forEach(function(marker) {
         marker.setMap(null);
     });
-
     var formatted_address = checkAddress(resp);
-    var URI = encodeURI(formatted_address);
+    var URI = searchCheck(formatted_address, latLon);
     var link = "https://maps.google.com?q=" + URI;
     var save = checkMyPlaces(formatted_address, picInfo);
     var content = '<div class="iw-container">' + '<h6>' + formatted_address + '</h6>' + '<div class="iw-options">' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' + save + '</div>' + '</div>';
@@ -281,12 +288,16 @@ function createMyPlaces() {
 
 // Check to see if address exists in reverseGeoCode response
 function checkAddress(resp) {
-    
-    var add = resp["results"][0]["formatted_address"];
-    if (add !== undefined) {
-        return add;
+    var results = resp["results"];
+    if (results.length > 0) { 
+        var add = results[0]["formatted_address"];
+        if (add !== undefined) {
+            return add;
+        } else {
+            return "No address data found for this picture.";
+        }
     } else {
-        return "No address data found for this picture."
+       return "No address data found for this picture.";
     }
 }
 
@@ -310,6 +321,9 @@ function addSearchListener() {
 function addPictureListener() {
     $pictureDisplay.on('click', 'img', function(event) {
         event.preventDefault();
+         if ($errorDisplay.children()) {
+            $errorDisplay.empty();
+        }
         getPicGeo($(event.target));
     });
 }

@@ -495,9 +495,11 @@ function initPlacesMap(myPlaces) {
 }
 
 function placeMarkers(placesMap, myPlaces) {
+    
     var infos = [];
     var bounds = new google.maps.LatLngBounds();
     for (key in myPlaces) {
+        printIt(myPlaces[key]["latLon"]);
         var id = stringMaker(key);
         var URI = encodeURI(key);
         var link = "https://maps.google.com?q=" + URI;
