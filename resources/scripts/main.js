@@ -381,10 +381,6 @@ function main() {
     createMyPlaces();
 }
 
-$(document).ready(function() {
-    main();
-});
-
 
 
 
