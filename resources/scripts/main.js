@@ -339,7 +339,7 @@ function clickMenuShow() {
     $HAMBURGER.click(function () {
         $EXIT_ICON.show();
         $(this).hide();
-        // $(".map-container").css("left", "170px");
+        $(".map-control").hide("slow");
         $MENU_CONTAINER.show("slow");
     });
 }
@@ -348,7 +348,7 @@ function clickExitButton() {
     $EXIT_ICON.click(function () {
         $HAMBURGER.show();
         $(this).hide();
-        // $(".map-container").css("left", "0");
+        $(".map-control").show("slow");
         $MENU_CONTAINER.hide("slow");
     });
 }

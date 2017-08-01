@@ -162,24 +162,45 @@ main {
 .footer-container {
     height: 250px;
     background: #023E58;
-    border-top: 2px solid black;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    align-content: center;
     justify-content: center;
 }
+
 .footer-menu {
+    display: flex;
+    margin-left: 10px;
+    font-size: 18px;
+}
+.footer-menu a {
+    text-decoration: none;
 }
 .footer-menu span {
-    margin-left: 10px;
-    font-size: 20px;
+    padding: 20px;
+    cursor: pointer;
+    letter-spacing: 2px;
 }
-.logo-image img {
-    height: 45px;
-    margin-top: 20px;
+.footer-menu span:after,
+.footer-menu span:before {
+    border: 1px solid #023E58;
+    bottom: 0px;
+    content: " ";
+    display: block;
+    transition: all 280ms ease-in-out;
+    width: 0;
 }
-
+.footer-menu span:hover:after,
+.footer-menu span:hover:before {
+    border-color:#2C6675;
+    transition: width 350ms ease-in-out;
+    width: 100%;
+    
+}
+.footer-menu span:hover:before {
+    bottom: auto;
+    top: 0;
+    width: 100%;
+}
 
 /*google maps pop up style  */
 .gm-style-iw {
@@ -233,9 +254,6 @@ main {
     .menu-container span {
         margin-left: 10px;
     }
-    .logo {
-        margin-right: 20px;
-    }
     .hamburger img,
     .exit img{
         display: none;
@@ -243,16 +261,16 @@ main {
     .large-menu-container {
         display: unset;
     }
+    .footer-container {
+        justify-content: flex-start;
+    }
+    .footer-menu {
+        margin-left: 20px;
+    }
 
 }
 
 @media only screen and (min-width: 976px){
-    #map {
-        height: 400px;
-        width: 100%;
-    }
-    .space-behind-map {
-         height: 400px;
-    }
+
 }
 
