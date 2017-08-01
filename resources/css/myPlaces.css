@@ -18,7 +18,7 @@ body {
     left: 0;
 }
 
-#map {
+#places-map {
 	height: 300px;
     box-shadow: 0px 0px 10px #2C6675;
     width: 100%;
@@ -130,6 +130,15 @@ main {
 .explain-site-container {
     margin-bottom: 40px;
 }
+.places-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: wrap;
+    align-content: center;
+    justify-content: center;
+    margin-bottom: 50px;
+}
 .place {
     border: 1px solid #2C6675;
     box-shadow: 5px 5px 10px #2C6675;
@@ -137,18 +146,18 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-align: center;
 }
 .place span {
-    max-width: 400px;
-    margin-bottom: 10px;
+    width: 320px;
+    margin: 10px;
 }
 .place a {
     margin-bottom: 10px;
 }
 .place img {
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin: 20px;
     max-height: 300px;
     max-width: 300px;
     cursor: pointer;
@@ -158,8 +167,9 @@ main {
     transition: all .75s;
     display: flex;
     align-content: center;
-    align-items: center;
     justify-content: center;
+    flex-direction: row;
+    overflow: scroll;
 }
 
 .back-to-top img{
@@ -221,7 +231,9 @@ main {
     top: 0;
     width: 100%;
 }
-
+.powered-by {
+    display: flex;
+}
 .powered-by img {
     height: 25px;
 }
@@ -274,7 +286,7 @@ main {
 /*-------------------------------MEDIA QUERIES-------------------------------*/
 
 @media only screen and (min-width: 768px){
-    #map {
+    #places-map {
         height: 350px;
     }
     .map-icons {
@@ -297,6 +309,10 @@ main {
         text-decoration: none;
         color: #023E58;
         margin-left: 30px;
+    }
+    .place {
+        margin-right: 35px;
+        margin-left: 35px;
     }
     .footer-container {
         justify-content: space-between;

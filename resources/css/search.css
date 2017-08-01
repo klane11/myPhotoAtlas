@@ -244,7 +244,7 @@ main {
 /* modifies picture-container class(created by Sarah on the DOM), within picture-display div in HTML  */
 .picture-container {
     display: flex;
-    max-width: 1200px;
+    max-width: 1020px;
     margin: 0 auto;
     margin-top: -50px;
     justify-content: center;

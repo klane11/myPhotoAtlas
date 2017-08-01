@@ -165,6 +165,10 @@ p {
     top: 0;
     width: 100%;
 }
+
+.powered-by {
+    display: flex;
+}
 .powered-by img {
     height: 25px;
 }

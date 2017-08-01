@@ -46,7 +46,7 @@ button {
     margin-right: 20px;
 }
 .banner-container {
-    height: 500px; 
+    height: 600px; 
     text-align: center;
     color: white;
     background-color: none;
@@ -63,7 +63,7 @@ button {
 .jumbotron-2,
 .jumbotron-3,
 .jumbotron-4 {
-    height: 500px; 
+    height: 600px; 
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -89,7 +89,7 @@ button {
 }
 
 .jumbotron-4 h1 {
-    font-size: 50px;
+    font-size: 60px;
     margin: 20px;
 }
 
@@ -100,7 +100,7 @@ button {
     width: 100px;
     font-size: 13px;
     box-shadow: 2px 2px 2px grey;
-    margin-top: 50px;
+    margin-top: 40px;
     cursor: pointer;
 }
 
