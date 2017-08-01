@@ -23,33 +23,36 @@
 <body>
     <!--header  -->
     <header>
-        <div class="header">
-            <!--top navigation  -->
-            <nav "navbar navbar-default">
-                <div class="navigation">
-                    <div class="hamburger-menu-icon">
-                        <!--hamburger icon  -->
-                        <button class="hamburger" data-image-role="hamburger" data-role="iconButton">
-                            <img src="resources/images/hamburgermenu.png" alt="menu button">
-                        </button>
-                        <!--exit icon  -->
-                        <button class="icon exit" data-image-role="exit-container">
-                            <img src="resources/images/exit.png" alt="exit out of menu">
-                        </button>
-                    </div>
-
-                    <div class="logo">
-                        <div class="logo">
-                            <a href="myPlaces.html"><img id="logo" src="resources/images/logo.png" alt="my photo atlas logo">
-                            </a>
-                        </div>
-                    </div>
+        <banner class="banner-container">
+            <div class="navigation-left">
+                <div class="hamburger-menu-container">
+                    <!--hamburger icon  -->
+                    <button class="hamburger" data-image-role="hamburger" data-role="iconButton">
+                        <img src="resources/images/hamburgermenu.png" alt="menu button">
+                    </button>
+                    <!--exit icon  -->
+                    <button class="exit" data-image-role="exit-container">
+                        <img src="resources/images/exit.png" alt="exit out of menu">
+                    </button>
+                    <!--open close map button  -->
                 </div>
-            </nav>
-        </div>
-        <!-- menu for hamburger menu -->
-        <div class="menu-container " data-text-role="menu">
-            <ul class="">
+                <!--large menu  -->
+                <div class="large-menu-container">
+                    <span class="active"><a href="index.html">Home</a></span>
+                    <span class="active"><a href="search.html">Search</a></span>
+                    <span class="active"><a href="myPlaces.html">myPlaces</a></span>
+                </div>
+            </div>
+            <div class="navigation-right">
+                <div class="myAtlas-logo">
+                    <img src="resources/images/logo.png" alt="myPhotoAtlas logo">
+                </div>
+            </div>
+
+        </banner>
+        <!--hidden menu  -->
+        <div class="menu-container" data-text-role="menu">
+           <ul class="menu-items">
                 <li class="active"><a href="index.html">Home</a></li>
                 <li class="active"><a href="search.html">Search</a></li>
                 <li class="active"><a href="myPlaces.html">myPlaces</a></li>
@@ -60,8 +63,11 @@
 
 <!--about sections are all in one parent container-->
 
-<!--about project section-->
+
+    <main>
         <div class='container'>
+
+            <!--about project section-->
             <div class="project-container">
                 <div class="about-project">
                     <div class="vision">
@@ -77,20 +83,21 @@
                     <div class="tools">
                         <h3>Our Tools</h3>
                         <div class="project-image"><img src="resources/images/tools2.png" alt="tools"></div>
-                        <p>To achieve the style and functionality that we were looking for, we used the following tools and languages: HTML, CSS/Flexbox, Bootstrap, JavaScript, jQuery, APIs(Google, Flickr), Ajax(local storage), and Trello.</p>
-                        <p>Our styling primarely came from Flexbox within CSS. Bootstrap complemented the CSS in creating button functionality and enhancing the user experience.</p>
-                        <p>JavaScript, jQuery and Ajax took our layout and created a fluid user experience and intuitive interaction. In addition, these programs work behind the scenes gathering data from Google Maps API and Flickrs API, while keeping track of myPlaces and much more. These APIs truly helped take our vision and create our product.</p>
-                        <p>Finally, Trello helped manage our project backlog, and track progress. It kept us focused on our goals and on the right path towards a finished product.</p>
+                        <p>To achieve the style and functionality that we were looking for, we used the following tools and languages: HTML, CSS/Flexbox, Bootstrap, JavaScript, jQuery, APIs(Google, Flickr), Ajax(local storage), and Trello. 
+                        <br />
+                        Our styling primarely came from Flexbox within CSS. Bootstrap complemented the CSS in creating button functionality and enhancing the user experience.
+                        <br />
+                        JavaScript, jQuery and Ajax took our layout and created a fluid user experience and intuitive interaction. In addition, these programs work behind the scenes gathering data from Google Maps API and Flickrs API, while keeping track of myPlaces and much more. These APIs truly helped take our vision and create our product.
+                        <br />
+                        Finally, Trello helped manage our project backlog, and track progress. It kept us focused on our goals and on the right path towards a finished product.</p>
                     </div>
                 </div>
             </div>
 
 
-            <!--about developers section-->
-
             <div class="line"></div>
 
-<!--about developers section-->
+            <!--about developers section-->
 
             <div class="dev-container">
                 <div class="about-developers">
@@ -127,7 +134,9 @@
                 </div>
             </div>
         </div>
+    </main>
 
+    <!--footer  -->
     <footer>
         <div class="footer-container">
             <div class="footer-menu">
