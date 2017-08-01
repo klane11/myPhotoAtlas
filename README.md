@@ -100,11 +100,16 @@
 
 </br>
 
-<h2><u>Screenshots:</u></h2>
-<img src="" alt="">
-<img src="" alt="">
-<img src="" alt="">
-<img src="" alt="">
-<img src="resources/images/About.png" alt="About Landing Page">
+
+<h2>Screenshots:</h2>
+<img src="resources/images/landingpage.png" alt="Landing Page with star filled night">
+<h4>Highlights the landing page of myPhotoAtlas</h4>
+<img src="resources/images/searchresult.png" alt="displaying search result of NYC and pictures">
+<h4>Photo result after Searching New York City</h4>
+<img src="resources/images/myPages.png" alt="myPages screenshot">
+<h4>Displays how myPages is layed out</h4>
+<img src="resources/images/about.png" alt="About Landing Page">
+<h4>Showcases our About section and our group went about myPhotoAtlas</h4>
+
 
        
