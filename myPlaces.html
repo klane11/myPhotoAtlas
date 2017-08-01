@@ -24,25 +24,26 @@
             <div class="map">
                 <!--whole map  -->
                 <div class="map-banner-container">
-                    <div data-role="places-map" class="places-map" id="places-map"></div>
+                    <div data-role="main-map" class="main-map" id="map"></div>
                 </div>
                 <!--space behind fixed map / fixed to bottom of map  -->
                 <div class="white-space">
                     <div class="navigation-icons">
+                        <div class="hamburger-menu-container">  
                         <!--hamburger icon  -->
-                        <button class="hamburger" data-image-role="hamburger" data-role="iconButton">
-                            <img src="resources/images/hamburgermenu.png" alt="menu button">
-                        </button>
-                        <!--exit icon  -->
-                        <button class="icon exit" data-image-role="exit-container">
-                            <img src="resources/images/exit.png" alt="exit out of menu">
-                        </button>
-                        <!--hidden menu  -->
-                        <div class="menu-container" data-text-role="menu">
-                            <span class="active"><a href="index.html">Home</a></span>
-                            <span class="active"><a href="search.html">Search</a></span>
-                            <span class="active"><a href="about.html">About</a></span>
-                            <span class="active"><a href="about.html">Contact</a></span>
+                            <button class="hamburger" data-image-role="hamburger" data-role="iconButton">
+                                <img src="resources/images/hamburgermenu.png" alt="menu button">
+                            </button>
+                            <!--exit icon  -->
+                            <button class="icon exit" data-image-role="exit-container">
+                                <img src="resources/images/exit.png" alt="exit out of menu">
+                            </button>
+                            <!--hidden menu  -->
+                            <div class="menu-container" data-text-role="menu">
+                                <span class="active"><a href="index.html">Home</a></span>
+                                <span class="active"><a href="search.html">Search</a></span>
+                                <span class="active"><a href="about.html">About</a></span>
+                            </div>
                         </div>
                         <!--large menu  -->
                         <div class="large-menu-container">
@@ -54,24 +55,29 @@
                     </div>
                     
                     <!--logo  -->
-                    <div class="logo">
-                        <div class="click-to-open">
-                            <span>Hide Map</span>
-                        </div>
-                        <div class="click-to-close">
-                            <span>Show Map</span>
-                        </div>
-                        <div class="open-close-map">
-                            <div class="map-icons">
-                                <button class="show-map" data-images-role="show-map">
-                                    <img src="resources/images/showcircleicon.png" alt="show map icon">
-                                </button>
-                                <button class="hide-map" data-images-role="hide-map">
-                                    <img src="resources/images/hidecircleicon.png" alt="hide map icon">
-                                </button>
+                    <div class="navigation-left">
+                        <!--open close map button  -->
+                        <div class="map-control">  
+                             <div class="click-to-open">
+                                <span>Hide Map</span>
                             </div>
-                        </div class="myAtlas-logo">
-                            <span class="logo-title" href="#">myPhotoAtlas</span>
+                            <div class="click-to-close">
+                                <span>Show Map</span>
+                            </div>
+                            <div class="open-close-map">
+                                <div class="map-icons">
+                                    <button class="show-map" data-images-role="show-map">
+                                        <img src="resources/images/showcircleicon.png" alt="show map icon">
+                                    </button>
+                                    <button class="hide-map" data-images-role="hide-map">
+                                        <img src="resources/images/hidecircleicon.png" alt="hide map icon">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="myAtlas-logo">
+                            <img src="resources/images/logo.png" alt="myPhotoAtlas logo">
                         </div>
                     </div>
                 </div>
@@ -95,6 +101,7 @@
 
             <div class="gallery-heading">
                 <h2>Explore the world around you</h2>
+                <p>Discover a new favorite place through the search section.</p>
             </div>
 
             <div class="explain-myplaces">
@@ -144,12 +151,12 @@
         crossorigin="anonymous">
     </script>
     <!--  Google Maps API-->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8UFO6YBOxOpaAG0Q6BUg4iqd_9214ZWY"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8UFO6YBOxOpaAG0Q6BUg4iqd_9214ZWY&callback=initMap"
+    async defer></script>
     <!--our JS file  -->
-    <script src="resources/scripts/map.js" charset="utf-8"></script>
     <script src="resources/scripts/main.js" charset="utf-8"></script>
     <script src="resources/scripts/myPlaces.js" charset="utf-8"></script>
-
+    <script src="resources/scripts/map.js" charset="utf-8"></script>
 </body>
 
 
