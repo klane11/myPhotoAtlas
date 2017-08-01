@@ -340,7 +340,7 @@ function clickMenuShow() {
     $HAMBURGER.click(function () {
         $EXIT_ICON.show();
         $(this).hide();
-        $(".map-control").hide("slow");
+        $(".myAtlas-logo").hide("slow");
         $MENU_CONTAINER.show("slow");
     });
 }
@@ -349,7 +349,7 @@ function clickExitButton() {
     $EXIT_ICON.click(function () {
         $HAMBURGER.show();
         $(this).hide();
-        $(".map-control").show("slow");
+        $(".myAtlas-logo").show("slow");
         $MENU_CONTAINER.hide("slow");
     });
 }
