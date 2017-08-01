@@ -510,7 +510,8 @@ function placeMarkers(placesMap, myPlaces) {
             animation: google.maps.Animation.DROP,
         })
         markers.push(marker);
-        var content = '<div class="iw-container">' + '<h6>' + key + '</h6>' + '<div class="iw-options">' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' + '<a href=' + section + '>Show in myPlaces</a></div>' + '</div>';
+        var content = '<div class="iw-container">' + '<h6>' + key + '</h6>' + '<div class="iw-options">' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a></div>' + '</div>';
+        // + '<a href=' + section + '>Show in myPlaces</a><
         
         var infoWindow = new google.maps.InfoWindow();
         

@@ -70,6 +70,8 @@ function deletePlace(element, key) {
     delete myPlaces[key];
     localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
     element.remove();
+    var myPlaces = JSON.parse(localStorage.getItem('myPlaces'));
+    initPlacesMap(myPlaces);
 }
 
 // Adds listener to "delete" link
