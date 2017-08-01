@@ -354,25 +354,6 @@ function clickExitButton() {
     });
 }
 
-// ******************************
-// *****INDEX.HTML CAROUSEL******
-// ******************************
-
-//Carousel control; rotates through jumbotron images
-function carouselControl() {
-    $(document).ready(function(){
-        $('.carousel').slick({
-        autoplay: true,
-        mobileFirst: true,
-        autoplaySpeed: 5000,
-        arrows: false,
-        pauseOnFocus: false,
-        pauseOnHover: false,
-        swipeToSlide: true,
-        }); 
-    });
-}
-
 
 // starts off DOM with exit and menu-container hidden until clicked
 function hideElements() {

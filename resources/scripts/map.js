@@ -246,7 +246,7 @@ function initMap() {
 }
 
 function initPlacesMap() {
-    var placesMap = new google.maps.Map(document.getElementById('placesmap'), {
+    var placesMap = new google.maps.Map(document.getElementById('places-map'), {
         center: {lat: 13.485790, lng: 4.218750},
         zoom: 3,
         minZoom: 3,

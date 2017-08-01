@@ -101,8 +101,24 @@ function addDeleteListener() {
     })
 }
 
-window.onload = function() {
+function hidePlacesElements() {
+    $SHOW_MAP.hide();
+    $EXIT_ICON.hide();
+    $MENU_CONTAINER.hide();
+    $(".click-to-close").hide();
+}
+
+function addPlacesListeners() {
+    clickMenuShow();
+    clickExitButton();
+    clickHideMap();
+    clickShowMap();
     addDeleteListener();
+}
+
+window.onload = function() {
+    hidePlacesElements();
+    addPlacesListeners();
     displayMyPlaces();
     initPlacesMap();
 }
