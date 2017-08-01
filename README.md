@@ -79,9 +79,6 @@ myPhotoAtlas allows users to search and save photos and locations around the wor
 <img src="" alt="">
 <img src="" alt="">
 <img src="" alt="">
-<img src="" alt="">
-<img src="" alt="">
-<img src="" alt="">
-<img src="" alt="">
+<img src="resources/images/about.png" alt="About Landing Page">
 
        
