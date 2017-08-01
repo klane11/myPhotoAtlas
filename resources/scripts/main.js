@@ -11,7 +11,7 @@ var $HAMBURGER = $('[data-image-role="hamburger"]');
 var $ICON_BUTTON = $('[data-role="iconButtonpwd"]');
 var $HIDE_MAP = $('[data-images-role="hide-map"]');
 var $SHOW_MAP = $('[data-images-role="show-map"]');
-var $errorDisplay = $('[data-role="error-display"]')
+var $errorDisplay = $('[data-role="error-display"]');
 
 // Uses Google API to get latitude and longitude from searched value, sends to photoSearch function to find pictures pased on coordinates
 // 1.2
@@ -37,7 +37,7 @@ function errorMessage(message) {
 
 // 1.3.1
 // Searches Flickr API for images based on latitude and longitude from Google Search, sends pictues to createPicture function
-function photoSearch(resp) {
+function photoSearch(latLon) {
 
     // gets radius, units and tags
     var radius = getRadius();
@@ -48,7 +48,7 @@ function photoSearch(resp) {
     var errorPics = errorMessage('No pictures were found for this location, radius, and tags, please try your search again.');
 
     // Adds in tags. Tags are essential in the search process,as well as radius units. These aspects will be changed later to get respnoses from the user
-    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + resp["results"][0]["geometry"]["location"]["lat"] + "&lon=" + resp["results"][0]["geometry"]["location"]["lng"]+ "&tags=" + tags + "&tag_mode=any&radius=" + radius + "&radius_units=" + units + "&format=json&nojsoncallback=1");
+    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + latLon["lat"] + "&lon=" + latLon["lng"]+ "&tags=" + tags + "&tag_mode=any&radius=" + radius + "&radius_units=" + units + "&format=json&nojsoncallback=1");
    
     resp
         .catch(errorPics)
@@ -62,7 +62,7 @@ function mapSetCenterSearch(resp) {
     latLon["lng"] = Number(resp["results"][0]["geometry"]["location"]["lng"]);
     map.setZoom(10);
     map.setCenter(latLon);
-    return resp;
+    return latLon;
 }
 
 // Checks to see if returned response contains pictures
@@ -151,14 +151,19 @@ function makePicture(farmID, serverID, photoID, secret, title) {
 // Gets latitude and longitude for clicked pic from Flickr API
 function getPicGeo(picture) {
     var errorPicGeo = errorMessage('The location of this photo is not specified. Please click another photo.');
-    var picId = picture[0]["attributes"][2]["nodeValue"];
+    console.log(picture);
+    var picId = picture[0]["id"];
     var picInfo = {};
-    picInfo["src"] = picture[0]["attributes"][0]["nodeValue"];
-    picInfo["alt"] = picture[0]["attributes"][1]["nodeValue"];
+    picInfo["src"] = picture[0]["currentSrc"];
+    picInfo["alt"] = picture[0]["alt"];
     picInfo["id"] = picId;
     var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.geo.getLocation&api_key=" + FLICKR_API_KEY + "&photo_id=" + picId + "&format=json&nojsoncallback=1");
     
     resp
+        .catch(function() {
+            errorPicGeo(error);
+            $('html, body').animate({ scrollTop: 0 }, 'fast');
+        })
         .then(function(resp) {
             mapSetCenterPic(resp, picInfo);
         })
@@ -176,14 +181,19 @@ function mapSetCenterPic(resp, picInfo) {
 
 // Takes latitude and longitude, obtains address
 function reverseGeoCode(latLon, picInfo) {
+    console.log(latLon);
+    console.log("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latLon["lat"] + "," + latLon["lng"] + "&key=" + GOOGLE_API_KEY);
+    var errorReverseGeo = errorMessage("The location of this photo is not specified. Please click another photo.");
     var resp = $.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latLon["lat"] + "," + latLon["lng"] + "&key=" + GOOGLE_API_KEY);
+    console.log(resp);
     resp
+        .catch(function() {
+            errorReverseGeo(error);
+            $('html, body').animate({ scrollTop: 0 }, 'fast');
+        })
         
         .then(function(resp) {
             placePicMarker(latLon, resp, picInfo);
-        })
-        .catch(function(error) {
-            console.log(error);
         })
 }
 
@@ -271,6 +281,7 @@ function createMyPlaces() {
 
 // Check to see if address exists in reverseGeoCode response
 function checkAddress(resp) {
+    
     var add = resp["results"][0]["formatted_address"];
     if (add !== undefined) {
         return add;
@@ -297,7 +308,7 @@ function addSearchListener() {
 
 // Adds click listener to all images within "picture-display" div, then gets coordinates with getPicGeo function
 function addPictureListener() {
-    $('[data-role="picture-display"]').on('click', $('img'), function(event) {
+    $pictureDisplay.on('click', 'img', function(event) {
         event.preventDefault();
         getPicGeo($(event.target));
     });
@@ -348,12 +359,5 @@ function clickExitButton() {
         $(".myAtlas-logo").show("slow");
         $MENU_CONTAINER.hide("slow");
     });
+
 }
-
-
-
-
-
-
-
-
