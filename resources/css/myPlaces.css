@@ -18,7 +18,7 @@ body {
     left: 0;
 }
 
-#map {
+#places-map {
 	height: 300px;
     box-shadow: 0px 0px 10px #2C6675;
     width: 100%;
@@ -122,7 +122,7 @@ main {
 }
 .place span {
     max-width: 400px;
-    margin-bottom: 10px;
+    margin: 0 10px 10px 10px;
 }
 .place a {
     margin-bottom: 10px;
@@ -247,7 +247,7 @@ main {
 }
 
 @media only screen and (min-width: 976px){
-    #map {
+    #places-map {
         height: 400px;
         width: 100%;
     }

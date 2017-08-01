@@ -211,7 +211,7 @@ function placePicMarker(latLon, resp, picInfo) {
     var URI = encodeURI(formatted_address);
     var link = "https://maps.google.com?q=" + URI;
     var save = checkMyPlaces(formatted_address, picInfo);
-    var content = '<div class="iw-container">' + '<h6>' + formatted_address + '</h6>' + '<div class="iw-options">' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' + save + '<a href=' + link + + '</div>' + '</div>';
+    var content = '<div class="iw-container">' + '<h6>' + formatted_address + '</h6>' + '<div class="iw-options">' + '<a target="_blank" rel="noopener noreferrer" href=' + link + '>Directions</a>' + save + '</div>' + '</div>';
     var icon = 'resources/images/markiethemarker.png';
 
 	var marker = new google.maps.Marker({
@@ -228,6 +228,7 @@ function placePicMarker(latLon, resp, picInfo) {
         infoWindow.open(map, marker);
     });
     markers.push(marker);
+    marker.setMap(map);
     
     google.maps.event.addListener(infoWindow, 'domready', function() {
         if (document.querySelector('[data-role="save"]')) {
@@ -353,53 +354,8 @@ function clickExitButton() {
     });
 }
 
-// ******************************
-// *****INDEX.HTML CAROUSEL******
-// ******************************
-
-//Carousel control; rotates through jumbotron images
-function carouselControl() {
-    $(document).ready(function(){
-        $('.carousel').slick({
-        autoplay: true,
-        mobileFirst: true,
-        autoplaySpeed: 5000,
-        arrows: false,
-        pauseOnFocus: false,
-        pauseOnHover: false,
-        swipeToSlide: true,
-        }); 
-    });
-}
 
 
-// starts off DOM with exit and menu-container hidden until clicked
-function hideElements() {
-    $SHOW_MAP.hide();
-    $EXIT_ICON.hide();
-    $MENU_CONTAINER.hide();
-    $(".click-to-close").hide();
-}
-
-// initializes all listeners
-function addListeners() {
-    clickMenuShow();
-    clickExitButton();
-    clickHideMap();
-    clickShowMap();
-    addSearchListener();
-    addPictureListener();
-}
-
-// Calls all init functions
-function main() {
-    hideElements();
-    addListeners();
-    createMyPlaces();
-    carouselControl();
-}
-
-main();
 
 
 
