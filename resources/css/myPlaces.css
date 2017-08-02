@@ -252,6 +252,19 @@ main {
     font-size: 12px;
 }
 
+.error-places-message {
+    font-size: 18px;
+    color: #2C6675;
+    font-weight: 900;
+    text-align: center;
+}
+
+.error-div {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    text-align: center;
+}
 
 /*google maps pop up style  */
 .gm-style-iw {
