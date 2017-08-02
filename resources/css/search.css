@@ -140,7 +140,7 @@ main {
 /*explain site section  */
 .explain-site-container {
     margin: 0 auto;
-    max-width: 600px;
+    max-width: 550px;
     display: flex;
     justify-content: space-around;
     padding: 40px 20px;
@@ -208,6 +208,10 @@ main {
 .search-location{
     width: 100%;
 }
+.choose-tags {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
 /* ************************ */
 /*checkbox animation  */
 .checkbox-container {
@@ -224,6 +228,9 @@ main {
     cursor: pointer;
     letter-spacing: 2px;
 }
+
+.large-menu-container span:after,
+.large-menu-container span:before,
 .checkbox-name:after,
 .checkbox-name:before {
     border: 1px solid white;
@@ -233,13 +240,18 @@ main {
     transition: all 280ms ease-in-out;
     width: 0;
 }
+
+.large-menu-container span:hover:after,
+.large-menu-container span:hover:before,
 .checkbox-name:hover:after,
 .checkbox-name:hover:before {
-    border-color:black;
+    border-color:#2C6675;
     transition: width 350ms ease-in-out;
     width: 100%;
     
 }
+
+.large-menu-container span:hover:before,
 .checkbox-name:hover:before {
     bottom: auto;
     top: 0;
@@ -319,6 +331,8 @@ main {
     cursor: pointer;
     letter-spacing: 2px;
 }
+
+
 .footer-menu span:after,
 .footer-menu span:before {
     border: 1px solid #023E58;
@@ -417,11 +431,13 @@ main {
     }
     .large-menu-container {
         display: flex;
+        margin-left: 20px;
     }
     .large-menu-container a {
         text-decoration: none;
         color: #023E58;
-        margin-left: 30px;
+        margin-left: 15px;
+        margin-right: 15px;
     }
     .gallery-heading h2 {
         line-height: 0px;
@@ -466,7 +482,11 @@ main {
     .myAtlas-logo {
         margin-right: 20px;
     }
-
+    .gallery-heading {
+        font-size: 60px;
+        padding: 40px;
+        color: #023E58;
+    }
     .input-group,
     .search-box-container {
         max-width: 1024px;
@@ -509,10 +529,7 @@ main {
         justify-content: center;
         align-content: center;
     }
-    .gallery-heading {
-        font-size: 60px;
-        padding: 40px;
-    }
+    
     .picture-box {
         height: 225px;
         width: 300px;
