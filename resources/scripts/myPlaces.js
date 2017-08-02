@@ -1,15 +1,36 @@
 var $myPlacesDisplay = $('[data-role="myplaces-display"]');
+var $errorPlacesDisplay = $('[data-role="error-places-display"]');
 
-
+// Takes out spaces and commas from address if we want to use it for id
 function stringMaker(string) {
     var arr = string.split(' ');
     var key2 = arr.join('');
     var key2 = key2.replace(/,/g, '');
     return key2;
 }
-// Takes myPlaces from local storage and prints information to screen
-function displayMyPlaces() {
+
+function errorPlacesMessage(message) {
+    return function() {
+        var $errorDiv = $('<div></div', {
+            'text': message,
+            'class': 'error-places-message'
+        })
+        $errorPlacesDisplay.append($errorDiv);
+    }
+}
+
+function checkPlaces() {
     var myPlaces = JSON.parse(localStorage.getItem('myPlaces'));
+    var noPlaces = errorPlacesMessage("You have not yet saved any locations! Please navigate back to the 'Search' page to explore locations and add them to myPlaces.");
+    if (myPlaces === undefined || myPlaces === null) {
+        noPlaces();
+    } else {
+        displayMyPlaces(placesMap, myPlaces);
+    }
+}
+
+// Takes myPlaces from local storage and prints information to screen
+function displayMyPlaces(myPlaces) {
     var $myPlacesContainer = $('<div></div>', {
         'class': 'places-container',
         'data-role': 'places-container'
