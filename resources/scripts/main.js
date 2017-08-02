@@ -328,6 +328,11 @@ function addPictureListener() {
             $errorDisplay.empty();
         }
         getPicGeo($(event.target));
+        $('[data-images-role="hide-map"]').show();
+        $('[data-images-role="show-map"]').hide();
+        $(".click-to-close").hide();
+        $(".click-to-open").show();
+        $(".map-banner-container").slideDown(1000);
     });
 }
 
@@ -342,6 +347,7 @@ function printIt(thing) {
 function clickShowMap() {
     $SHOW_MAP.click(function () {
         $('[data-images-role="hide-map"]').show();
+        printIt($(this));
         $(this).hide();
         $(".click-to-close").hide();
         $(".click-to-open").show();
