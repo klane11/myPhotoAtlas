@@ -1,5 +1,4 @@
 // Aubergine styling
-
 var AUBERGINE = [
             {
                 "elementType": "geometry",
@@ -240,7 +239,7 @@ var AUBERGINE = [
 // **********************************************
 
 
-// Creates map
+// Creates map on search page
 var map;
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
@@ -274,8 +273,8 @@ function initPlacesMap() {
     }
 }
 
+//Places markers on map from places in localStorage
 function placeMarkers(placesMap, myPlaces) {
-    
     var infos = [];
     var bounds = new google.maps.LatLngBounds();
     for (key in myPlaces) {
@@ -283,7 +282,6 @@ function placeMarkers(placesMap, myPlaces) {
         var URI = encodeURI(key);
         var link = "https://maps.google.com?q=" + URI;
         var section = "#" + id;
-        
         var icon = 'resources/images/markiethemarker.png';
 
         var marker = new google.maps.Marker({

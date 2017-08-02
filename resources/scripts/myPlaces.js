@@ -5,7 +5,7 @@ var $errorPlacesDisplay = $('[data-role="error-places-display"]');
 function stringMaker(string) {
     var arr = string.split(' ');
     var key2 = arr.join('');
-    var key2 = key2.replace(/,/g, '');
+    key2 = key2.replace(/,/g, '');
     return key2;
 }
 
@@ -45,7 +45,7 @@ function displayMyPlaces(myPlaces) {
     var $myPlacesContainer = $('<div></div>', {
         'class': 'places-container',
         'data-role': 'places-container'
-    })
+    });
     
     for (var key in myPlaces) {
         var id = stringMaker(key);

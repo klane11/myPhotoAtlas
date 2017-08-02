@@ -395,11 +395,16 @@ main {
     cursor: pointer;
 }
 
+.error-display {
+    background-color: white;
+}
+
 .error-message {
-    font-size: 18px;
-    color: white;
+    font-size: 22px;
+    color: #2C6675;
     font-weight: 900;
     text-align: center;
+    padding: 40px 0;
 }
 
 

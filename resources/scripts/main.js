@@ -25,6 +25,7 @@ function getGeoCoords(searchValue) {
         .then(photoSearch)
 }
 
+// Creates error message function
 function errorMessage(message) {
     return function(error) {
         var $errorDiv = $('<div></div', {
@@ -151,7 +152,6 @@ function makePicture(farmID, serverID, photoID, secret, title) {
 // Gets latitude and longitude for clicked pic from Flickr API
 function getPicGeo(picture) {
     var errorPicGeo = errorMessage('The location of this photo is not specified. Please choose another photo.');
-    console.log(picture);
     var picId = picture[0]["id"];
     var picInfo = {};
     picInfo["src"] = picture[0]["currentSrc"];
@@ -216,8 +216,8 @@ function searchCheck(address, latLon) {
     }
 }
 
-var markers = [];
 // Removes all markers from map and places new one when pic clicked
+var markers = [];
 function placePicMarker(latLon, resp, picInfo) {
     markers.forEach(function(marker) {
         marker.setMap(null);
@@ -270,8 +270,8 @@ function addPlace(address, picInfo, latLon) {
 
     } else if (myPlaces[address]["images"] === undefined) {
         myPlaces[address]["images"] = {};
-        
     }
+
     myPlaces[address]["images"][id] = picInfo;
     localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
 }
@@ -313,7 +313,7 @@ function addSearchListener() {
             $errorDisplay.empty();
         }
         markers.forEach(function(marker) {
-        marker.setMap(null);
+            marker.setMap(null);
         });
         var searchValue = $('[data-role="search"]').val();
         getGeoCoords(searchValue);
