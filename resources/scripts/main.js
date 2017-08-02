@@ -150,7 +150,7 @@ function makePicture(farmID, serverID, photoID, secret, title) {
 // when photo is clicked to get location of photo
 // Gets latitude and longitude for clicked pic from Flickr API
 function getPicGeo(picture) {
-    var errorPicGeo = errorMessage('The location of this photo is not specified. Please click another photo.');
+    var errorPicGeo = errorMessage('The location of this photo is not specified. Please choose another photo.');
     console.log(picture);
     var picId = picture[0]["id"];
     var picInfo = {};
@@ -181,7 +181,7 @@ function mapSetCenterPic(resp, picInfo) {
 
 // Takes latitude and longitude, obtains address
 function reverseGeoCode(latLon, picInfo) {
-    var errorReverseGeo = errorMessage("The location of this photo is not specified. Please click another photo.");
+    var errorReverseGeo = errorMessage("The location of this photo is not specified. Please choose another photo.");
     var resp = $.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latLon["lat"] + "," + latLon["lng"] + "&key=" + GOOGLE_API_KEY);
     
     resp

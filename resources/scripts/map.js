@@ -269,7 +269,7 @@ function initPlacesMap() {
         styles: AUBERGINE
     });
    
-    if (myPlaces.length !== undefined && myPlaces !== null) {
+    if (Object.keys(myPlaces).length !== 0 && myPlaces !== null) {
         placeMarkers(placesMap, myPlaces);
     }
 }

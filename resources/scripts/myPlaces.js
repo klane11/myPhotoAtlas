@@ -33,10 +33,10 @@ function noPlaces(message) {
 // Displays error message if user has not yet saved any places
 function checkPlaces() {
     var myPlaces = JSON.parse(localStorage.getItem('myPlaces'));
-    if (myPlaces.length === undefined || myPlaces === null) {
-        noPlaces();
-    } else {
+    if (Object.keys(myPlaces).length !== 0 && myPlaces !== null) {
         displayMyPlaces(myPlaces);
+    } else {
+        noPlaces();
     }
 }
 
@@ -96,7 +96,6 @@ function appendImages(dictionary, appendTo) {
 
 // Deletes clicked element from DOM and localStorage
 function deletePlace(element, key) {
-    console.log(key);
     var myPlaces = JSON.parse(localStorage.getItem('myPlaces'));
     delete myPlaces[key];
     localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
@@ -110,7 +109,6 @@ function addDeleteListener() {
     $myPlacesDisplay.on('click', "[data-role='delete']", function(event) {
         event.preventDefault();
         $element = $(event.target.parentNode);
-        console.log($element);
         deletePlace($element, $element[0]["attributes"][2]['nodeValue']);
     })
 }
