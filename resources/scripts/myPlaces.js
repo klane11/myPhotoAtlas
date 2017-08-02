@@ -33,7 +33,7 @@ function noPlaces(message) {
 // Displays error message if user has not yet saved any places
 function checkPlaces() {
     var myPlaces = JSON.parse(localStorage.getItem('myPlaces'));
-    if (Object.keys(myPlaces).length !== 0 && myPlaces !== null) {
+    if (myPlaces !== null && Object.keys(myPlaces).length !== 0) {
         displayMyPlaces(myPlaces);
     } else {
         noPlaces();
