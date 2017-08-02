@@ -174,7 +174,7 @@ function mapSetCenterPic(resp, picInfo) {
     var latLon = {};
     latLon["lat"] = Number(resp["photo"]["location"]["latitude"]);
     latLon["lng"] = Number(resp["photo"]["location"]["longitude"]);
-    map.setZoom(12);
+    map.setZoom(11);
 	map.setCenter(latLon);
     reverseGeoCode(latLon, picInfo);
 }
@@ -235,6 +235,7 @@ function placePicMarker(latLon, resp, picInfo) {
         icon: icon,
         animation: google.maps.Animation.DROP,
     })
+    map.setZoom(12);
     var infoWindow = new google.maps.InfoWindow({
         content: content
     });
@@ -311,6 +312,9 @@ function addSearchListener() {
         if ($errorDisplay.children()) {
             $errorDisplay.empty();
         }
+        markers.forEach(function(marker) {
+        marker.setMap(null);
+        });
         var searchValue = $('[data-role="search"]').val();
         getGeoCoords(searchValue);
     });
