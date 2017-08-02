@@ -279,7 +279,6 @@ function placeMarkers(placesMap, myPlaces) {
     var infos = [];
     var bounds = new google.maps.LatLngBounds();
     for (key in myPlaces) {
-        printIt(myPlaces[key]["latLon"]);
         var id = stringMaker(key);
         var URI = encodeURI(key);
         var link = "https://maps.google.com?q=" + URI;
@@ -321,9 +320,3 @@ function closeInfos(infos) {
         infos.length = 0;
     }
 }
-
-// Could set zoom if we want to 
-// var listener = google.maps.event.addListener(placesMap, "idle", function () {
-    //     placesMap.setZoom(2);
-    //     google.maps.event.removeListener(listener);
-    // });
