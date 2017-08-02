@@ -1,20 +1,51 @@
 var $myPlacesDisplay = $('[data-role="myplaces-display"]');
+var $errorPlacesDisplay = $('[data-role="error-places-display"]');
 
-
+// Takes out spaces and commas from address if we want to use it for id
 function stringMaker(string) {
     var arr = string.split(' ');
     var key2 = arr.join('');
-    var key2 = key2.replace(/,/g, '');
+    key2 = key2.replace(/,/g, '');
     return key2;
 }
-// Takes myPlaces from local storage and prints information to screen
-function displayMyPlaces() {
+
+// Displays error message if user has not yet saved any places
+function noPlaces(message) {
+    var $errorDiv = $('<div></div', {
+        'class': 'error-places-message'
+    })
+    var $span = $('<span></span>', {
+        'text': "You have not saved any locations! Please navigate back to the "
+    })
+    $errorDiv.append($span);
+    var $link = $('<a></a>', {
+        'href': 'search.html',
+        'text': 'Search'
+    })
+    $errorDiv.append($link);
+    $span = $('<span></span>', {
+        'text': " page to explore locations and add them to myPlaces."
+    })
+    $errorDiv.append($span);
+    $errorPlacesDisplay.append($errorDiv);
+}
+
+// Displays error message if user has not yet saved any places
+function checkPlaces() {
     var myPlaces = JSON.parse(localStorage.getItem('myPlaces'));
+    if (myPlaces !== null && Object.keys(myPlaces).length !== 0) {
+        displayMyPlaces(myPlaces);
+    } else {
+        noPlaces();
+    }
+}
+
+// Takes myPlaces from local storage and prints information to screen
+function displayMyPlaces(myPlaces) {
     var $myPlacesContainer = $('<div></div>', {
         'class': 'places-container',
         'data-role': 'places-container'
-    })
-    initPlacesMap(myPlaces);
+    });
     
     for (var key in myPlaces) {
         var id = stringMaker(key);
@@ -65,7 +96,6 @@ function appendImages(dictionary, appendTo) {
 
 // Deletes clicked element from DOM and localStorage
 function deletePlace(element, key) {
-    console.log(key);
     var myPlaces = JSON.parse(localStorage.getItem('myPlaces'));
     delete myPlaces[key];
     localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
@@ -79,7 +109,6 @@ function addDeleteListener() {
     $myPlacesDisplay.on('click', "[data-role='delete']", function(event) {
         event.preventDefault();
         $element = $(event.target.parentNode);
-        console.log($element);
         deletePlace($element, $element[0]["attributes"][2]['nodeValue']);
     })
 }
@@ -104,5 +133,6 @@ function addPlacesListeners() {
 $(document).ready(function() {
     hidePlacesElements();
     addPlacesListeners();
-    displayMyPlaces();
+    checkPlaces();
+    initPlacesMap();
 });

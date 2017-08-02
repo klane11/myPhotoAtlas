@@ -252,6 +252,22 @@ main {
     font-size: 12px;
 }
 
+.error-places-message {
+    font-size: 18px;
+    color: #2C6675;
+    font-weight: 900;
+    text-align: center;
+    margin: 20px;
+}
+
+.error-places-message a {
+    color: darkblue
+}
+
+.error-places-message a:visited {
+    text-decoration: none;
+    color: darkblue
+}
 
 /*google maps pop up style  */
 .gm-style-iw {

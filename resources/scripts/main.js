@@ -25,6 +25,7 @@ function getGeoCoords(searchValue) {
         .then(photoSearch)
 }
 
+// Creates error message function
 function errorMessage(message) {
     return function(error) {
         var $errorDiv = $('<div></div', {
@@ -150,8 +151,7 @@ function makePicture(farmID, serverID, photoID, secret, title) {
 // when photo is clicked to get location of photo
 // Gets latitude and longitude for clicked pic from Flickr API
 function getPicGeo(picture) {
-    var errorPicGeo = errorMessage('The location of this photo is not specified. Please click another photo.');
-    console.log(picture);
+    var errorPicGeo = errorMessage('The location of this photo is not specified. Please choose another photo.');
     var picId = picture[0]["id"];
     var picInfo = {};
     picInfo["src"] = picture[0]["currentSrc"];
@@ -174,14 +174,14 @@ function mapSetCenterPic(resp, picInfo) {
     var latLon = {};
     latLon["lat"] = Number(resp["photo"]["location"]["latitude"]);
     latLon["lng"] = Number(resp["photo"]["location"]["longitude"]);
-    map.setZoom(12);
+    map.setZoom(11);
 	map.setCenter(latLon);
     reverseGeoCode(latLon, picInfo);
 }
 
 // Takes latitude and longitude, obtains address
 function reverseGeoCode(latLon, picInfo) {
-    var errorReverseGeo = errorMessage("The location of this photo is not specified. Please click another photo.");
+    var errorReverseGeo = errorMessage("The location of this photo is not specified. Please choose another photo.");
     var resp = $.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latLon["lat"] + "," + latLon["lng"] + "&key=" + GOOGLE_API_KEY);
     
     resp
@@ -216,8 +216,8 @@ function searchCheck(address, latLon) {
     }
 }
 
-var markers = [];
 // Removes all markers from map and places new one when pic clicked
+var markers = [];
 function placePicMarker(latLon, resp, picInfo) {
     markers.forEach(function(marker) {
         marker.setMap(null);
@@ -235,6 +235,7 @@ function placePicMarker(latLon, resp, picInfo) {
         icon: icon,
         animation: google.maps.Animation.DROP,
     })
+    map.setZoom(12);
     var infoWindow = new google.maps.InfoWindow({
         content: content
     });
@@ -269,8 +270,8 @@ function addPlace(address, picInfo, latLon) {
 
     } else if (myPlaces[address]["images"] === undefined) {
         myPlaces[address]["images"] = {};
-        
     }
+
     myPlaces[address]["images"][id] = picInfo;
     localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
 }
@@ -311,6 +312,9 @@ function addSearchListener() {
         if ($errorDisplay.children()) {
             $errorDisplay.empty();
         }
+        markers.forEach(function(marker) {
+            marker.setMap(null);
+        });
         var searchValue = $('[data-role="search"]').val();
         getGeoCoords(searchValue);
     });
