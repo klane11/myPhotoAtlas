@@ -268,8 +268,8 @@ function initPlacesMap() {
         gestureHandling: 'cooperative',
         styles: AUBERGINE
     });
-    var noPlaces = errorPlacesMessage("You have not yet saved any locations! Please navigate back to the 'Search' page to explore locations and add them to myPlaces.");
-    if (myPlaces === undefined || myPlaces === null) {
+   
+    if (myPlaces.length === undefined || myPlaces === null) {
         noPlaces();
     } else {
         placeMarkers(placesMap, myPlaces);

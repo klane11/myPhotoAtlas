@@ -257,13 +257,16 @@ main {
     color: #2C6675;
     font-weight: 900;
     text-align: center;
+    margin: 20px;
 }
 
-.error-div {
-    display: flex;
-    justify-content: center;
-    margin: 10px;
-    text-align: center;
+.error-places-message a {
+    color: darkblue
+}
+
+.error-places-message a:visited {
+    text-decoration: none;
+    color: darkblue
 }
 
 /*google maps pop up style  */

@@ -9,20 +9,29 @@ function stringMaker(string) {
     return key2;
 }
 
-function errorPlacesMessage(message) {
-    return function() {
-        var $errorDiv = $('<div></div', {
-            'text': message,
-            'class': 'error-places-message'
-        })
-        $errorPlacesDisplay.append($errorDiv);
-    }
+function noPlaces(message) {
+    var $errorDiv = $('<div></div', {
+        'class': 'error-places-message'
+    })
+    var $span = $('<span></span>', {
+        'text': "You have not saved any locations! Please navigate back to the "
+    })
+    $errorDiv.append($span);
+    var $link = $('<a></a>', {
+        'href': 'search.html',
+        'text': 'Search'
+    })
+    $errorDiv.append($link);
+    $span = $('<span></span>', {
+        'text': " page to explore locations and add them to myPlaces."
+    })
+    $errorDiv.append($span);
+    $errorPlacesDisplay.append($errorDiv);
 }
 
 function checkPlaces() {
     var myPlaces = JSON.parse(localStorage.getItem('myPlaces'));
-    var noPlaces = errorPlacesMessage("You have not yet saved any locations! Please navigate back to the 'Search' page to explore locations and add them to myPlaces.");
-    if (myPlaces === undefined || myPlaces === null) {
+    if (myPlaces.length === undefined || myPlaces === null) {
         noPlaces();
     } else {
         displayMyPlaces(placesMap, myPlaces);
