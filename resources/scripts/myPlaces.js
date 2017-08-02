@@ -9,6 +9,7 @@ function stringMaker(string) {
     return key2;
 }
 
+// Displays error message if user has not yet saved any places
 function noPlaces(message) {
     var $errorDiv = $('<div></div', {
         'class': 'error-places-message'
@@ -29,12 +30,13 @@ function noPlaces(message) {
     $errorPlacesDisplay.append($errorDiv);
 }
 
+// Displays error message if user has not yet saved any places
 function checkPlaces() {
     var myPlaces = JSON.parse(localStorage.getItem('myPlaces'));
     if (myPlaces.length === undefined || myPlaces === null) {
         noPlaces();
     } else {
-        displayMyPlaces(placesMap, myPlaces);
+        displayMyPlaces(myPlaces);
     }
 }
 
@@ -44,7 +46,6 @@ function displayMyPlaces(myPlaces) {
         'class': 'places-container',
         'data-role': 'places-container'
     })
-    initPlacesMap(myPlaces);
     
     for (var key in myPlaces) {
         var id = stringMaker(key);
@@ -134,5 +135,6 @@ function addPlacesListeners() {
 $(document).ready(function() {
     hidePlacesElements();
     addPlacesListeners();
-    displayMyPlaces();
+    checkPlaces();
+    initPlacesMap();
 });

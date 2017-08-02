@@ -269,9 +269,7 @@ function initPlacesMap() {
         styles: AUBERGINE
     });
    
-    if (myPlaces.length === undefined || myPlaces === null) {
-        noPlaces();
-    } else {
+    if (myPlaces.length !== undefined && myPlaces !== null) {
         placeMarkers(placesMap, myPlaces);
     }
 }
