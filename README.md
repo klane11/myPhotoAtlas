@@ -16,7 +16,7 @@
 
 
 <h3>Stephanie Asmar: https://github.com/stephanieasmar</h3>
-<b>Primary team role:</b> Front-end markup and styling, prototype/concepting, Scrum/Agile project management, 
+<b>Primary team role:</b> Front-end markup and styling, prototype/concepting, Scrum/Agile
 
 
 </br>
