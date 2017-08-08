@@ -99,10 +99,10 @@
 </br>
 
 <h2><u>Code Snippets:</u></h2>
-<img src="resources/images/workwithflicker.png" alt="code snipit">
+<img src="resources/images/workwithflickr.png" alt="code snipit">
 <h4>The code above showcases how we work with Flickr's API and the specificity they require when working with their database</h4>
 <br/>
-<img src="resources/images/carousel.png" alt="code snipit">
+<img src="resources/images/CarouselCode.png" alt="code snipit">
 <h4> Once we found the carousel feature, we knew we wanted it. This snipit shows the simple, yet customizable, carousel that features on our home page.</h4>
 <br />
 <img src="resources/images/hideandshow.png">
