@@ -273,6 +273,7 @@ main {
     background-color: white;
     border-top: 1px solid #023E58;
 }
+
 .picture-box {
     height: 250px;
     width: 400px;
@@ -284,6 +285,12 @@ main {
     align-items: center;
     justify-content: center;
 }
+.picture-box:hover {
+    cursor: pointer;
+    overflow: unset;
+    z-index: 20;
+    box-shadow: 5px 5px 10px grey;
+}
 .picture-container img {
     max-height: 400px;
     max-width: 400px;
@@ -291,13 +298,10 @@ main {
     cursor: pointer;
     transition: all .75s;
 }
-.picture-box:hover {
-    box-shadow: 5px 5px 10px grey;
-}
+
 .picture-container img:hover{
     opacity: 1;
-    /* box-shadow: 5px 5px 10px grey; */
-    transform: scale(1.02); 
+    transform: scale(1.2); 
 }
 .back-to-top img{
     background-color: #8CC3B7;
