@@ -10,12 +10,12 @@
 <h2><u>The Team:</u></h2>
 
 <h3>Sarah Abbey: https://github.com/sabbey37</h3>
-<b>Primary team role:</b> Front-end markup and styling, UI/UX, prototype/concept, Scrum, JavaScript/jQuery Function-writer
+<b>Primary team role:</b> JavaScript/jQuery Function-writer, prototype/concepting
 </br>
 <b>Contributions:</b> HTML, CSS, JavaScript, and jQuery for myPlaces and Search pages. Implemented our streach goal of localstorage for myPlaces. Developed jQuery and JavaScript functions to efficently obtain information from Google Maps API, including geocoding and reverse geocoding.
 
 <h3>Katie Lane: https://github.com/MaeDae11</h3>
-<b>Primary team role:</b> Front-end markup and styling,prototype/concepting, JavaScript Function-write
+<b>Primary team role:</b> Front-end markup and styling, prototype/concepting, JavaScript Function-write
 </br>
 <b>Contributions:</b> Main focuse was HTML, CSS, JavaScript and jQuery for myPlaces and Search pages. Focused our Flickr API search after running into roadblocks. Deployed responsive design while collaborating with team, as well as, consistant design throughout all pages navigation and footers.
 
