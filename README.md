@@ -99,17 +99,20 @@
 </br>
 
 <h2><u>Code Snippets:</u></h2>
-<img src="resources/images/workwithflickr.png" alt="Flickr API code">
+<img src="resources/images/FlickrSearch.png" alt="Flickr API code">
 <h4>The code above showcases how we worked with Flickr's API and the specificity they require when working with their database</h4>
 <br/>
 <img src="resources/images/CarouselCode.png" alt="carousel code">
 <h4> Once we found the carousel feature, we knew we wanted it. This snipit shows the simple, yet customizable, carousel that features on our home page.</h4>
 <br />
-<img src="resources/images/markerevent.png" alt="Adding listeners to text in Google marker code">
-<h4>This bit of code shows how event listerners can be added to text inside a Google Maps marker. The code also detects whether or not the event has already been saved to myPlaces. The listener is not added if the event has been saved.</h4>
-</br>
 <img src="resources/images/hideandshow.png" alt="hide and show features code">
-<h4>This final bit of code displays the hide and show features for our map and hamburger menu</h4>
+<h4>This bit of code displays the hide and show features for our map and hamburger menu</h4>
+<br />
+<img src="resources/images/markerevent.png" alt="Adding listeners to text in Google marker code">
+<h4>The above code shows how event listerners can be added to text inside a Google Maps marker. The code also detects whether or not the event has already been saved to myPlaces. The listener is not added if the event has been saved.</h4>
+</br>
+<img src="resources/images/rendermyPlaces.png" alt="Shows how a user's locations are rendered from local storage">
+<h4>The code above demonstrates how a user's places on their myPlaces page are rendered from local storage.</h4>
 </br>
 
 
