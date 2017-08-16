@@ -103,7 +103,7 @@
 <h4>The code above showcases how we worked with Flickr's API and the specificity they require when working with their database</h4>
 <br/>
 <img src="resources/images/CarouselCode.png" alt="carousel code">
-<h4> Once we found the carousel feature, we knew we wanted it. This snipit shows the simple, yet customizable, carousel that features on our home page.</h4>
+<h4>This snippet shows the simple, yet customizable, carousel featured on our home page.</h4>
 <br />
 <img src="resources/images/hideandshow.png" alt="hide and show features code">
 <h4>This bit of code displays the hide and show features for our map and hamburger menu</h4>
