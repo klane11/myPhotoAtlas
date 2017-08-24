@@ -115,6 +115,9 @@
 <h4>The code above demonstrates how a user's places on their myPlaces page are rendered from local storage.</h4>
 </br>
 
+<h2>Live Demo</h2>
+https://www.youtube.com/watch?v=LRKIs7j-9Ew
+</br>
 
 <h2>Screenshots:</h2>
 <img src="resources/images/landingpage.png" alt="Landing Page with star filled night">
@@ -128,6 +131,4 @@
 <br />
 <img src="resources/images/About.png" alt="About Landing Page">
 <h4>Showcases our About section and the methods we used in creating myPhotoAtlas</h4>
-
-
        
