@@ -99,14 +99,106 @@
 </br>
 
 <h2><u>Code Snippets:</u></h2>
-<img src="resources/images/FlickrSearch.png" alt="Flickr API code">
-<h4>The code above showcases how we worked with Flickr's API and the specificity they require when working with their database</h4>
+
+<h4>Showcases how we worked with Flickr's API and the specificity they require when working with their database</h4>
+
+``` javascript
+
+// Searches Flickr API for images based on latitude and longitude from Google Search, sends pictues to createPicture function
+function photoSearch(latLon) {
+
+    // gets radius, units and tags
+    var radius = getRadius();
+    var units = getUnits();
+    var tags = chooseTags();
+
+    //Creates error function w/message to be returned if no pictures found
+    var errorPics = errorMessage('No pictures were found for this location, radius, and tags, please try your search again.');
+
+    // Adds in tags. Tags are essential in the search process,as well as radius units. These aspects will be changed later to get respnoses from the user
+    var resp = $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + FLICKR_API_KEY + "&lat=" + latLon["lat"] + "&lon=" + latLon["lng"]+ "&tags=" + tags + "&tag_mode=any&radius=" + radius + "&radius_units=" + units + "&format=json&nojsoncallback=1");
+   
+    resp
+        .catch(errorPics)
+        .then(checkForPics)
+};
+
+```
+
+
 <br/>
-<img src="resources/images/CarouselCode.png" alt="carousel code">
+
 <h4>This snippet shows the simple, yet customizable, carousel featured on our home page.</h4>
+
+``` javascript
+
+//Carousel control; rotates through jumbotron images
+function carouselControl() {
+    $(document).ready(function(){
+        $('.carousel').slick({
+        autoplay: true,
+        mobileFirst: true,
+        autoplaySpeed: 5000,
+        arrows: false,
+        pauseOnFocus: false,
+        pauseOnHover: false,
+        swipeToSlide: true,
+        }); 
+    });
+};
+
+```
+
 <br />
-<img src="resources/images/hideandshow.png" alt="hide and show features code">
-<h4>This bit of code displays the hide and show features for our map and hamburger menu</h4>
+<h4>This bit of code displays the use of jQuery's ease of animations to add hide and show features for our map and hamburger menu</h4>
+
+``` javascript
+
+// ******************************
+// *******REACTIVE MENUS*********
+// ******************************
+function clickShowMap() {
+    $SHOW_MAP.click(function () {
+        $('[data-images-role="hide-map"]').show();
+        printIt($(this));
+        $(this).hide();
+        $(".click-to-close").hide();
+        $(".click-to-open").show();
+        $(".map-banner-container").slideDown(1000);
+    });
+};
+
+function clickHideMap() {
+    $HIDE_MAP.click(function () {
+        $('[data-images-role="show-map"]').show();
+        $(this).hide();
+        $(".click-to-close").show();
+        $(".click-to-open").hide();
+        $(".map-banner-container").slideUp(1000);
+    });
+};
+
+// when hamburger menu icon is clicked, the hamburger icon hids, the exit icon shows and the menu-container shows slowly
+function clickMenuShow() {
+    $HAMBURGER.click(function () {
+        $EXIT_ICON.show();
+        $(this).hide();
+        $(".myAtlas-logo").hide("slow");
+        $MENU_CONTAINER.show("slow");
+    });
+};
+// when exit icon is clicked, the exit icon hids, the hamburger menu shows, and the menu-container hids slowly
+function clickExitButton() {
+    $EXIT_ICON.click(function () {
+        $HAMBURGER.show();
+        $(this).hide();
+        $(".myAtlas-logo").show("slow");
+        $MENU_CONTAINER.hide("slow");
+    });
+};
+
+```
+
 <br />
 <img src="resources/images/markerevent.png" alt="Adding listeners to text in Google marker code">
 <h4>The above code shows how event listerners can be added to text inside a Google Maps marker. The code also detects whether or not the event has already been saved to myPlaces. The listener is not added if the event has been saved.</h4>
