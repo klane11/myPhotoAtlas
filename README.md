@@ -3,7 +3,7 @@
 <img src="resources/images/logo.png">
 
 <h2><u>Overview:</u><h2>
-<h4>myPhotoAtlas allows users to search and save photos and locations around the world. It is an application that is geared toward photography enthusiasts and travellers exploring a new location. Our final product allows the user to search any location and returns a gallery of photos taken within a specific radius of that location. Additional features include the ability to get directions from Google Maps and save/delete locations and images to the my ‘myPlaces’ page. In the future we would like to incorporate a backend server and database, which will allow the user to login to their own profile. We would also like to import another API which will give the user information on their chosen locations (i.e. wikipedia etc.).</h4>
+<h4>myPhotoAtlas allows users to search and save photos and locations around the world. It is an application that is geared toward photography enthusiasts and adventurous travelers explore a new location. Our final product allows the user to search any location and returns a gallery of photos taken within a specific radius of that location. Additional features include the ability to get directions from Google Maps and save/delete locations and images to the my ‘myPlaces’ page. In the future we would like to incorporate a backend server and database, which will allow the user to login to their own profile. We would also like to import another API which will give the user information on their chosen locations (i.e. wikipedia etc.).</h4>
 
 </br>
 
