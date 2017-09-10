@@ -69,12 +69,17 @@
 
 </br>
 
-<h2><u>Stretch Goals</u></h2>
+<h2><u>Stretch Goals Completed</u></h2>
 <ul>
     <li>Using AJAX / localstorage to save myPlaces</li>
     <li>Map with functionality: info window pop up, locating where picture was taken, marking location on map, displaying multiple markers at a time, adjusting map depending where user was searching</li>
     <li>Implementing Google Autocomplete</li>
     <li>Hiding and showing of map</li>
+</ul>
+
+<h2><u>Stretch Goals Future</u></h2>
+<ul>
+<li>Creating PostgreSQL database requiring user login to enable myPlaces to be available from different devices</li>
 </ul>
 
 </br>
@@ -92,7 +97,7 @@
 
 <b>Challenge:</b> Photo tags, getting good photos from Flickr API
 </br>
-<b>Solution:</b> Trial and error, reading up on user documentation, tutorials
+<b>Solution:</b> Trial and error, reading up on user documentation, tutorials.
 
 
 
@@ -100,7 +105,7 @@
 
 <h2><u>Code Snippets:</u></h2>
 
-<h4>Showcases how we worked with Flickr's API and the specificity they require when working with their database</h4>
+<h4>Showcases how we worked with Flickr's API and the specificity they require when working with their database.</h4>
 
 ``` javascript
 
@@ -150,7 +155,7 @@ function carouselControl() {
 ```
 
 <br />
-<h4>This bit of code displays the use of jQuery's ease of animations to add hide and show features for our map and hamburger menu</h4>
+<h4>This bit of code displays the use of jQuery's ease of animations to add hide and show features for our map and hamburger menu.</h4>
 
 ``` javascript
 
@@ -200,11 +205,76 @@ function clickExitButton() {
 ```
 
 <br />
-<img src="resources/images/markerevent.png" alt="Adding listeners to text in Google marker code">
-<h4>The above code shows how event listerners can be added to text inside a Google Maps marker. The code also detects whether or not the event has already been saved to myPlaces. The listener is not added if the event has been saved.</h4>
+<h4>Code snippit displays how listerners can be added to text inside a Google Maps marker. The code also detects whether or not the event has already been saved to myPlaces. The listener is not added if the event has been saved.</h4>
+
+``` javascript
+
+google.maps.event.addListener(infoWindow, 'domready', function() {
+    if (document.querySelector('[data-role="save"]')) {
+        document.querySelector('[data-role="save"]').addEventListener("click", function handler(e) {
+            e.preventDefault();
+            this.textContent = '\u2713Saved to myPlaces';
+            this.setAttribute('data-role', 'saved');
+            this.setAttribute('class', 'saved');
+            addPlace(formatted_address, picInfo, latLon);
+            e.currentTarget.removeEventListener('click', handler);
+        });
+    }
+});
+
+```
+
 </br>
-<img src="resources/images/rendermyPlaces.png" alt="Shows how a user's locations are rendered from local storage">
-<h4>The code above demonstrates how a user's places on their myPlaces page are rendered from local storage.</h4>
+
+<h4>Demonstrates usage of localstorage and how a user's places on their myPlaces page are rendered.</h4>
+
+``` javascript
+
+// Takes myPlaces from local storage and prints information to screen
+function displayMyPlaces(myPlaces) {
+    var $myPlacesContainer = $('<div></div>', {
+        'class': 'places-container',
+        'data-role': 'places-container'
+    });
+    
+    for (var key in myPlaces) {
+        var id = stringMaker(key);
+        var $place = $('<div></div>', {
+        'class': 'place',
+        'data-role': 'place',
+        'name': key,
+        'id': id
+        });
+        appendImages(myPlaces[key]["images"], $place);
+        var $address = $('<span></span>', {
+            'text': key
+        });
+        $place.append($address);
+        var URI = encodeURI(key);
+        var link = "https://maps.google.com?q=" + URI;
+        var $directions = $('<a></a>', {
+            'target': "_blank", 
+            'rel': "noopener noreferrer",
+            'href': link,
+            'text': 'Directions'
+        });
+
+        $place.append($directions);
+        var $delete = $('<a></a>', {
+            'href': "#",
+            'text': "Delete",
+            'class': 'delete',
+            'data-role': 'delete'
+        });
+        $place.append($delete);
+        $myPlacesContainer.append($place);
+    }
+    $myPlacesDisplay.append($myPlacesContainer);
+};
+
+```
+
+
 </br>
 
 <h2>Live Demo</h2>
